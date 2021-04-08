@@ -13,4 +13,9 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+
 </Project>

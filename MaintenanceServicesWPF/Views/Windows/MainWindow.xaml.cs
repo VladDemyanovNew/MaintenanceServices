@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF
+namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

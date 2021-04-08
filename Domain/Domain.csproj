@@ -6,4 +6,8 @@
     <RootNamespace>VDemyanov.MaintenanceServices.Domain</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
