@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
 {
-    public class Tests
+    public class DAL_Tests
     {
         [SetUp]
         public void Setup()

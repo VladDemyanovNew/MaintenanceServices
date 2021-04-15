@@ -5,7 +5,7 @@ using VDemyanov.MaintenanceServices.Domain.Models.Base;
 
 namespace VDemyanov.MaintenanceServices.Domain.Models.Base
 {
-    public class Category : Entity
+    public abstract class Category : Entity
     {
         public string Name { get; set; }
         public string Description { get; set; }
