@@ -1,20 +1,20 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using VDemyanov.MaintenanceServices.Domain.Models.Base;
 
-namespace VDemyanov.MaintenanceServices.Domain.Models.AuthorizationEntities
+#nullable disable
+
+namespace VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities
 {
-    public class Employee : Entity
+    public partial class Employee : Entity
     {
-        [Required]
         public string Login { get; set; }
-        [Required]
         public string Password { get; set; }
-        [Required]
         public string Name { get; set; }
-        public DateTime Birthday { get; set; }
+        public int? Position { get; set; }
+        public DateTime? Bday { get; set; }
         public string AvatarPath { get; set; }
-        public int PositionId { get; set; }
-        public Position PositionName { get; set; }
+
+        public virtual Position PositionNavigation { get; set; }
     }
 }

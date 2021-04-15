@@ -1,13 +1,20 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 using VDemyanov.MaintenanceServices.Domain.Models.Base;
 
-namespace VDemyanov.MaintenanceServices.Domain.Models.AuthorizationEntities
+#nullable disable
+
+namespace VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities
 {
-    public class Position : Entity
+    public partial class Position : Entity
     {
-        [Required]
+        public Position()
+        {
+            Employees = new HashSet<Employee>();
+        }
+
         public string Name { get; set; }
-        public List<Employee> Employees { get; set; }
+
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

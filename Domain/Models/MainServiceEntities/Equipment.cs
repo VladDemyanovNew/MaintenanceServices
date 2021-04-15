@@ -1,15 +1,22 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 using VDemyanov.MaintenanceServices.Domain.Models.Base;
+
+#nullable disable
 
 namespace VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities
 {
-    public class Equipment : Entity
+    public partial class Equipment : Entity
     {
-        [Required]
+        public Equipment()
+        {
+            ServiceEquipments = new HashSet<ServiceEquipment>();
+        }
+
         public string Name { get; set; }
-        public int CategoryId { get; set; }
-        public EquipmentCategory Category { get; set; }
-        public List<ServiceEquipment> ServiceEquipmentList { get; set; }
+        public int? Category { get; set; }
+
+        public virtual EquipmentCategory CategoryNavigation { get; set; }
+        public virtual ICollection<ServiceEquipment> ServiceEquipments { get; set; }
     }
 }

@@ -1,15 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 using VDemyanov.MaintenanceServices.Domain.Models.Base;
+
+#nullable disable
 
 namespace VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities
 {
-    public class ReportData : Entity
+    public partial class ReportData : Entity
     {
-        public int ReportId { get; set; }
-        public Report Report { get; set; }
-        public int ServiceEquipmentId { get; set; }
-        public ServiceEquipment ServiceEquipment { get; set; }
-        [Required]
-        public double Number { get; set; }
+        public int? Report { get; set; }
+        public int? ServiceEquipment { get; set; }
+        public double? Number { get; set; }
+
+        public virtual Report ReportNavigation { get; set; }
+        public virtual ServiceEquipment ServiceEquipmentNavigation { get; set; }
     }
 }

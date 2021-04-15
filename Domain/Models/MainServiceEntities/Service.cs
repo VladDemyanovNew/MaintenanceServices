@@ -1,20 +1,25 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 using VDemyanov.MaintenanceServices.Domain.Models.Base;
+
+#nullable disable
 
 namespace VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities
 {
-    public class Service : Entity
+    public partial class Service : Entity
     {
-        public int PriceListId { get; set; }
-        public PriceList PriceList { get; set; }
-        [Required]
+        public Service()
+        {
+            ServiceEquipments = new HashSet<ServiceEquipment>();
+        }
+
+        public int? PriceList { get; set; }
         public string Unit { get; set; }
-        [Required]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         public string Notation { get; set; }
-        [Required]
         public string Name { get; set; }
-        public List<ServiceEquipment> ServiceEquipmentList { get; set; }
+
+        public virtual PriceList PriceListNavigation { get; set; }
+        public virtual ICollection<ServiceEquipment> ServiceEquipments { get; set; }
     }
 }

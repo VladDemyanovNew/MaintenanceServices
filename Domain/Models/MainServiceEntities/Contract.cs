@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using VDemyanov.MaintenanceServices.Domain.Models.Base;
+
+#nullable disable
 
 namespace VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities
 {
-    public class Contract : Entity
+    public partial class Contract : Entity
     {
-        [Required]
+        public Contract()
+        {
+            Reports = new HashSet<Report>();
+        }
+
         public string Name { get; set; }
-        [Required]
-        public DateTime CreationDate { get; set; }
-        [Required]
+        public DateTime? CreationDate { get; set; }
         public string ClientName { get; set; }
-        [Required]
         public string FacilityAddress { get; set; }
-        public int CategoryId { get; set; }
-        public ContractCategory Category { get; set; }
-        public List<Report> Reports { get; set; }
+        public int? Category { get; set; }
+
+        public virtual ContractCategory CategoryNavigation { get; set; }
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using VDemyanov.MaintenanceServices.Domain.Models.Base;
+
+#nullable disable
 
 namespace VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities
 {
-    public class PriceList : Entity
+    public partial class PriceList : Entity
     {
-        [Required]
-        public DateTime CreationDate { get; set; }
+        public PriceList()
+        {
+            Services = new HashSet<Service>();
+        }
+
+        public DateTime? CreationDate { get; set; }
         public string Description { get; set; }
-        public List<Service> Services { get; set; }
+
+        public virtual ICollection<Service> Services { get; set; }
     }
 }
