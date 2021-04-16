@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using VDemyanov.MaintenanceServices.DAL;
 using VDemyanov.MaintenanceServices.DAL.Context;
 using VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities;
@@ -38,7 +39,37 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
         }
 
         [Test]
-        public void Test2()
+        public void TestOptionConnecting()
+        {
+
+            var builder = new ConfigurationBuilder();
+            // установка пути к текущему каталогу
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            // получаем конфигурацию из файла appsettings.json
+            builder.AddJsonFile("appsettings.json");
+            // создаем конфигурацию
+            var config = builder.Build();
+            // получаем строку подключения
+            string connectionString = config.GetConnectionString("DefaultConnection");
+
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+            var options = optionsBuilder
+                .UseSqlServer(connectionString)
+                .Options;
+            
+            using(ApplicationContext db = new ApplicationContext(options))
+            {
+                var employees = db.Employees.ToList();
+                Console.WriteLine("Список объектов:");
+                foreach (Employee e in employees)
+                {
+                    Console.WriteLine($"{e.Id}.{e.Login} - {e.Password}");
+                }
+            }
+        }
+
+        [Test]
+        public void TestAdd()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -51,7 +82,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
         }
 
         [Test]
-        public void Test1()
+        public void TestGet()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
