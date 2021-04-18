@@ -8,7 +8,7 @@ using System.Text;
 
 namespace VDemyanov.MaintenanceServices.DAL.Context
 {
-    public class SampleContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
+    public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
     {
         public ApplicationContext CreateDbContext(string[] args) => new ApplicationContext(GetDbContextOptions());
 
