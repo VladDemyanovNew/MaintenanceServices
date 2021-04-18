@@ -10,8 +10,8 @@ using VDemyanov.MaintenanceServices.DAL.Context;
 namespace VDemyanov.MaintenanceServices.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210416154526_InitMigration")]
-    partial class InitMigration
+    [Migration("20210418090445_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

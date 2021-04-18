@@ -10,7 +10,11 @@ namespace VDemyanov.MaintenanceServices.DAL.Context
 {
     public class SampleContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
     {
-        public ApplicationContext CreateDbContext(string[] args)
+        public ApplicationContext CreateDbContext(string[] args) => new ApplicationContext(GetDbContextOptions());
+
+        public ApplicationContext CreateDbContext() => new ApplicationContext(GetDbContextOptions());
+
+        private DbContextOptions<ApplicationContext> GetDbContextOptions()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
 
@@ -23,7 +27,8 @@ namespace VDemyanov.MaintenanceServices.DAL.Context
             // получаем строку подключения из файла appsettings.json
             string connectionString = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString, opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds));
-            return new ApplicationContext(optionsBuilder.Options);
+            return optionsBuilder.Options;
         }
+
     }
 }

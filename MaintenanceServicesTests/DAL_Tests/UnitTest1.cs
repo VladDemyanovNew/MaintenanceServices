@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,29 +15,56 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
 {
     public class DAL_Tests
     {
+        private DbContextOptions<ApplicationContext> _options;
+        private EFGenericRepository<Employee> _employeeRepo;
+        private EFGenericRepository<Position> _posRepo;
+
         [SetUp]
         public void Setup()
         {
-            /*var builder = new ConfigurationBuilder();
-            // установка пути к текущему каталогу
-            builder.SetBasePath(Directory.GetCurrentDirectory());
-            // получаем конфигурацию из файла appsettings.json
-            builder.AddJsonFile("appsettings.json");
-            // создаем конфигурацию
-            var config = builder.Build();
-            // получаем строку подключения
-            string connectionString = config.GetConnectionString("DefaultConnection");
+            _options = GetDbContextOptions();
+            _employeeRepo = new EFGenericRepository<Employee>(new ApplicationContext(_options));
+            _posRepo = new EFGenericRepository<Position>(new ApplicationContext(_options));
+        }
 
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder
-                .UseSqlServer(connectionString)
-                .Options;*/
+        [Test]
+        public void TestAddEmployee()
+        {
+            GenericRepository<Employee> genericEmployeeRepository = new GenericRepository<Employee>(new SampleContextFactory());
+            GenericRepository<Position> genericPositionRepository = new GenericRepository<Position>(new SampleContextFactory());
 
+            Position testpos = genericPositionRepository.GetAll().Result.Where(item => item.Name == "Адмнинистратор").FirstOrDefault();
 
-            /*const string connection = "Server = (localdb)\\mssqllocaldb; Database = MAINTENANCE_SERVICE; Trusted_Connection = True;";
-            using var db = new ApplicationContext(new DbContextOptionsBuilder<ApplicationContext>().UseSqlServer(connection).Options);*/
-            
-           
+            Employee employee2 = new Employee 
+            { 
+                Login = "VladTest",
+                Password = "TestPassword2",
+                Name = "Ildar",
+                Bday = DateTime.Now,
+                PositionNavigation = testpos
+            };
+
+            genericEmployeeRepository.Create(employee2).Wait();
+
+            /*IEnumerable<Employee> empls = genericEmployeeRepository.GetAll().Result;
+            foreach (Employee e in empls)
+            {
+                Console.WriteLine($"{e.Id}.{e.Login} - {e.Password}");
+            }*/
+        }
+
+        [Test]
+        public void TestAddPriceList()
+        {
+            GenericRepository<PriceList> genericEmployeeRepository = new GenericRepository<PriceList>(new SampleContextFactory());
+
+            PriceList priceList = new PriceList
+            {
+                CreationDate = DateTime.Now,
+                Description = "TestAddPriceList"
+            };
+
+            genericEmployeeRepository.Create(priceList).Wait();
         }
 
         [Test]
@@ -71,9 +100,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
         [Test]
         public void TestAdd()
         {
-            using (ApplicationContext db = new ApplicationContext())
+            using (ApplicationContext db = new ApplicationContext(_options))
             {
-                Employee employee2 = new Employee { Login = "IDemyanov", Password = "TestPassword2", Name = "Ildar", Bday = DateTime.Now, PositionNavigation = db.Positions.FirstOrDefault(p => p.Name == "Admin") };
+                Position p = db.Positions.FirstOrDefault(p => p.Name == "Адмнинистратор");
+                Employee employee2 = new Employee { Login = "testVladLast3", Password = "TestPassword2", Name = "Ildar", Bday = DateTime.Now, PositionNavigation = p };
 
                 // Добавление
                 db.Employees.Add(employee2);
@@ -84,7 +114,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
         [Test]
         public void TestGet()
         {
-            using (ApplicationContext db = new ApplicationContext())
+            using (ApplicationContext db = new ApplicationContext(_options))
             {
                 // получаем объекты из бд и выводим на консоль
                 var employees = db.Employees.ToList();
@@ -95,6 +125,25 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
                 }
             }
             Assert.Pass();
+        }
+    
+        private DbContextOptions<ApplicationContext> GetDbContextOptions()
+        {
+            var builder = new ConfigurationBuilder();
+            // установка пути к текущему каталогу
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            // получаем конфигурацию из файла appsettings.json
+            builder.AddJsonFile("appsettings.json");
+            // создаем конфигурацию
+            var config = builder.Build();
+            // получаем строку подключения
+            string connectionString = config.GetConnectionString("DefaultConnection");
+
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+            var options = optionsBuilder
+                .UseSqlServer(connectionString)
+                .Options;
+            return options;
         }
     }
 }
