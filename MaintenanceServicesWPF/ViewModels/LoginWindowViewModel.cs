@@ -11,7 +11,11 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 {
     class LoginWindowViewModel : ViewModelBase
     {
+        #region Properties
         public Window CodeBehind { get; set; }
+        #endregion
+
+        #region Commands
 
         #region LoginCommand
         public ICommand LoginCommand { get; }
@@ -22,6 +26,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             this.CodeBehind.Close();
         }
         private bool CanLoginCommandExecuted(object p) => true;
+        #endregion
+
         #endregion
 
         public LoginWindowViewModel()

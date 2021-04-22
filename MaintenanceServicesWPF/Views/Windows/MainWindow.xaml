@@ -5,9 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.Windows"
         xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels"
+        xmlns:views="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls" 
+        xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums"
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="766" Width="1366">
+
+    <Window.Resources>
+        <DataTemplate DataType = "{x:Type vm:HomeViewModel}">
+            <views:Home/>
+        </DataTemplate>
+
+        <DataTemplate DataType = "{x:Type vm:ReportsViewModel}">
+            <views:Reports/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        <Button Command="{Binding LoginCommand}" Width="100" Height="50" Content="Back to Login"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height = "Auto" />
+            <RowDefinition Height = "*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name = "NavBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width = "*" />
+                <ColumnDefinition Width = "*" />
+                <ColumnDefinition Width = "*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content = "Home" 
+            Command = "{Binding NavCommand}"
+            CommandParameter = "{Binding Source={x:Static enums:ViewType.HOME}}" 
+            Grid.Column ="0"/>
+
+            <Button Content = "Reports" 
+            Command = "{Binding NavCommand}" 
+            CommandParameter = "{Binding Source={x:Static enums:ViewType.REPORTS}}" 
+            Grid.Column = "2" />
+
+            <Button Command="{Binding OpenLoginWindowCommand}"
+            Width="100" Height="50"
+            Content="Back to Login"
+            Grid.Column="1"/>
+        </Grid>
+
+        <Grid x:Name = "MainContent" Grid.Row = "1">
+            <ContentControl Content = "{Binding CurrentViewModel}" />
+        </Grid>
+
+        
     </Grid>
 </Window>
