@@ -4,9 +4,63 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls"
+             xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessZoneVM"
+             xmlns:views="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessZoneUC"
+             xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <DataTemplate DataType = "{x:Type vm:ContractCreatingZoneViewModel}">
+                        <views:ContractCreatingZone/>
+                    </DataTemplate>
+                    <DataTemplate DataType = "{x:Type vm:ContractUpdatingZoneViewModel}">
+                        <views:ContractUpdatingZone/>
+                    </DataTemplate>
+                    <DataTemplate DataType = "{x:Type vm:ReportCreatingZoneViewModel}">
+                        <views:ReportCreatingZone/>
+                    </DataTemplate>
+                    <DataTemplate DataType = "{x:Type vm:ReportPresentationZoneViewModel}">
+                        <views:ReportPresentationZone/>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Background="AliceBlue">
-        <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Center" Text="BusinessZone"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="400"/>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
+                      HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                      Background="Transparent"
+                      BorderThickness="0,0,1,0"
+                      BorderBrush="Black"/>
+
+        <Grid x:Name="contracts" Grid.Column="0" Background="White">
+            <StackPanel VerticalAlignment="Center">
+                <Button Width="50" Height="25" Margin="10" Content="1"
+                        Command="{Binding NavCommand}"
+                        CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_CREATING_ZONE}}"/>
+                <Button Width="50" Height="25" Margin="10" Content="2"
+                        Command="{Binding NavCommand}"
+                        CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_UPDATING_ZONE}}"/>
+                <Button Width="50" Height="25" Margin="10" Content="3"
+                        Command="{Binding NavCommand}"
+                        CommandParameter="{Binding Source={x:Static enums:ViewType.REPORT_CREATING_ZONE}}"/>
+                <Button Width="50" Height="25" Margin="10" Content="4"
+                        Command="{Binding NavCommand}"
+                        CommandParameter="{Binding Source={x:Static enums:ViewType.REPORT_PRESENTATION_ZONE}}"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="businessZone_contentControl" Grid.Column="2" Background="#9f7feb">
+            <ContentControl Content = "{Binding CurrentViewModel}" />
+        </Grid>
     </Grid>
 </UserControl>

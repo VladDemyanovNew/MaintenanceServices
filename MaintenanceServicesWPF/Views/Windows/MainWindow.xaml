@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.Windows"
         xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels"
         xmlns:views="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls" 
-        xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" xmlns:fa="http://schemas.fontawesome.io/icons/" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" 
+        xmlns:fa="http://schemas.fontawesome.io/icons/" 
+        xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Height="720" Width="1080" WindowState="Maximized" WindowStartupLocation="CenterScreen">
 
@@ -29,9 +31,13 @@
 
     <Grid>
         <Grid Background="white">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding ElementName=nav_pnl, Path=Width}"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
             <!-- Main Content -->
-            <Grid x:Name="main_content">
+            <Grid x:Name="main_content" Grid.Column="1">
                 <Behaviors:Interaction.Triggers>
                     <Behaviors:EventTrigger EventName="PreviewMouseLeftButtonDown" SourceObject="{Binding ElementName=main_content}">
                         <Behaviors:InvokeCommandAction Command="{Binding MainContent_PreviewMouseLeftButtonDownCommand}" />
@@ -44,7 +50,8 @@
             <Grid   x:Name="nav_pnl"
                     HorizontalAlignment="Left"
                     Width="65"
-                    Background="#2E333A">
+                    Background="#2E333A"
+                    Grid.Column="0">
 
                 <StackPanel x:Name="st_pnl">
                     <!-- Grid for the Menu Toggle Button -->

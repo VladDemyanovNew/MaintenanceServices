@@ -8,6 +8,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.En
     public enum ViewType
     {
         BUSINESS_ZONE,
-        DATABASE
+        DATABASE,
+        CONTRACT_CREATING_ZONE,
+        CONTRACT_UPDATING_ZONE,
+        REPORT_CREATING_ZONE,
+        REPORT_PRESENTATION_ZONE
     }
 }
