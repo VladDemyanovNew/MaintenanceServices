@@ -43,8 +43,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         #endregion
 
         #region Fields
-        private HomeViewModel _HomeViewModel = new HomeViewModel();
-        private ReportsViewModel _ReportsViewModel = new ReportsViewModel();
+        private BusinessZoneViewModel _BusinessZoneViewModel = new BusinessZoneViewModel();
+        private DatabaseViewModel _DatabaseViewModel = new DatabaseViewModel();
         #endregion
 
         #region Commands
@@ -70,12 +70,12 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
             switch (destination)
             {
-                case ViewType.REPORTS:
-                    CurrentViewModel = _ReportsViewModel;
+                case ViewType.DATABASE:
+                    CurrentViewModel = _DatabaseViewModel;
                     break;
-                case ViewType.HOME:
+                case ViewType.BUSINESS_ZONE:
                 default:
-                    CurrentViewModel = _HomeViewModel;
+                    CurrentViewModel = _BusinessZoneViewModel;
                     break;
             }
         }
@@ -101,7 +101,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             #endregion
 
             #region InitFields
-            CurrentViewModel = _HomeViewModel;
+            CurrentViewModel = _BusinessZoneViewModel;
             HumburgerIsChecked = false;
             #endregion InitFields
         }

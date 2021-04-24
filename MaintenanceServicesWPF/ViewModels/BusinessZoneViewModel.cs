@@ -5,7 +5,7 @@ using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Base;
 
 namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 {
-    class ReportsViewModel : ViewModelBase
+    class BusinessZoneViewModel : ViewModelBase
     {
     }
 }

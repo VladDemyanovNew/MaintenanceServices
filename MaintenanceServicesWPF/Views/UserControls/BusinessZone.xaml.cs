@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для Home.xaml
+    /// Логика взаимодействия для BusinessZone.xaml
     /// </summary>
-    public partial class Home : UserControl
+    public partial class BusinessZone : UserControl
     {
-        public Home()
+        public BusinessZone()
         {
             InitializeComponent();
         }

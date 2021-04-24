@@ -16,9 +16,9 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControl
     /// <summary>
     /// Логика взаимодействия для Reports.xaml
     /// </summary>
-    public partial class Reports : UserControl
+    public partial class Database : UserControl
     {
-        public Reports()
+        public Database()
         {
             InitializeComponent();
         }

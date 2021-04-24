@@ -16,11 +16,11 @@
                 <ResourceDictionary Source="/Resources/Themes/MainWindowStyles.xaml" />
 
                 <ResourceDictionary>
-                    <DataTemplate DataType = "{x:Type vm:HomeViewModel}">
-                        <views:Home/>
+                    <DataTemplate DataType = "{x:Type vm:BusinessZoneViewModel}">
+                        <views:BusinessZone/>
                     </DataTemplate>
-                    <DataTemplate DataType = "{x:Type vm:ReportsViewModel}">
-                        <views:Reports/>
+                    <DataTemplate DataType = "{x:Type vm:DatabaseViewModel}">
+                        <views:Database/>
                     </DataTemplate>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -28,19 +28,16 @@
     </Window.Resources>
 
     <Grid>
-        <!-- Background Color -->
         <Grid Background="white">
 
-            <!-- Background Image -->
+            <!-- Main Content -->
             <Grid x:Name="main_content">
                 <Behaviors:Interaction.Triggers>
                     <Behaviors:EventTrigger EventName="PreviewMouseLeftButtonDown" SourceObject="{Binding ElementName=main_content}">
                         <Behaviors:InvokeCommandAction Command="{Binding MainContent_PreviewMouseLeftButtonDownCommand}" />
                     </Behaviors:EventTrigger>
                 </Behaviors:Interaction.Triggers>
-                <Grid.Background>
-                    <ImageBrush x:Name="img_bg" Stretch="Fill"/>
-                </Grid.Background>
+                <ContentControl Content = "{Binding CurrentViewModel}" />
             </Grid>
 
             <!-- Navigation Panel -->
@@ -130,11 +127,29 @@
                                BorderThickness="0"
                                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-                        <!-- Home -->
-                        <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15">
+                        <!-- Business zone -->
+                        <ListViewItem x:Name="business_zone" HorizontalAlignment="Left" Margin="0,0,0,15" >
+                            <Behaviors:Interaction.Triggers>
+                                <Behaviors:EventTrigger EventName="Selected" SourceObject="{Binding ElementName=business_zone}">
+                                    <Behaviors:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="{Binding Source={x:Static enums:ViewType.BUSINESS_ZONE}}" />
+                                </Behaviors:EventTrigger>
+                            </Behaviors:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal" Width="230">
-                                <fa:ImageAwesome Margin="12,0,0,0"  Height="30" Width="30" Foreground="White" Icon="Home"/>
-                                <TextBlock Text="Home" Margin="25,0,0,0" Style="{StaticResource font_style}"/>
+                                <fa:ImageAwesome Margin="12,0,0,0"  Height="30" Width="30" Foreground="White" Icon="Briefcase"/>
+                                <TextBlock Text="Business zone" Margin="25,0,0,0" Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <!-- Database -->
+                        <ListViewItem x:Name="database" HorizontalAlignment="Left" Margin="0,0,0,15">
+                            <Behaviors:Interaction.Triggers>
+                                <Behaviors:EventTrigger EventName="Selected" SourceObject="{Binding ElementName=database}">
+                                    <Behaviors:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="{Binding Source={x:Static enums:ViewType.DATABASE}}" />
+                                </Behaviors:EventTrigger>
+                            </Behaviors:Interaction.Triggers>
+                            <StackPanel Orientation="Horizontal" Width="230">
+                                <fa:ImageAwesome Margin="12,0,0,0"  Height="30" Width="30" Foreground="White" Icon="Database"/>
+                                <TextBlock Text="Database" Margin="25,0,0,0" Style="{StaticResource font_style}"/>
                             </StackPanel>
                         </ListViewItem>
 

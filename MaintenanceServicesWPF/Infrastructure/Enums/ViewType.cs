@@ -7,7 +7,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.En
 {
     public enum ViewType
     {
-        HOME,
-        REPORTS
+        BUSINESS_ZONE,
+        DATABASE
     }
 }
