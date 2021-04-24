@@ -6,53 +6,177 @@
         xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.Windows"
         xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels"
         xmlns:views="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls" 
-        xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums"
+        xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" xmlns:fa="http://schemas.fontawesome.io/icons/" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="{Binding Path=Title}" Height="766" Width="1366">
+        Height="720" Width="1080" WindowState="Maximized" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <DataTemplate DataType = "{x:Type vm:HomeViewModel}">
-            <views:Home/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Themes/MainWindowStyles.xaml" />
 
-        <DataTemplate DataType = "{x:Type vm:ReportsViewModel}">
-            <views:Reports/>
-        </DataTemplate>
+                <ResourceDictionary>
+                    <DataTemplate DataType = "{x:Type vm:HomeViewModel}">
+                        <views:Home/>
+                    </DataTemplate>
+                    <DataTemplate DataType = "{x:Type vm:ReportsViewModel}">
+                        <views:Reports/>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height = "Auto" />
-            <RowDefinition Height = "*" />
-        </Grid.RowDefinitions>
+        <!-- Background Color -->
+        <Grid Background="white">
 
-        <Grid x:Name = "NavBar">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width = "*" />
-                <ColumnDefinition Width = "*" />
-                <ColumnDefinition Width = "*" />
-            </Grid.ColumnDefinitions>
+            <!-- Background Image -->
+            <Grid x:Name="main_content">
+                <Behaviors:Interaction.Triggers>
+                    <Behaviors:EventTrigger EventName="PreviewMouseLeftButtonDown" SourceObject="{Binding ElementName=main_content}">
+                        <Behaviors:InvokeCommandAction Command="{Binding MainContent_PreviewMouseLeftButtonDownCommand}" />
+                    </Behaviors:EventTrigger>
+                </Behaviors:Interaction.Triggers>
+                <Grid.Background>
+                    <ImageBrush x:Name="img_bg" Stretch="Fill"/>
+                </Grid.Background>
+            </Grid>
 
-            <Button Content = "Home" 
-            Command = "{Binding NavCommand}"
-            CommandParameter = "{Binding Source={x:Static enums:ViewType.HOME}}" 
-            Grid.Column ="0"/>
+            <!-- Navigation Panel -->
+            <Grid   x:Name="nav_pnl"
+                    HorizontalAlignment="Left"
+                    Width="65"
+                    Background="#2E333A">
 
-            <Button Content = "Reports" 
-            Command = "{Binding NavCommand}" 
-            CommandParameter = "{Binding Source={x:Static enums:ViewType.REPORTS}}" 
-            Grid.Column = "2" />
+                <StackPanel x:Name="st_pnl">
+                    <!-- Grid for the Menu Toggle Button -->
+                    <Grid Height="90">
+                        <!-- Toggle Button -->
+                        <ToggleButton x:Name="humburger"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="18,-20,0,0"
+                                      Height="30"
+                                      Width="30"
+                                      BorderThickness="0"
+                                      Background="{x:Null}"
+                                      Style="{StaticResource humburger_style}"
+                                      Cursor="Hand"
+                                      IsChecked="{Binding HumburgerIsChecked}">
 
-            <Button Command="{Binding OpenLoginWindowCommand}"
-            Width="100" Height="50"
-            Content="Back to Login"
-            Grid.Column="1"/>
+                            <!-- Toggle Button: Checked, Unchecked, MouseEnter, MouseLeave events -->
+                            <ToggleButton.Triggers>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="HideStackPanel">
+                                            <DoubleAnimation          
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="230" To="65"
+                                                Duration="0:0:0.2">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="ShowStackPanel">
+                                            <DoubleAnimation    
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="65" To="230"
+                                                Duration="0:0:0.3">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="ToggleButton.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="MouseEnter_Humburger">
+                                            <ColorAnimation
+                                                Storyboard.TargetName="humburger_icon"
+                                                Storyboard.TargetProperty="(fa:ImageAwesome.Foreground).(SolidColorBrush.Color)"
+                                                To="#bf00ff" Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="ToggleButton.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="MouseLeave_Humburger">
+                                            <ColorAnimation
+                                                Storyboard.TargetName="humburger_icon"
+                                                Storyboard.TargetProperty="(fa:ImageAwesome.Foreground).(SolidColorBrush.Color)"
+                                                To="White" Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+
+                            <fa:ImageAwesome x:Name="humburger_icon" Foreground="White" Icon="Bars"/>
+                        </ToggleButton>
+                    </Grid>
+
+                    <!-- ListView with menu list items -->
+                    <ListView  Background="Transparent"
+                               BorderBrush="Transparent"
+                               BorderThickness="0"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <!-- Home -->
+                        <ListViewItem HorizontalAlignment="Left" Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal" Width="230">
+                                <fa:ImageAwesome Margin="12,0,0,0"  Height="30" Width="30" Foreground="White" Icon="Home"/>
+                                <TextBlock Text="Home" Margin="25,0,0,0" Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <!-- Listview items style template -->
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <Border x:Name="Bd"
+                                                    Height="50"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True"
+                                                    Cursor="Hand">
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+
+                                            <ControlTemplate.Triggers>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsMouseOver" Value="True"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Background" TargetName="Bd" Value="#404D5B"/>
+                                                    <Setter Property="BorderBrush" TargetName="Bd" Value="#404D5B"/>
+                                                </MultiTrigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                    </ListView>
+                </StackPanel>
+            </Grid>
+
         </Grid>
 
-        <Grid x:Name = "MainContent" Grid.Row = "1">
-            <ContentControl Content = "{Binding CurrentViewModel}" />
-        </Grid>
-
-        
     </Grid>
 </Window>

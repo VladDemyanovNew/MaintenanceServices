@@ -31,6 +31,15 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         }
         #endregion
 
+        #region HumburgerIsChecked
+        private bool _HumburgerIsChecked;
+        public bool HumburgerIsChecked
+        {
+            get => _HumburgerIsChecked;
+            set => Set(ref _HumburgerIsChecked, value);
+        }
+        #endregion
+
         #endregion
 
         #region Fields
@@ -72,6 +81,15 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         }
         #endregion
 
+        #region MainContent_PreviewMouseLeftButtonDownCommand
+        public ICommand MainContent_PreviewMouseLeftButtonDownCommand { get; }
+        private void OnMainContent_PreviewMouseLeftButtonDownCommandExecuted(object p)
+        {
+            HumburgerIsChecked = false;
+        }
+        private bool CanMainContent_PreviewMouseLeftButtonDownCommandExecuted(object p) => true;
+        #endregion
+
         #endregion
 
         public MainWindowViewModel()
@@ -79,11 +97,14 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             #region Commands
             OpenLoginWindowCommand = new RelayCommand(OnOpenLoginWindowCommandExecuted, CanOpenLoginWindowCommandExecuted);
             NavCommand = new RelayCommand(OnNavCommandExecuted, CanNavCommandExecuted);
+            MainContent_PreviewMouseLeftButtonDownCommand = new RelayCommand(OnMainContent_PreviewMouseLeftButtonDownCommandExecuted, CanMainContent_PreviewMouseLeftButtonDownCommandExecuted);
             #endregion
 
             #region InitFields
             CurrentViewModel = _HomeViewModel;
+            HumburgerIsChecked = false;
             #endregion InitFields
         }
+
     }
 }
