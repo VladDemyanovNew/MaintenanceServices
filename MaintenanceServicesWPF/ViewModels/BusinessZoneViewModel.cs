@@ -55,6 +55,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         private ContractUpdatingZoneViewModel _ContractUpdatingZoneViewModel = new ContractUpdatingZoneViewModel();
         private ReportCreatingZoneViewModel _ReportCreatingZoneViewModel = new ReportCreatingZoneViewModel();
         private ReportPresentationZoneViewModel _ReportPresentationZoneViewModel = new ReportPresentationZoneViewModel();
+        private UnitOfWork _UnitOfWork;
         #endregion
 
         #region Commands
@@ -89,9 +90,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
         #endregion
 
-
-#warning test
-        private EFGenericRepository<Contract> _contractRep;
+        #warning test
+        #region test
 
         private List<Contract> contrcts;
 
@@ -104,12 +104,12 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
         public ICommand TestCommand { get; }
         private void OnTestCommandExecuted(object p) 
-        { 
-            contrcts = _contractRep.GetAllAsync().Result.ToList();
+        {
+            contrcts = _UnitOfWork.ContractRep.GetAll().ToList();
             TestProp = contrcts.First().Name;
         }
         private bool CanTestCommandExecuted(object p) => true;
-#warning test
+        #endregion
 
         public BusinessZoneViewModel()
         {
@@ -118,7 +118,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             TestCommand = new RelayCommand(OnTestCommandExecuted, CanTestCommandExecuted);
             #endregion
 
-            _contractRep = new EFGenericRepository<Contract>(new ApplicationContextFactory());
+            _UnitOfWork = new UnitOfWork();
+            Contracts = new ObservableCollection<Contract>(_UnitOfWork.ContractRep.GetAll());
             //List<Contract> contrcts = _contractRep.GetAllAsync().Result.ToList();
 
         }

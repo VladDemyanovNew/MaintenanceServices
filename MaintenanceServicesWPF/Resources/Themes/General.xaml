@@ -32,6 +32,7 @@
 
     <!-- Стиль для кнопки -->
     <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">

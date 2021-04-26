@@ -16,36 +16,27 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
 {
     public class DAL_Tests
     {
-        private DbContextOptions<ApplicationContext> _options;
-        private EFGenericRepository<Employee> _employeeRep;
-        private EFGenericRepository<Position> _positionRep;
-        private EFGenericRepository<Contract> _contractRep;
-        private EFGenericRepository<ContractCategory> _contractCategoryRep;
-        private EFGenericRepository<Equipment> _eqRep;
-        private EFGenericRepository<EquipmentCategory> _eqCategoryRep;
-        private EFGenericRepository<PriceList> _priceListRep;
-        private EFGenericRepository<Report> _reportRep;
-        private EFGenericRepository<ReportData> _reportDataRep;
-        private EFGenericRepository<Service> _serviceRep;
-        private EFGenericRepository<ServiceEquipment> _serviceEqRep;
+        //private DbContextOptions<ApplicationContext> _options;
+        private UnitOfWork _unitOfWork;
 
         [SetUp]
         public void Setup()
         {
-            _options = GetDbContextOptions();
-            _employeeRep = new EFGenericRepository<Employee>(new ApplicationContextFactory());
-            _positionRep = new EFGenericRepository<Position>(new ApplicationContextFactory());
-            _contractRep = new EFGenericRepository<Contract>(new ApplicationContextFactory());
-            _contractCategoryRep = new EFGenericRepository<ContractCategory>(new ApplicationContextFactory());
-            _eqRep = new EFGenericRepository<Equipment>(new ApplicationContextFactory());
-            _eqCategoryRep = new EFGenericRepository<EquipmentCategory>(new ApplicationContextFactory());
-            _priceListRep = new EFGenericRepository<PriceList>(new ApplicationContextFactory());
-            _reportRep = new EFGenericRepository<Report>(new ApplicationContextFactory());
-            _reportDataRep = new EFGenericRepository<ReportData>(new ApplicationContextFactory());
-            _serviceRep = new EFGenericRepository<Service>(new ApplicationContextFactory());
-            _serviceEqRep = new EFGenericRepository<ServiceEquipment>(new ApplicationContextFactory());
+            //_options = GetDbContextOptions();
+            _unitOfWork = new UnitOfWork();
         }
 
+        [Test]
+        public void TestingUnitOfWork()
+        {
+            List<Contract> contrcts = _unitOfWork.ContractRep.GetAllAsync().Result.ToList();
+            foreach (Contract c in contrcts)
+            {
+                Console.WriteLine(c.Name);
+            }
+        }
+
+        /*
         #region CRUD testing with repository
         [Test]
         public void TestContracts()
@@ -180,6 +171,6 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
                 .UseSqlServer(connectionString)
                 .Options;
             return options;
-        }
+        }*/
     }
 }

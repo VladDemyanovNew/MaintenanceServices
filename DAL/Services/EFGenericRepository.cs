@@ -13,63 +13,53 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
 {
     public class EFGenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
-        private readonly ApplicationContextFactory _contextFactory;
+        private readonly ApplicationContext _db;
 
-        public EFGenericRepository(ApplicationContextFactory contextFactory)
+        public EFGenericRepository(ApplicationContext db)
         {
-            _contextFactory = contextFactory;
+            this._db = db;
         }
 
         public async Task<T> AddAsync(T entity, CancellationToken Cancel = default)
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));
 
-            using (ApplicationContext context = _contextFactory.CreateDbContext())
-            {
-                //var createdEntity = await context.Set<T>().AddAsync(entity);
-                context.Entry(entity).State = EntityState.Added;
-                await context.SaveChangesAsync(Cancel).ConfigureAwait(false);
-                return entity;
-            }
+            //var createdEntity = await context.Set<T>().AddAsync(entity);
+            _db.Entry(entity).State = EntityState.Added;
+            await _db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+            return entity;
         }
 
         public async Task RemoveAsync(int id, CancellationToken Cancel = default)
         {
-            using (ApplicationContext context = _contextFactory.CreateDbContext())
-            {
-                T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
-                context.Set<T>().Remove(entity);
-                await context.SaveChangesAsync(Cancel).ConfigureAwait(false);
-            }
+            T entity = await _db.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
+            _db.Set<T>().Remove(entity);
+            await _db.SaveChangesAsync(Cancel).ConfigureAwait(false);
         }
 
         public async Task<T> GetAsync(int id, CancellationToken Cancel = default)
         {
-            using (ApplicationContext context = _contextFactory.CreateDbContext())
-            {
-                T entity = await context.Set<T>().SingleOrDefaultAsync(e => e.Id == id, Cancel).ConfigureAwait(false);
-                return entity;
-            }
+            T entity = await _db.Set<T>().SingleOrDefaultAsync(e => e.Id == id, Cancel).ConfigureAwait(false);
+            return entity;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(CancellationToken Cancel = default)
         {
-            using (ApplicationContext context = _contextFactory.CreateDbContext())
-            {
-                IEnumerable<T> entities = await context.Set<T>().ToListAsync().ConfigureAwait(false);
-                return entities;
-            }
+            IEnumerable<T> entities = await _db.Set<T>().ToListAsync().ConfigureAwait(false);
+            return entities;
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            return _db.Set<T>();
         }
 
         public async Task UpdateAsync(T entity, CancellationToken Cancel = default)
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));
 
-            using (ApplicationContext context = _contextFactory.CreateDbContext())
-            {
-                context.Entry(entity).State = EntityState.Modified;
-                await context.SaveChangesAsync(Cancel).ConfigureAwait(false);
-            }
+            _db.Entry(entity).State = EntityState.Modified;
+            await _db.SaveChangesAsync(Cancel).ConfigureAwait(false);
         }
     }
 }
