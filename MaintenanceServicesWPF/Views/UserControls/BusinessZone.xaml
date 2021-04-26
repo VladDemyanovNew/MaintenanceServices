@@ -13,7 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Themes/General.xaml" />
-                
+
                 <ResourceDictionary>
                     <DataTemplate DataType = "{x:Type vm:ContractCreatingZoneViewModel}">
                         <views:ContractCreatingZone/>
@@ -46,8 +46,13 @@
                       BorderBrush="Black"/>
 
         <Grid x:Name="contracts" Grid.Column="0" Background="#f7f7f7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-            <Grid VerticalAlignment="Top" Background="#f7f7f7">
+            <Grid Grid.Row="0" Background="#f7f7f7">
                 <StackPanel>
                     <Grid Background="#f0f0f0">
                         <TextBlock HorizontalAlignment="Center" Padding="0,2" FontSize="20" FontWeight="DemiBold" Foreground="DarkGray" Text="Contracts"/>
@@ -78,70 +83,71 @@
                             </StackPanel>
                         </Expander>
                     </Grid>
-                    <Grid>
-                        <ScrollViewer CanContentScroll="True" Grid.Row="1">
-                            <ItemsControl x:Name="guitarList" ItemsSource="{Binding Path=Contracts}" >
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border BorderThickness="1" BorderBrush="#FF4F4F4F"  Background="White" Margin="20,20,20,0">
-                                            <StackPanel>
-                                                <Grid Margin="5,5,5,0">
-                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                        <fa:ImageAwesome Height="30"
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <ScrollViewer CanContentScroll="True" Grid.Row="1">
+                    <ItemsControl x:Name="guitarList" ItemsSource="{Binding Path=Contracts}" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="#FF4F4F4F"  Background="White" Margin="20,20,20,0">
+                                    <StackPanel>
+                                        <Grid Margin="5,5,5,0">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                <fa:ImageAwesome Height="30"
                                                                          Width="30"
                                                                          Foreground="Black"
                                                                          Icon="HandshakeOutline"
                                                                          Margin="0,0,5,0"/>
-                                                        <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding Name}"/>
-                                                    </StackPanel>
-                                                    <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding CreationDate}" HorizontalAlignment="Right"/>
-                                                </Grid>
-                                                <Grid Margin="5">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="auto"/>
-                                                        <RowDefinition Height="auto"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <Button Style="{DynamicResource ButtonStyle}" Grid.Row="0" Background="#ffbf08" Grid.Column="0" Padding="3,5" Margin="0,0,5,5">
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="Pencil"/>
-                                                            <TextBlock FontSize="15" Text="Update" Foreground="White"/>
-                                                        </StackPanel>
-                                                    </Button>
-                                                    <Button Style="{DynamicResource ButtonStyle}" Grid.Row="0" Background="#bc3d10" Grid.Column="1" Padding="3,5" Margin="0,0,0,5">
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="white" Icon="TrashOutline"/>
-                                                            <TextBlock FontSize="15" Text="Delete" Foreground="White"/>
-                                                        </StackPanel>
-                                                    </Button>
-                                                    <Button Style="{DynamicResource ButtonStyle}" Grid.Row="1" Background="#6ea1ff" Grid.Column="0" Padding="3,5" Margin="0,0,5,0">
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="FileOutline"/>
-                                                            <TextBlock FontSize="15" Text="Show report" Foreground="White"/>
-                                                        </StackPanel>
-                                                    </Button>
-                                                    <Button Style="{DynamicResource ButtonStyle}" Grid.Row="1" Background="#43a187" Grid.Column="1" Padding="3,5" Margin="0">
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="PlusCircle"/>
-                                                            <TextBlock FontSize="15" Text="Create report" Foreground="White"/>
-                                                        </StackPanel>
-                                                    </Button>
-                                                </Grid>
+                                                <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding Name}"/>
                                             </StackPanel>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </ScrollViewer>
-                    </Grid>
-                </StackPanel>
+                                            <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding CreationDate}" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Margin="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button Style="{DynamicResource ButtonStyle}" Grid.Row="0" Background="#ffbf08" Grid.Column="0" Padding="3,5" Margin="0,0,5,5">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="Pencil"/>
+                                                    <TextBlock FontSize="15" Text="Update" Foreground="White"/>
+                                                </StackPanel>
+                                            </Button>
+                                            <Button Style="{DynamicResource ButtonStyle}" Grid.Row="0" Background="#bc3d10" Grid.Column="1" Padding="3,5" Margin="0,0,0,5">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="white" Icon="TrashOutline"/>
+                                                    <TextBlock FontSize="15" Text="Delete" Foreground="White"/>
+                                                </StackPanel>
+                                            </Button>
+                                            <Button Style="{DynamicResource ButtonStyle}" Grid.Row="1" Background="#6ea1ff" Grid.Column="0" Padding="3,5" Margin="0,0,5,0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="FileOutline"/>
+                                                    <TextBlock FontSize="15" Text="Show report" Foreground="White"/>
+                                                </StackPanel>
+                                            </Button>
+                                            <Button Style="{DynamicResource ButtonStyle}" Grid.Row="1" Background="#43a187" Grid.Column="1" Padding="3,5" Margin="0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="PlusCircle"/>
+                                                    <TextBlock FontSize="15" Text="Create report" Foreground="White"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
             </Grid>
-            
-            <Grid VerticalAlignment="Bottom">
+
+            <Grid Grid.Row="2">
                 <Button Cursor="Hand" Padding="4,6" Margin="10,15" Width="160" Style="{DynamicResource ButtonStyle}" Background="#43a187" BorderBrush="{x:Null}">
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="PlusCircle"/>
