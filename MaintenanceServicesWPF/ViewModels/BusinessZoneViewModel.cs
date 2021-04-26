@@ -1,7 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Text;
+using System.Windows.Data;
 using System.Windows.Input;
+using VDemyanov.MaintenanceServices.DAL.Context;
+using VDemyanov.MaintenanceServices.DAL.Services;
+using VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Commands;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Base;
@@ -20,6 +27,25 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             get => _CurrentViewModel;
             set => Set(ref _CurrentViewModel, value);
         }
+        #endregion
+
+        #region Contracts
+        private ObservableCollection<Contract> _Contracts;
+        public ObservableCollection<Contract> Contracts
+        {
+            get => _Contracts;
+            set
+            {
+                if (!Set(ref _Contracts, value)) return;
+                _SelectedContracts.Source = value;
+                OnPropertyChanged(nameof(SelectedContracts));
+            }
+        }
+        #endregion
+
+        #region ContractsView
+        private readonly CollectionViewSource _SelectedContracts = new CollectionViewSource();
+        public ICollectionView SelectedContracts => _SelectedContracts?.View;
         #endregion
 
         #endregion
@@ -63,11 +89,38 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
         #endregion
 
+
+#warning test
+        private EFGenericRepository<Contract> _contractRep;
+
+        private List<Contract> contrcts;
+
+        private string _TestProp = "test";
+        public string TestProp
+        {
+            get => _TestProp;
+            set => Set(ref _TestProp, value);
+        }
+
+        public ICommand TestCommand { get; }
+        private void OnTestCommandExecuted(object p) 
+        { 
+            contrcts = _contractRep.GetAllAsync().Result.ToList();
+            TestProp = contrcts.First().Name;
+        }
+        private bool CanTestCommandExecuted(object p) => true;
+#warning test
+
         public BusinessZoneViewModel()
         {
             #region Commands
             NavCommand = new RelayCommand(OnNavCommandExecuted, CanNavCommandExecuted);
+            TestCommand = new RelayCommand(OnTestCommandExecuted, CanTestCommandExecuted);
             #endregion
+
+            _contractRep = new EFGenericRepository<Contract>(new ApplicationContextFactory());
+            //List<Contract> contrcts = _contractRep.GetAllAsync().Result.ToList();
+
         }
     }
 }

@@ -6,12 +6,14 @@
              xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls"
              xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessZoneVM"
              xmlns:views="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessZoneUC"
-             xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums"
+             xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Themes/General.xaml" />
+                
                 <ResourceDictionary>
                     <DataTemplate DataType = "{x:Type vm:ContractCreatingZoneViewModel}">
                         <views:ContractCreatingZone/>
@@ -29,6 +31,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MaxWidth="400"/>
@@ -42,8 +45,99 @@
                       BorderThickness="0,0,1,0"
                       BorderBrush="Black"/>
 
-        <Grid x:Name="contracts" Grid.Column="0" Background="White">
-            <StackPanel VerticalAlignment="Center">
+        <Grid x:Name="contracts" Grid.Column="0" Background="#f7f7f7">
+
+            <Grid VerticalAlignment="Top" Background="#f7f7f7">
+                <StackPanel>
+                    <Grid Background="#f0f0f0">
+                        <TextBlock HorizontalAlignment="Center" Padding="0,2" FontSize="20" FontWeight="DemiBold" Foreground="DarkGray" Text="Contracts"/>
+                    </Grid>
+                    <Grid Margin="5,10,5,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding GuitarSearchText, UpdateSourceTrigger=PropertyChanged}"
+                         Padding="50, 5, 3, 5" Foreground="#ffbf08"
+                         Grid.ColumnSpan="3" Background="White" FontSize="20"
+                         TextAlignment="Left"
+                         Style="{StaticResource TextBoxStyle}"/>
+                        <fa:ImageAwesome Grid.Column="0" Height="20" Width="20" Foreground="DarkGray" Icon="Search"/>
+                    </Grid>
+                    <Grid Background="#f7f7f7">
+                        <Expander Padding="0" Margin="5" Style="{DynamicResource MyCoolExpanderStyle}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:ImageAwesome Margin="15,10,30,8" Height="20" Width="20" Foreground="White" Icon="Filter"/>
+                                    <TextBlock Padding="0,8,15,6" Text="Sorting contracts" FontSize="15" Foreground="White"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Margin="10,15,10,10">
+                                <TextBlock HorizontalAlignment="Center" FontSize="15" Foreground="Black" Text="{Binding Path=TestProp}"/>
+                                <Button Width="100" Height="50" Command="{Binding TestCommand}"/>
+                            </StackPanel>
+                        </Expander>
+                    </Grid>
+                    <Grid>
+                        <!--<ScrollViewer CanContentScroll="True" Grid.Row="1">
+                            <StackPanel>
+                                <ItemsControl x:Name="guitarList" ItemsSource="{Binding Path=Contracts}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderThickness="1" BorderBrush="#FF4F4F4F"  Background="White" Margin="20">
+                                                <Border.Effect>
+                                                    <DropShadowEffect ShadowDepth="12" Opacity="0.3" BlurRadius="7"/>
+                                                </Border.Effect>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Grid.Column="1" Padding="10" Background="LightGray">
+                                                        <StackPanel>
+                                                            <TextBlock Padding="0,0,0,2" Foreground="#FF5A5A5A" Text="{Binding Name}" />
+                                                            
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ScrollViewer>-->
+                        
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            
+            <Grid VerticalAlignment="Bottom">
+                <Button Cursor="Hand" Padding="4,6" Margin="10,15" Width="160" Style="{DynamicResource ButtonStyle}" Background="#43a187" BorderBrush="{x:Null}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="PlusCircle"/>
+                        <TextBlock FontSize="15" Text="Add new contract" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="businessZone_contentControl" Grid.Column="2" Background="#9f7feb">
+            <ContentControl Content = "{Binding CurrentViewModel}" />
+        </Grid>
+    </Grid>
+</UserControl>
+
+
+
+
+
+<!--
+       <StackPanel VerticalAlignment="Center">
                 <Button Width="50" Height="25" Margin="10" Content="1"
                         Command="{Binding NavCommand}"
                         CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_CREATING_ZONE}}"/>
@@ -56,11 +150,5 @@
                 <Button Width="50" Height="25" Margin="10" Content="4"
                         Command="{Binding NavCommand}"
                         CommandParameter="{Binding Source={x:Static enums:ViewType.REPORT_PRESENTATION_ZONE}}"/>
-            </StackPanel>
-        </Grid>
-
-        <Grid x:Name="businessZone_contentControl" Grid.Column="2" Background="#9f7feb">
-            <ContentControl Content = "{Binding CurrentViewModel}" />
-        </Grid>
-    </Grid>
-</UserControl>
+            </StackPanel> 
+        -->

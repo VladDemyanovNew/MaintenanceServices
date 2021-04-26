@@ -56,7 +56,7 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
         {
             using (ApplicationContext context = _contextFactory.CreateDbContext())
             {
-                IEnumerable<T> entities = await context.Set<T>().ToListAsync(Cancel).ConfigureAwait(false);
+                IEnumerable<T> entities = await context.Set<T>().ToListAsync().ConfigureAwait(false);
                 return entities;
             }
         }

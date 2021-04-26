@@ -107,7 +107,7 @@
                                             <ColorAnimation
                                                 Storyboard.TargetName="humburger_icon"
                                                 Storyboard.TargetProperty="(fa:ImageAwesome.Foreground).(SolidColorBrush.Color)"
-                                                To="#bf00ff" Duration="0:0:0.1"/>
+                                                To="#ffbf08" Duration="0:0:0.1"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>

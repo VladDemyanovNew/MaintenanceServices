@@ -48,6 +48,18 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
 
         #region CRUD testing with repository
         [Test]
+        public void TestContracts()
+        {
+            
+            List<Contract> contrcts = _contractRep.GetAllAsync().Result.ToList();
+
+            foreach(Contract c in contrcts)
+            {
+                Console.WriteLine(c.Name);
+            }
+        }
+
+        [Test]
         public void TestAddEmployee()
         {
            
