@@ -37,6 +37,14 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
             await _db.SaveChangesAsync(Cancel).ConfigureAwait(false);
         }
 
+        public void Remove(int id)
+        {
+            T entity = _db.Set<T>().Find(id);
+
+            if (entity != null)
+                _db.Set<T>().Remove(entity);
+        }
+
         public async Task<T> GetAsync(int id, CancellationToken Cancel = default)
         {
             T entity = await _db.Set<T>().SingleOrDefaultAsync(e => e.Id == id, Cancel).ConfigureAwait(false);

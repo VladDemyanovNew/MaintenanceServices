@@ -88,9 +88,22 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         }
         #endregion
 
+        #region RemoveContractCommand
+        public ICommand RemoveContractCommand { get; }
+        private void OnRemoveContractCommandExecuted(object p)
+        {
+            Contract contract = p as Contract;
+            _UnitOfWork.ContractRep.Remove(contract.Id);
+            _UnitOfWork.Save();
+            Contracts.Remove(contract);
+            //TestProp = "Work";
+        }
+        private bool CanRemoveContractCommandExecuted(object p) => true;
         #endregion
 
-        #warning test
+        #endregion
+
+#warning test
         #region test
 
         private List<Contract> contrcts;
@@ -115,6 +128,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         {
             #region Commands
             NavCommand = new RelayCommand(OnNavCommandExecuted, CanNavCommandExecuted);
+            RemoveContractCommand = new RelayCommand(OnRemoveContractCommandExecuted, CanRemoveContractCommandExecuted);
             TestCommand = new RelayCommand(OnTestCommandExecuted, CanTestCommandExecuted);
             #endregion
 

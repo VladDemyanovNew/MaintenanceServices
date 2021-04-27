@@ -27,13 +27,20 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesTests
         }
 
         [Test]
-        public void TestingUnitOfWork()
+        public void TestingGetAll()
         {
             List<Contract> contrcts = _unitOfWork.ContractRep.GetAllAsync().Result.ToList();
             foreach (Contract c in contrcts)
             {
                 Console.WriteLine(c.Name);
             }
+        }
+
+        [Test]
+        public void TestingRemove()
+        {
+            _unitOfWork.ContractRep.Remove(8);
+            _unitOfWork.Save();
         }
 
         /*
