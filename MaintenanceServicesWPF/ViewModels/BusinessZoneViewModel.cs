@@ -51,11 +51,11 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         #endregion
 
         #region Fields
-        private ContractCreatingZoneViewModel _ContractCreatingZoneViewModel = new ContractCreatingZoneViewModel();
+        private ContractCreatingZoneViewModel _ContractCreatingZoneViewModel;
         private ContractUpdatingZoneViewModel _ContractUpdatingZoneViewModel = new ContractUpdatingZoneViewModel();
         private ReportCreatingZoneViewModel _ReportCreatingZoneViewModel = new ReportCreatingZoneViewModel();
         private ReportPresentationZoneViewModel _ReportPresentationZoneViewModel = new ReportPresentationZoneViewModel();
-        private UnitOfWork _UnitOfWork;
+        private UnitOfWork _UnitOfWork = new UnitOfWork();
         #endregion
 
         #region Commands
@@ -64,7 +64,6 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         public ICommand NavCommand { get; }
         private void OnNavCommandExecuted(object p) => OnNav((ViewType)p);
         private bool CanNavCommandExecuted(object p) => true;
-
         private void OnNav(ViewType destination)
         {
 
@@ -96,9 +95,18 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             _UnitOfWork.ContractRep.Remove(contract.Id);
             _UnitOfWork.Save();
             Contracts.Remove(contract);
-            //TestProp = "Work";
         }
         private bool CanRemoveContractCommandExecuted(object p) => true;
+        #endregion
+
+        #region LoadDataCommand
+        public ICommand LoadDataCommand { get; }
+        private async void OnLoadDataCommandExecuted(object p)
+        {
+            var aw = await _UnitOfWork.ContractRep.GetAllAsync();
+            Contracts = new ObservableCollection<Contract>(aw);
+        }
+        private bool CanLoadDataCommandExecuted(object p) => true;
         #endregion
 
         #endregion
@@ -129,12 +137,14 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             #region Commands
             NavCommand = new RelayCommand(OnNavCommandExecuted, CanNavCommandExecuted);
             RemoveContractCommand = new RelayCommand(OnRemoveContractCommandExecuted, CanRemoveContractCommandExecuted);
+            LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted, CanLoadDataCommandExecuted);
+           
             TestCommand = new RelayCommand(OnTestCommandExecuted, CanTestCommandExecuted);
             #endregion
 
-            _UnitOfWork = new UnitOfWork();
-            Contracts = new ObservableCollection<Contract>(_UnitOfWork.ContractRep.GetAll());
-            //List<Contract> contrcts = _contractRep.GetAllAsync().Result.ToList();
+            #region InitSection
+            _ContractCreatingZoneViewModel = new ContractCreatingZoneViewModel(this);
+            #endregion
 
         }
     }

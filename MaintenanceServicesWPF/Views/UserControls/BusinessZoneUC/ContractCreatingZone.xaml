@@ -3,10 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessZoneUC"
+             xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessZoneUC" xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="RosyBrown">
-        <TextBlock Text="ContractCreatingZone" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+             d:DesignHeight="800" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Themes/General.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="#FF373737">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/Images/testImage.jpg" Opacity="0.4"/>
+            </Grid.Background>
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.Background>
+                    <SolidColorBrush Opacity="0.6" Color="#FF000D56"/>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!--<Image Source="/Assets/Images/contractLogo2.jpg"/>-->
+                <TextBlock Margin="20,50,20,20" FontSize="30" HorizontalAlignment="Center" Grid.Row="0" Foreground="White" Text="Icon"/>
+                <StackPanel Margin="50" Grid.Row="1" Background="White">
+                    <StackPanel Margin="20,40">
+                        <StackPanel Margin="0,15" Orientation="Horizontal">
+                            <TextBlock Margin="0,0,10,0" FontSize="25" Text="Test"/>
+                            <TextBox MinWidth="250" MinHeight="30" BorderThickness="0,0,0,1"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,15" Orientation="Horizontal">
+                            <TextBlock Margin="0,0,10,0" FontSize="25" Text="Test"/>
+                            <TextBox MinWidth="250" MinHeight="30" BorderThickness="0,0,0,1"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,15" Orientation="Horizontal">
+                            <TextBlock Margin="0,0,10,0" FontSize="25" Text="Test"/>
+                            <TextBox MinWidth="250" MinHeight="30" BorderThickness="0,0,0,1"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,15" Orientation="Horizontal">
+                            <TextBlock Margin="0,0,10,0" FontSize="25" Text="Test"/>
+                            <TextBox MinWidth="250" MinHeight="30" BorderThickness="0,0,0,1"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,15" Orientation="Horizontal">
+                            <TextBlock Margin="0,0,10,0" FontSize="25" Text="Test"/>
+                            <TextBox MinWidth="250" MinHeight="30" BorderThickness="0,0,0,1"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" BorderThickness="0" Style="{DynamicResource ButtonStyle}" FontSize="25" Content="Close"/>
+                        <Button Grid.Column="1" BorderThickness="0" Style="{DynamicResource ButtonStyle}" FontSize="25" Content="Create"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            
+            
+        </Grid>
     </Grid>
+    
 </UserControl>

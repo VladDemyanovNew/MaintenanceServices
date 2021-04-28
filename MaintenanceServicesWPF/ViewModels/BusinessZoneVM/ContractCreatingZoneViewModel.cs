@@ -7,5 +7,16 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
 {
     class ContractCreatingZoneViewModel : ViewModelBase
     {
+        #region Fields
+        private BusinessZoneViewModel _Parent;
+        #endregion
+
+
+
+        public ContractCreatingZoneViewModel(BusinessZoneViewModel parent)
+        {
+            _Parent = parent;
+            
+        }
     }
 }

@@ -6,9 +6,15 @@
              xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls"
              xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessZoneVM"
              xmlns:views="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessZoneUC"
-             xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" xmlns:fa="http://schemas.fontawesome.io/icons/" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <Behaviors:Interaction.Triggers>
+        <Behaviors:EventTrigger EventName="Loaded">
+            <Behaviors:InvokeCommandAction Command="{Binding LoadDataCommand}" />
+        </Behaviors:EventTrigger>
+    </Behaviors:Interaction.Triggers>
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -109,7 +115,10 @@
 
             <!-- Кнопка добавления новых contracts -->
             <Grid Grid.Row="2">
-                <Button Cursor="Hand" Padding="4,6" Margin="10,15" Width="160" Style="{DynamicResource ButtonStyle}" Background="#43a187" BorderBrush="{x:Null}">
+                <Button Cursor="Hand" Padding="4,6" Margin="10,15" Width="160"
+                        Style="{DynamicResource ButtonStyle}" Background="#43a187" BorderBrush="{x:Null}"
+                        Command="{Binding NavCommand}"
+                        CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_CREATING_ZONE}}">
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="PlusCircle"/>
                         <TextBlock FontSize="15" Text="Add new contract" Foreground="White"/>
@@ -118,7 +127,7 @@
             </Grid>
         </Grid>
 
-        <Grid x:Name="businessZone_contentControl" Grid.Column="2" Background="#9f7feb">
+        <Grid x:Name="businessZone_contentControl" Grid.Column="2" Background="White">
             <ContentControl Content = "{Binding CurrentViewModel}" />
         </Grid>
     </Grid>
