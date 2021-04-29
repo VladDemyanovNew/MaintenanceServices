@@ -12,11 +12,11 @@ using VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Commands;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Base;
-using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessZoneVM;
+using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessSectionVM;
 
 namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 {
-    class BusinessZoneViewModel : ViewModelBase
+    class BusinessSectionViewModel : ViewModelBase
     {
         #region Properties
 
@@ -51,11 +51,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         #endregion
 
         #region Fields
-        private ContractCreatingZoneViewModel _ContractCreatingZoneViewModel;
-        private ContractUpdatingZoneViewModel _ContractUpdatingZoneViewModel = new ContractUpdatingZoneViewModel();
+        private ContractCreatingSectionViewModel _ContractCreatingSectionViewModel;
         private ReportCreatingZoneViewModel _ReportCreatingZoneViewModel = new ReportCreatingZoneViewModel();
         private ReportPresentationZoneViewModel _ReportPresentationZoneViewModel = new ReportPresentationZoneViewModel();
-        private UnitOfWork _UnitOfWork = new UnitOfWork();
+        public UnitOfWork _UnitOfWork = new UnitOfWork();
         #endregion
 
         #region Commands
@@ -69,11 +68,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
             switch (destination)
             {
-                case ViewType.CONTRACT_CREATING_ZONE:
-                    CurrentViewModel = _ContractCreatingZoneViewModel;
-                    break;
-                case ViewType.CONTRACT_UPDATING_ZONE:
-                    CurrentViewModel = _ContractUpdatingZoneViewModel;
+                case ViewType.CONTRACT_CREATING_SECTION:
+                    CurrentViewModel = _ContractCreatingSectionViewModel;
                     break;
                 case ViewType.REPORT_CREATING_ZONE:
                     CurrentViewModel = _ReportCreatingZoneViewModel;
@@ -132,7 +128,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         private bool CanTestCommandExecuted(object p) => true;
         #endregion
 
-        public BusinessZoneViewModel()
+        public BusinessSectionViewModel()
         {
             #region Commands
             NavCommand = new RelayCommand(OnNavCommandExecuted, CanNavCommandExecuted);
@@ -143,7 +139,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             #endregion
 
             #region InitSection
-            _ContractCreatingZoneViewModel = new ContractCreatingZoneViewModel(this);
+            _ContractCreatingSectionViewModel = new ContractCreatingSectionViewModel(this);
             #endregion
 
         }

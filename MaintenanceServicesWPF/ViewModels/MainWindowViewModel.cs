@@ -43,7 +43,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         #endregion
 
         #region Fields
-        private BusinessZoneViewModel _BusinessZoneViewModel = new BusinessZoneViewModel();
+        private BusinessSectionViewModel _BusinessSectionViewModel = new BusinessSectionViewModel();
         private DatabaseViewModel _DatabaseViewModel = new DatabaseViewModel();
         #endregion
 
@@ -73,9 +73,9 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
                 case ViewType.DATABASE:
                     CurrentViewModel = _DatabaseViewModel;
                     break;
-                case ViewType.BUSINESS_ZONE:
+                case ViewType.BUSINESS_SECTION:
                 default:
-                    CurrentViewModel = _BusinessZoneViewModel;
+                    CurrentViewModel = _BusinessSectionViewModel;
                     break;
             }
         }
@@ -101,7 +101,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             #endregion
 
             #region InitFields
-            CurrentViewModel = _BusinessZoneViewModel;
+            CurrentViewModel = _BusinessSectionViewModel;
             HumburgerIsChecked = false;
             #endregion InitFields
         }

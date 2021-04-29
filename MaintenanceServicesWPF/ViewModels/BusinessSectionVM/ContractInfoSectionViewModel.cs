@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Base;
 
-namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessZoneVM
+namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessSectionVM
 {
-    class ReportPresentationZoneViewModel : ViewModelBase
+    class ContractInfoSectionViewModel : ViewModelBase
     {
     }
 }

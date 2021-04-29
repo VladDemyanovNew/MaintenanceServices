@@ -58,6 +58,7 @@
         </Setter>
     </Style>
 
+
     <!-- Стиль для экспандера -->
     <Style x:Key="ExpanderHeaderFocusVisual">
         <Setter Property="Control.Template">
@@ -116,5 +117,13 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!-- Стиль с закруглёнными границами -->
+    <!--<Style x:Key="testStyle" TargetType="Grid">
+        
+        <Style.Setters>
+            <Setter Property="CornerRadius" Value="10" TargetName="Border"/>
+        </Style.Setters>
+    </Style>-->
 
 </ResourceDictionary>

@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessZoneUC
+namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessSectionUC
 {
     /// <summary>
-    /// Логика взаимодействия для ContractCreatingZone.xaml
+    /// Логика взаимодействия для ReportCreatingZone.xaml
     /// </summary>
-    public partial class ContractCreatingZone : UserControl
+    public partial class ReportCreatingZone : UserControl
     {
-        public ContractCreatingZone()
+        public ReportCreatingZone()
         {
             InitializeComponent();
         }

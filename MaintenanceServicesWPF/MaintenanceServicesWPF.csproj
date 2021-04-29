@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Images\testImage.jpg" />
+    <None Remove="Assets\Images\contractBackground.jpg" />
+    <None Remove="Assets\Images\contractIcon.png" />
+    <None Remove="Assets\Images\contractLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,11 +21,13 @@
 
   <ItemGroup>
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Images\testImage.jpg" />
+    <Resource Include="Assets\Images\contractBackground.jpg" />
+    <Resource Include="Assets\Images\contractIcon.png" />
   </ItemGroup>
 
 </Project>

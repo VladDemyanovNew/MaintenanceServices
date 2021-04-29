@@ -4,9 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls"
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="Gold">
+       <!--
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Database"/>
+        --> 
+        <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Grid.Column="1" ZoomLevel="16" Center="-23.1870304,-50.6606103">
+            <Canvas m:MapLayer.Position="53.902334,27.5618791"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
+                <fa:ImageAwesome  Height="30" Width="30" Foreground="White" Icon="MapMarker"/>
+                
+            </Canvas>
+            
+        </m:Map>
     </Grid>
 </UserControl>

@@ -1,12 +1,14 @@
-﻿<UserControl x:Class="VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessZone"
+﻿<UserControl x:Class="VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessSection"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls"
-             xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessZoneVM"
-             xmlns:views="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessZoneUC"
-             xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" xmlns:fa="http://schemas.fontawesome.io/icons/" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessSectionVM"
+             xmlns:views="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessSectionUC"
+             xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Behaviors:Interaction.Triggers>
@@ -21,11 +23,8 @@
                 <ResourceDictionary Source="/Resources/Themes/General.xaml" />
                 <ResourceDictionary Source="/Resources/Templates/ListViewTemplate.xaml" />
                 <ResourceDictionary>
-                    <DataTemplate DataType = "{x:Type vm:ContractCreatingZoneViewModel}">
-                        <views:ContractCreatingZone/>
-                    </DataTemplate>
-                    <DataTemplate DataType = "{x:Type vm:ContractUpdatingZoneViewModel}">
-                        <views:ContractUpdatingZone/>
+                    <DataTemplate DataType = "{x:Type vm:ContractCreatingSectionViewModel}">
+                        <views:ContractCreatingSection/>
                     </DataTemplate>
                     <DataTemplate DataType = "{x:Type vm:ReportCreatingZoneViewModel}">
                         <views:ReportCreatingZone/>
@@ -118,7 +117,7 @@
                 <Button Cursor="Hand" Padding="4,6" Margin="10,15" Width="160"
                         Style="{DynamicResource ButtonStyle}" Background="#43a187" BorderBrush="{x:Null}"
                         Command="{Binding NavCommand}"
-                        CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_CREATING_ZONE}}">
+                        CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_CREATING_SECTION}}">
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="PlusCircle"/>
                         <TextBlock FontSize="15" Text="Add new contract" Foreground="White"/>

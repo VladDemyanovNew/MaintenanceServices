@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.Windows"
         mc:Ignorable="d"
-        xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels"
+        xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
         Title="LoginWindow" Height="500" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Command="{Binding LoginCommand}" Width="100" Height="50" Content="Login" Cursor="Hand"/>

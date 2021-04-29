@@ -10,16 +10,15 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/" 
         xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Height="720" Width="1080" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+        Height="720" Width="1080" MinWidth="950" MinHeight="700" WindowState="Maximized" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Themes/MainWindowStyles.xaml" />
-
                 <ResourceDictionary>
-                    <DataTemplate DataType = "{x:Type vm:BusinessZoneViewModel}">
-                        <views:BusinessZone/>
+                    <DataTemplate DataType = "{x:Type vm:BusinessSectionViewModel}">
+                        <views:BusinessSection/>
                     </DataTemplate>
                     <DataTemplate DataType = "{x:Type vm:DatabaseViewModel}">
                         <views:Database/>
@@ -138,7 +137,7 @@
                         <ListViewItem x:Name="business_zone" HorizontalAlignment="Left" Margin="0,0,0,15" >
                             <Behaviors:Interaction.Triggers>
                                 <Behaviors:EventTrigger EventName="Selected" SourceObject="{Binding ElementName=business_zone}">
-                                    <Behaviors:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="{Binding Source={x:Static enums:ViewType.BUSINESS_ZONE}}" />
+                                    <Behaviors:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="{Binding Source={x:Static enums:ViewType.BUSINESS_SECTION}}" />
                                 </Behaviors:EventTrigger>
                             </Behaviors:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal" Width="230">
