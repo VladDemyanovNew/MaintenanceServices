@@ -48,12 +48,22 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         public ICollectionView SelectedContracts => _SelectedContracts?.View;
         #endregion
 
+        #region SelectedContract
+        private Contract _SelectedContract;
+        public Contract SelectedContract
+        {
+            get => _SelectedContract;
+            set => Set(ref _SelectedContract, value);
+        }
+        #endregion
+
         #endregion
 
         #region Fields
         private ContractCreatingSectionViewModel _ContractCreatingSectionViewModel;
         private ReportCreatingZoneViewModel _ReportCreatingZoneViewModel = new ReportCreatingZoneViewModel();
         private ReportPresentationZoneViewModel _ReportPresentationZoneViewModel = new ReportPresentationZoneViewModel();
+        
         public UnitOfWork _UnitOfWork = new UnitOfWork();
         #endregion
 
@@ -63,7 +73,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         public ICommand NavCommand { get; }
         private void OnNavCommandExecuted(object p) => OnNav((ViewType)p);
         private bool CanNavCommandExecuted(object p) => true;
-        private void OnNav(ViewType destination)
+        private async void OnNav(ViewType destination)
         {
 
             switch (destination)
@@ -73,6 +83,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
                     break;
                 case ViewType.REPORT_CREATING_ZONE:
                     CurrentViewModel = _ReportCreatingZoneViewModel;
+                    break;
+                case ViewType.CONTRACT_INFO_SECTION:
+                    SelectedContract.CategoryNavigation = await _UnitOfWork.ContractCategoryRep.GetAsync(SelectedContract.Category.Value);
+                    CurrentViewModel = new ContractInfoSectionViewModel(SelectedContract);
                     break;
                 case ViewType.REPORT_PRESENTATION_ZONE:
                     CurrentViewModel = _ReportPresentationZoneViewModel;
@@ -107,27 +121,6 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
         #endregion
 
-#warning test
-        #region test
-
-        private List<Contract> contrcts;
-
-        private string _TestProp = "test";
-        public string TestProp
-        {
-            get => _TestProp;
-            set => Set(ref _TestProp, value);
-        }
-
-        public ICommand TestCommand { get; }
-        private void OnTestCommandExecuted(object p) 
-        {
-            contrcts = _UnitOfWork.ContractRep.GetAll().ToList();
-            TestProp = contrcts.First().Name;
-        }
-        private bool CanTestCommandExecuted(object p) => true;
-        #endregion
-
         public BusinessSectionViewModel()
         {
             #region Commands
@@ -135,7 +128,6 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             RemoveContractCommand = new RelayCommand(OnRemoveContractCommandExecuted, CanRemoveContractCommandExecuted);
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted, CanLoadDataCommandExecuted);
            
-            TestCommand = new RelayCommand(OnTestCommandExecuted, CanTestCommandExecuted);
             #endregion
 
             #region InitSection

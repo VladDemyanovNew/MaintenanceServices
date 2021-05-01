@@ -32,6 +32,9 @@
                     <DataTemplate DataType = "{x:Type vm:ReportPresentationZoneViewModel}">
                         <views:ReportPresentationZone/>
                     </DataTemplate>
+                    <DataTemplate DataType = "{x:Type vm:ContractInfoSectionViewModel}">
+                        <views:ContractInfoSection/>
+                    </DataTemplate>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -83,9 +86,9 @@
                                     <TextBlock Padding="0,8,15,6" Text="Sorting contracts" FontSize="15" Foreground="White"/>
                                 </StackPanel>
                             </Expander.Header>
-                            <StackPanel Margin="10,15,10,10">
-                                <TextBlock HorizontalAlignment="Center" FontSize="15" Foreground="Black" Text="{Binding Path=TestProp}"/>
-                                <Button Width="100" Height="50" Command="{Binding TestCommand}"/>
+                            <StackPanel>
+                                <TextBlock Text="test"/>
+                                <TextBlock Text="test"/>
                             </StackPanel>
                         </Expander>
                     </Grid>
@@ -95,15 +98,21 @@
             <!-- Список contracts -->
             <Grid Grid.Row="1">
                 <ScrollViewer CanContentScroll="True" Grid.Row="1">
-                    <ListView x:Name="guitarList" ItemsSource="{Binding Path=SelectedContracts}"
-                              ItemTemplate="{StaticResource ContractsListView}">
+                    <ListView x:Name="contractsList" ItemsSource="{Binding Path=SelectedContracts}"
+                              ItemTemplate="{StaticResource ContractsListView}" SelectedItem="{Binding SelectedContract}">
+                        <Behaviors:Interaction.Triggers>
+                            <Behaviors:EventTrigger EventName="SelectionChanged" SourceObject="{Binding ElementName=contractsList}">
+                                <Behaviors:InvokeCommandAction Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                           CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_INFO_SECTION}}" />
+                            </Behaviors:EventTrigger>
+                        </Behaviors:Interaction.Triggers>
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment"  Value="Stretch"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="BorderThickness" Value="1"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Red"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -115,7 +124,7 @@
             <!-- Кнопка добавления новых contracts -->
             <Grid Grid.Row="2">
                 <Button Cursor="Hand" Padding="4,6" Margin="10,15" Width="160"
-                        Style="{DynamicResource ButtonStyle}" Background="#43a187" BorderBrush="{x:Null}"
+                        Style="{DynamicResource ButtonStyle}" Background="#FF204AFA" BorderBrush="{x:Null}"
                         Command="{Binding NavCommand}"
                         CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_CREATING_SECTION}}">
                     <StackPanel Orientation="Horizontal">

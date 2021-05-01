@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fa="http://schemas.fontawesome.io/icons/">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fa="http://schemas.fontawesome.io/icons/"
+                    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Resources/Themes/General.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -36,7 +39,7 @@
                         </StackPanel>
                     </Button>
                     <Button Style="{DynamicResource ButtonStyle}"
-                            Grid.Row="0" Background="#bc3d10" Grid.Column="1"
+                            Grid.Row="0" Background="#E10014" Grid.Column="1"
                             Padding="3,5" Margin="0,0,0,5"
                             Command="{Binding DataContext.RemoveContractCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             CommandParameter="{Binding}">

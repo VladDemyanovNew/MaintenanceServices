@@ -10,6 +10,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.En
         BUSINESS_SECTION,
         DATABASE,
         CONTRACT_CREATING_SECTION,
+        CONTRACT_INFO_SECTION,
         REPORT_CREATING_ZONE,
         REPORT_PRESENTATION_ZONE
     }

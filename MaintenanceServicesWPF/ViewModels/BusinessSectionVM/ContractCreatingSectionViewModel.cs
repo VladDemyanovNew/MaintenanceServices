@@ -37,7 +37,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
 
         #endregion
 
-        #region Contracts
+        #region ContractCategoryCollection
         private ObservableCollection<ContractCategory> _ContractCategoryCollection;
         public ObservableCollection<ContractCategory> ContractCategoryCollection
         {
