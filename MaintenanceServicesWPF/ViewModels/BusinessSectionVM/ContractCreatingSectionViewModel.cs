@@ -68,6 +68,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             await _UnitOfWork.ContractRep.AddAsync(ContractProp);
             _UnitOfWork.Save();
             _Parent.Contracts.Add(ContractProp);
+
             ContractProp = new Contract();
         }
         private bool CanCreateContractCommandExecuted(object p) => true;

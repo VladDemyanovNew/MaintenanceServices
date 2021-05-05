@@ -6,6 +6,7 @@ using System.Windows.Input;
 using VDemyanov.MaintenanceServices.DAL.Services;
 using VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Commands;
+using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums;
 using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Base;
 
 namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessSectionVM
@@ -33,6 +34,18 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         {
             get => _SelectedContractDescription;
             set => Set(ref _SelectedContractDescription, value);
+        }
+        #endregion
+
+        #region UpdatingContract
+        private Contract _UpdatingContract;
+        public Contract UpdatingContract
+        {
+            get => _UpdatingContract;
+            set
+            {
+                Set(ref _UpdatingContract, value);
+            }
         }
         #endregion
 
@@ -65,6 +78,38 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
 
         #endregion
 
+        #region Commands
+
+        #region UpdateContractCommand
+        public ICommand UpdateContractCommand { get; }
+        private void OnUpdateContractCommandExecuted(object p) => UpdateContract((ContractProperty)p);
+        private bool CanUpdateContractCommandExecuted(object p) => true;
+
+        private async void UpdateContract(ContractProperty contractProperty)
+        {
+            switch (contractProperty)
+            {
+                case ContractProperty.NAME:
+                    SelectedContract.Name = UpdatingContract.Name;
+                    OnPropertyChanged(nameof(SelectedContract));
+                    await _UnitOfWork.ContractRep.UpdateAsync(SelectedContract);
+                    _UnitOfWork.Save();
+                    UpdatingContract = new Contract();
+                    break;
+                case ContractProperty.CLIENT_NAME:
+                    break;
+                case ContractProperty.CREATION_DATE:
+                    break;
+                case ContractProperty.FACILITY_ADDRESS:
+                    break;
+                case ContractProperty.CATEGORY:
+                    break;
+            }
+        }
+        #endregion
+
+        #endregion
+
         #region Methods
 
         private async void LoadComboBoxItemsSource()
@@ -82,9 +127,14 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
 
         public ContractInfoSectionViewModel(Contract selectedContract)
         {
+            #region Commands
+            UpdateContractCommand = new RelayCommand(OnUpdateContractCommandExecuted, CanUpdateContractCommandExecuted);
+            #endregion
+
             #region InitSection
             this.SelectedContract = selectedContract;
             LoadComboBoxItemsSource();
+            UpdatingContract = new Contract();
             #endregion
         }
     }
