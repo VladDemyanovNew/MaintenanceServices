@@ -63,8 +63,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         private ContractCreatingSectionViewModel _ContractCreatingSectionViewModel;
         private ReportCreatingZoneViewModel _ReportCreatingZoneViewModel = new ReportCreatingZoneViewModel();
         private ReportPresentationZoneViewModel _ReportPresentationZoneViewModel = new ReportPresentationZoneViewModel();
-        
-        public UnitOfWork _UnitOfWork = new UnitOfWork();
+
+        public UnitOfWork _UnitOfWork;
         #endregion
 
         #region Commands
@@ -86,7 +86,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
                     break;
                 case ViewType.CONTRACT_INFO_SECTION:
                     SelectedContract.CategoryNavigation = await _UnitOfWork.ContractCategoryRep.GetAsync(SelectedContract.Category.Value);
-                    CurrentViewModel = new ContractInfoSectionViewModel(SelectedContract);
+                    CurrentViewModel = new ContractInfoSectionViewModel(this);
                     break;
                 case ViewType.REPORT_PRESENTATION_ZONE:
                     CurrentViewModel = _ReportPresentationZoneViewModel;
@@ -121,6 +121,15 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
         #endregion
 
+        #region Methods
+        public async void LoadData()
+        {
+            _UnitOfWork = new UnitOfWork();
+            var aw = await _UnitOfWork.ContractRep.GetAllAsync();
+            Contracts = new ObservableCollection<Contract>(aw);
+        }
+        #endregion
+
         public BusinessSectionViewModel()
         {
             #region Commands
@@ -132,8 +141,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
             #region InitSection
             _ContractCreatingSectionViewModel = new ContractCreatingSectionViewModel(this);
+            LoadData();
             #endregion
-
         }
     }
 }

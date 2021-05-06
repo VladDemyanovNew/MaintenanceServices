@@ -2,10 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.fontawesome.io/icons/"
                     xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
-                    xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums">
+                    xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" 
+                    xmlns:converters="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Converters">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Resources/Themes/General.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <converters:DateTimeToDateConverter x:Key="myDateConverter" />
     
     <!-- Шаблон данных для представления списка контрактов -->
     <DataTemplate x:Key="ContractsListView" >
@@ -20,7 +23,7 @@
                                          Margin="0,0,5,0"/>
                         <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding Name}"/>
                     </StackPanel>
-                    <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding CreationDate}" HorizontalAlignment="Right"/>
+                    <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding CreationDate, Converter={StaticResource myDateConverter}}" HorizontalAlignment="Right"/>
                 </Grid>
                 <Grid Margin="5">
                     <Grid.RowDefinitions>

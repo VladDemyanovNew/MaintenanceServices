@@ -11,11 +11,11 @@
              xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Behaviors:Interaction.Triggers>
+    <!--<Behaviors:Interaction.Triggers>
         <Behaviors:EventTrigger EventName="Loaded">
             <Behaviors:InvokeCommandAction Command="{Binding LoadDataCommand}" />
         </Behaviors:EventTrigger>
-    </Behaviors:Interaction.Triggers>
+    </Behaviors:Interaction.Triggers>-->
 
     <UserControl.Resources>
         <ResourceDictionary>

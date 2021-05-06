@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using VDemyanov.MaintenanceServices.DAL.Services;
@@ -15,6 +16,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
     {
         #region Fields
         public UnitOfWork _UnitOfWork = new UnitOfWork();
+        private BusinessSectionViewModel _Parent;
         #endregion
 
         #region Properties
@@ -90,21 +92,41 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             switch (contractProperty)
             {
                 case ContractProperty.NAME:
+                    if (UpdatingContract.Name == null) break;
                     SelectedContract.Name = UpdatingContract.Name;
-                    OnPropertyChanged(nameof(SelectedContract));
-                    await _UnitOfWork.ContractRep.UpdateAsync(SelectedContract);
-                    _UnitOfWork.Save();
-                    UpdatingContract = new Contract();
+                    UpdateContractUtil();
                     break;
                 case ContractProperty.CLIENT_NAME:
+                    if (UpdatingContract.ClientName == null) break;
+                    SelectedContract.ClientName = UpdatingContract.ClientName;
+                    UpdateContractUtil();
                     break;
                 case ContractProperty.CREATION_DATE:
+                    if (UpdatingContract.CreationDate == null) break;
+                    SelectedContract.CreationDate = UpdatingContract.CreationDate;
+                    UpdateContractUtil();
                     break;
                 case ContractProperty.FACILITY_ADDRESS:
+                    if (UpdatingContract.FacilityAddress == null) break;
+                    SelectedContract.FacilityAddress = UpdatingContract.FacilityAddress;
+                    UpdateContractUtil();
                     break;
                 case ContractProperty.CATEGORY:
+                    if (SelectedContractCategory == null) break;
+                    var aw = await _UnitOfWork.ContractCategoryRep.GetAllAsync();
+                    SelectedContract.CategoryNavigation = aw.First(item => item.Description == SelectedContractCategory);
+                    UpdateContractUtil();
                     break;
             }
+        }
+
+        private async void UpdateContractUtil()
+        {
+            await _UnitOfWork.ContractRep.UpdateAsync(SelectedContract);
+            _UnitOfWork.Save();
+            OnPropertyChanged(nameof(SelectedContract));
+            _Parent.SelectedContracts.Refresh();
+            UpdatingContract = new Contract();
         }
         #endregion
 
@@ -125,14 +147,15 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
 
         #endregion
 
-        public ContractInfoSectionViewModel(Contract selectedContract)
+        public ContractInfoSectionViewModel(BusinessSectionViewModel parent)
         {
             #region Commands
             UpdateContractCommand = new RelayCommand(OnUpdateContractCommandExecuted, CanUpdateContractCommandExecuted);
             #endregion
 
             #region InitSection
-            this.SelectedContract = selectedContract;
+            _Parent = parent;
+            this.SelectedContract = parent.SelectedContract;
             LoadComboBoxItemsSource();
             UpdatingContract = new Contract();
             #endregion
