@@ -12,20 +12,20 @@
     
     <!-- Шаблон данных для представления списка контрактов -->
     <DataTemplate x:Key="ContractsListView" >
-        <Border HorizontalAlignment="Center" BorderThickness="1" BorderBrush="#FF4F4F4F"  Background="White" Margin="5">
+        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="#FF4F4F4F"  Background="White" Margin="5">
             <StackPanel>
-                <Grid Margin="5,5,5,0">
+                <Grid Margin="10,10,10,10">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <fa:ImageAwesome Height="30"
-                                         Width="30"
-                                         Foreground="Black"
-                                         Icon="HandshakeOutline"
-                                         Margin="0,0,5,0"/>
-                        <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding Name}"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="20"
+                                   Foreground="#FF353535" Text="Contract №"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="20"
+                                   Foreground="#FF353535" TextWrapping="Wrap"
+                                   Width="150"  Text="{Binding Name}"/>
                     </StackPanel>
-                    <TextBlock VerticalAlignment="Center" FontSize="15" Text="{Binding CreationDate, Converter={StaticResource myDateConverter}}" HorizontalAlignment="Right"/>
+                    <TextBlock Foreground="#FF353535" VerticalAlignment="Center" FontSize="20"
+                               Text="{Binding CreationDate, Converter={StaticResource myDateConverter}}" HorizontalAlignment="Right"/>
                 </Grid>
-                <Grid Margin="5">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -35,15 +35,9 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Button Style="{DynamicResource ButtonStyle}" Grid.Row="0" Background="#ffbf08" Grid.Column="0" Padding="3,5" Margin="0,0,5,5">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="Pencil"/>
-                            <TextBlock FontSize="15" Text="Update" Foreground="White"/>
-                        </StackPanel>
-                    </Button>
                     <Button Style="{DynamicResource ButtonStyle}"
-                            Grid.Row="0" Background="#E10014" Grid.Column="1"
-                            Padding="3,5" Margin="0,0,0,5"
+                            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="#E10014" 
+                            Padding="8,10" BorderThickness="0"
                             Command="{Binding DataContext.RemoveContractCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             CommandParameter="{Binding}">
                         <StackPanel Orientation="Horizontal">
@@ -51,15 +45,19 @@
                             <TextBlock FontSize="15" Text="Delete" Foreground="White"/>
                         </StackPanel>
                     </Button>
-                    <Button Style="{DynamicResource ButtonStyle}" Grid.Row="1" Background="#6ea1ff" Grid.Column="0" Padding="3,5" Margin="0,0,5,0">
+                    <Button Style="{DynamicResource ButtonStyle}" Background="#FF353535"
+                            Grid.Row="0" Grid.Column="0" Padding="8,10" BorderThickness="0">
                         <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="FileOutline"/>
+                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="eye"/>
                             <TextBlock FontSize="15" Text="Show report" Foreground="White"/>
                         </StackPanel>
                     </Button>
-                    <Button Style="{DynamicResource ButtonStyle}" Grid.Row="1" Background="#43a187" Grid.Column="1" Padding="3,5" Margin="0">
+                    <Button Style="{DynamicResource ButtonStyle}" Background="#E008CA"
+                            Grid.Row="0" Grid.Column="1" Padding="8,10" BorderThickness="0"
+                            Command="{Binding DataContext.OpenReportCreatingSectionCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                            CommandParameter="{Binding}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="PlusCircle"/>
+                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="magic"/>
                             <TextBlock FontSize="15" Text="Create report" Foreground="White"/>
                         </StackPanel>
                     </Button>

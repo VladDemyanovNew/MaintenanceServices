@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using VDemyanov.MaintenanceServices.DAL.Context;
@@ -60,10 +61,6 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         #endregion
 
         #region Fields
-        private ContractCreatingSectionViewModel _ContractCreatingSectionViewModel;
-        private ReportCreatingZoneViewModel _ReportCreatingZoneViewModel = new ReportCreatingZoneViewModel();
-        private ReportPresentationZoneViewModel _ReportPresentationZoneViewModel = new ReportPresentationZoneViewModel();
-
         public UnitOfWork _UnitOfWork;
         #endregion
 
@@ -79,22 +76,33 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             switch (destination)
             {
                 case ViewType.CONTRACT_CREATING_SECTION:
-                    CurrentViewModel = _ContractCreatingSectionViewModel;
+                    CurrentViewModel = new ContractCreatingSectionViewModel(this);
                     break;
-                case ViewType.REPORT_CREATING_ZONE:
-                    CurrentViewModel = _ReportCreatingZoneViewModel;
+                case ViewType.REPORT_CREATING_SECTION:
+                    CurrentViewModel = new ReportCreatingSectionViewModel(this);
                     break;
                 case ViewType.CONTRACT_INFO_SECTION:
                     SelectedContract.CategoryNavigation = await _UnitOfWork.ContractCategoryRep.GetAsync(SelectedContract.Category.Value);
                     CurrentViewModel = new ContractInfoSectionViewModel(this);
                     break;
                 case ViewType.REPORT_PRESENTATION_ZONE:
-                    CurrentViewModel = _ReportPresentationZoneViewModel;
+                    CurrentViewModel = new ReportPresentationZoneViewModel();
                     break;
                 default:
                     break;
             }
         }
+        #endregion
+
+        #region OpenReportCreatingSectionCommand
+        public ICommand OpenReportCreatingSectionCommand { get; }
+        private void OnOpenReportCreatingSectionCommandExecuted(object p)
+        {
+            Contract contract = p as Contract;
+            SelectedContract = contract;
+            CurrentViewModel = new ReportCreatingSectionViewModel(this);
+        }
+        private bool CanOpenReportCreatingSectionCommandExecuted(object p) => true;
         #endregion
 
         #region RemoveContractCommand
@@ -106,7 +114,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             if (contract.Equals(SelectedContract) && Contracts.Count == 1)
             {
                 SelectedContract = null;
-                CurrentViewModel = _ContractCreatingSectionViewModel;
+                CurrentViewModel = new ContractCreatingSectionViewModel(this);
             } 
             else if (contract.Equals(SelectedContract) && !contract.Equals(Contracts.Last()))
                 SelectedContract = Contracts.Last();
@@ -138,6 +146,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             _UnitOfWork = new UnitOfWork();
             var aw = await _UnitOfWork.ContractRep.GetAllAsync();
             Contracts = new ObservableCollection<Contract>(aw);
+            CurrentViewModel = new ContractCreatingSectionViewModel(this);
         }
         #endregion
 
@@ -147,11 +156,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             NavCommand = new RelayCommand(OnNavCommandExecuted, CanNavCommandExecuted);
             RemoveContractCommand = new RelayCommand(OnRemoveContractCommandExecuted, CanRemoveContractCommandExecuted);
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted, CanLoadDataCommandExecuted);
-           
+            OpenReportCreatingSectionCommand = new RelayCommand(OnOpenReportCreatingSectionCommandExecuted, CanOpenReportCreatingSectionCommandExecuted);
             #endregion
 
             #region InitSection
-            _ContractCreatingSectionViewModel = new ContractCreatingSectionViewModel(this);
             LoadData();
             #endregion
         }

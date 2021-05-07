@@ -26,8 +26,8 @@
                     <DataTemplate DataType = "{x:Type vm:ContractCreatingSectionViewModel}">
                         <views:ContractCreatingSection/>
                     </DataTemplate>
-                    <DataTemplate DataType = "{x:Type vm:ReportCreatingZoneViewModel}">
-                        <views:ReportCreatingZone/>
+                    <DataTemplate DataType = "{x:Type vm:ReportCreatingSectionViewModel}">
+                        <views:ReportCreatingSection/>
                     </DataTemplate>
                     <DataTemplate DataType = "{x:Type vm:ReportPresentationZoneViewModel}">
                         <views:ReportPresentationZone/>

@@ -86,7 +86,7 @@
     </Style>
     <Style x:Key="MyCoolExpanderStyle" TargetType="{x:Type Expander}">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
-        <Setter Property="Background" Value="#FF204AFA"/>
+        <Setter Property="Background" Value="#4f4f4f"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="BorderBrush" Value="Black"/>
