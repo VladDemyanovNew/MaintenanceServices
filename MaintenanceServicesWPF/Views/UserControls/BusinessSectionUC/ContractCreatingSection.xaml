@@ -119,8 +119,7 @@
                                     <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" Text="Contract category" Foreground="#FF353535" FontWeight="Regular"/>
                                     <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" FontSize="20"
                                               Foreground="DarkGray" ItemsSource="{Binding ComboBoxItemsSource}"
-                                              SelectedIndex="0" Cursor="Hand" BorderThickness="0,0,0,1" Background="{x:Null}"
-                                              >
+                                              SelectedIndex="0" Cursor="Hand" BorderThickness="0,0,0,1" Background="{x:Null}">
                                         <ComboBox.SelectedItem>
                                             <Binding Path="SelectedContractCategory">
                                                 <Binding.ValidationRules>

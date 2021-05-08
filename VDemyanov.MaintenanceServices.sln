@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceServicesWPF", "MaintenanceServicesWPF\MaintenanceServicesWPF.csproj", "{7F15022D-AFBF-45BC-90B2-DC6BF31C390D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaintenanceServicesWPF", "MaintenanceServicesWPF\MaintenanceServicesWPF.csproj", "{7F15022D-AFBF-45BC-90B2-DC6BF31C390D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{55F5F028-7417-4ABF-ABC5-923A415934DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{55F5F028-7417-4ABF-ABC5-923A415934DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{5576E602-69E5-474E-953C-6294BD72A6B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{5576E602-69E5-474E-953C-6294BD72A6B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceServicesTests", "MaintenanceServicesTests\MaintenanceServicesTests.csproj", "{85DB3AED-E14A-4593-9525-EFE34474239C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaintenanceServicesTests", "MaintenanceServicesTests\MaintenanceServicesTests.csproj", "{85DB3AED-E14A-4593-9525-EFE34474239C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
