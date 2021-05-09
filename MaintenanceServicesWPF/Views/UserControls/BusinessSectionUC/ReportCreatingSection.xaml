@@ -67,9 +67,14 @@
                         <TextBlock Grid.Column="0" Text="Price list"
                                    Padding="15,0,0,0" VerticalAlignment="Center"
                                    FontSize="20" Foreground="#FF353535"/>
-                        <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" FontSize="20"
+                        <ComboBox x:Name="priceList" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="20"
                                   Foreground="#FF353535" SelectedIndex="0" Cursor="Hand" Margin="5,5,15,5"
-                                  ItemsSource="{Binding PriceListComboBox}">
+                                  ItemsSource="{Binding PriceListComboBox}" SelectedItem="{Binding SelectedPriceList}">
+                            <Behaviors:Interaction.Triggers>
+                                <Behaviors:EventTrigger EventName="SelectionChanged" SourceObject="{Binding ElementName=priceList}">
+                                    <Behaviors:InvokeCommandAction Command="{Binding DataContext.SelectedPriceListCommand, RelativeSource={RelativeSource AncestorType=ComboBox}}"/>
+                                </Behaviors:EventTrigger>
+                            </Behaviors:Interaction.Triggers>
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding CreationDate, Converter={StaticResource myDateConverter}}"/>
@@ -80,24 +85,44 @@
 
                     <Grid Grid.Row="2">
                         <DataGrid AutoGenerateColumns="False" 
-                                  CanUserAddRows="True" CanUserDeleteRows="True"
+                                  CanUserAddRows="False" CanUserDeleteRows="False"
                                   ColumnWidth="*" HorizontalScrollBarVisibility="auto"
                                   VerticalScrollBarVisibility="auto" FontSize="20"
-                                  ItemsSource="{Binding ReportDataProp}">
+                                  ItemsSource="{Binding ReportDataProp}" Foreground="#FF353535"
+                                  BorderThickness="0" BorderBrush="#FF353535"
+                                  AlternatingRowBackground="LightGray"
+                                  >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Count" Width="*" Binding="{Binding Path=Number}" />
-                                <!--<DataGridTemplateColumn Header="Service" Width="*">
+
+                                <DataGridTemplateColumn Header="Service" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Path=ReportDataProp.}"/>
+                                            <ComboBox x:Name="servicesComboBox" ItemsSource="{Binding Source={StaticResource Services}}"
+                                                      DisplayMemberPath="Name"
+                                                      SelectedItem="{Binding ServiceEquipmentNavigation.Service}"
+                                                      IsSynchronizedWithCurrentItem="False">
+                                                <Behaviors:Interaction.Triggers>
+                                                    <Behaviors:EventTrigger EventName="SelectionChanged">
+                                                        <Behaviors:InvokeCommandAction Command="{Binding DataContext.SelectedServiceCommand,  RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                                       CommandParameter="{Binding ElementName=servicesComboBox, Path=SelectedItem}"/>
+                                                    </Behaviors:EventTrigger>
+                                                </Behaviors:Interaction.Triggers>
+                                            </ComboBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>-->
+                                </DataGridTemplateColumn>
 
-
-                                <DataGridComboBoxColumn Header="Service" Width="*" ItemsSource="{Binding Source={StaticResource Services}}"
+                                <!--<DataGridComboBoxColumn x:Name="whatever" Header="Service" Width="*" ItemsSource="{Binding Source={StaticResource Services}}"
                                                         SelectedItemBinding="{Binding ServiceEquipmentNavigation.Service}"
-                                                        DisplayMemberPath="Name"/>
+                                                        DisplayMemberPath="Name">
+                                    <Behaviors:Interaction.Triggers>
+                                        <Behaviors:EventTrigger EventName="SelectionChanged">
+                                            <Behaviors:InvokeCommandAction Command="{Binding DataContext.SelectedServiceCommand,  RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+                                        </Behaviors:EventTrigger>
+                                    </Behaviors:Interaction.Triggers>
+                                </DataGridComboBoxColumn>-->
+
                                 <DataGridComboBoxColumn Header="Equipment"  Width="*" ItemsSource="{Binding Source={StaticResource Equipments}}"
                                                         SelectedItemBinding="{Binding ServiceEquipmentNavigation.Equipment}"
                                                         DisplayMemberPath="Name"/>
@@ -115,12 +140,14 @@
                                 Background="#FF353535" Foreground="White"
                                 FontWeight="Regular" FontSize="15"  
                                 Style="{DynamicResource ButtonStyle}" 
-                                Content="Remove"  Cursor="Hand"/>
+                                Content="Remove"  Cursor="Hand"
+                                Command="{Binding ServiceRemoveCommand}"/>
                         <Button Grid.Column="1" Padding="15,10" Margin="0,15,15,15" BorderThickness="0"
                                 Background="#E008CA" Foreground="White"
                                 Style="{DynamicResource ButtonStyle}" 
                                 FontWeight="Regular" FontSize="15" 
-                                Content="Add" Cursor="Hand"/>
+                                Content="Add" Cursor="Hand"
+                                Command="{Binding ServiceAddCommand}"/>
 
                     </Grid>
                 </Grid>
@@ -223,7 +250,7 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox VerticalAlignment="Center" Grid.Column="0"
-                                     FontSize="20"
+                                     FontSize="20" Text="{Binding ReportProp.Discount}"
                                      BorderThickness="0,0,0,1" Background="White"
                                      HorizontalAlignment="Stretch" Padding="5" BorderBrush="#FF353535"
                                      Foreground="#FF353535"/>

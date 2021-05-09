@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using VDemyanov.MaintenanceServices.DAL.Services;
@@ -15,7 +16,6 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         #region Fields
         public UnitOfWork _UnitOfWork = new UnitOfWork();
         private BusinessSectionViewModel _Parent;
-        private Report _Report;
         #endregion
 
         #region Properties
@@ -56,6 +56,18 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         }
         #endregion
 
+        #region Report
+        private Report _Report;
+        public Report ReportProp
+        {
+            get => _Report;
+            set
+            {
+                Set(ref _Report, value);
+            }
+        }
+        #endregion
+
         #region Services
         private ObservableCollection<Service> _Services;
         public ObservableCollection<Service> Services
@@ -80,6 +92,18 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         }
         #endregion
 
+        #region SelectedPriceList
+        private PriceList _SelectedPriceList;
+        public PriceList SelectedPriceList
+        {
+            get => _SelectedPriceList;
+            set
+            {
+                Set(ref _SelectedPriceList, value);
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Commands
@@ -91,13 +115,66 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             var aw1 = await _UnitOfWork.PriceListRep.GetAllAsync();
             this.PriceListComboBox = new ObservableCollection<PriceList>(aw1);
 
-            var aw2 = await _UnitOfWork.ServiceRep.GetAllAsync();
-            this.Services = new ObservableCollection<Service>(aw2);
+            /*var aw2 = await _UnitOfWork.ServiceRep.GetAllAsync();
+            this.Services = new ObservableCollection<Service>(aw2);*/
 
-            var aw3 = await _UnitOfWork.EquipmentRep.GetAllAsync();
-            this.Equipments = new ObservableCollection<Equipment>(aw3);
+            /*var aw3 = await _UnitOfWork.EquipmentRep.GetAllAsync();
+            this.Equipments = new ObservableCollection<Equipment>(aw3);*/
         }
         private bool CanLoadDataCommandExecuted(object p) => true;
+        #endregion
+
+        #region SelectedPriceListCommand
+        public ICommand SelectedPriceListCommand { get; }
+        private async void OnSelectedPriceListCommandExecuted(object p)
+        {
+            var aw = await _UnitOfWork.ServiceRep.GetAllAsync();
+            this.Services = new ObservableCollection<Service>(aw.Where(item => item.PriceListNavigation.Equals(SelectedPriceList)));
+        }
+        private bool CanSelectedPriceListCommandExecuted(object p) => true;
+        #endregion
+
+        #region SelectedServiceCommand
+        public ICommand SelectedServiceCommand { get; }
+        private async void OnSelectedServiceCommandExecuted(object p)
+        {
+            Service service = p as Service;
+
+            var aw = await _UnitOfWork.ServiceEquipmentRep.GetAllAsync();
+            List<ServiceEquipment> serviceEquipment = aw.Where(item => item.ServiceId == service.Id).ToList();
+
+            var aw2 = await _UnitOfWork.EquipmentRep.GetAllAsync();
+            List<Equipment> equipments = aw2.Where(item => serviceEquipment.Any(servEq => servEq.EquipmentId == item.Id)).ToList();
+
+            this.Equipments = new ObservableCollection<Equipment>(equipments);
+            
+        }
+        private bool CanSelectedServiceCommandExecuted(object p) => true;
+        #endregion
+
+        #region ServiceAddCommand
+        public ICommand ServiceAddCommand { get; }
+        private void OnServiceAddCommandExecuted(object p) => this.ReportDataProp.Add(new ReportData());
+        private bool CanServiceAddCommandExecuted(object p) => true;
+        #endregion
+
+        #region ServiceRemoveCommand
+        public ICommand ServiceRemoveCommand { get; }
+        private void OnServiceRemoveCommandExecuted(object p)
+        {
+            if (ReportDataProp.Count != 0)
+                this.ReportDataProp.RemoveAt(ReportDataProp.Count - 1);
+        }
+        private bool CanServiceRemoveCommandExecuted(object p) => true;
+        #endregion
+
+        #region ReportCreateCommand
+        public ICommand ReportCreateCommand { get; }
+        private void OnReportCreateCommandExecuted(object p)
+        {
+
+        }
+        private bool CanReportCreateCommandExecuted(object p) => true;
         #endregion
 
         #endregion
@@ -107,21 +184,23 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         {
             #region Commands
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted, CanLoadDataCommandExecuted);
+            ServiceAddCommand = new RelayCommand(OnServiceAddCommandExecuted, CanServiceAddCommandExecuted);
+            ServiceRemoveCommand = new RelayCommand(OnServiceRemoveCommandExecuted, CanServiceRemoveCommandExecuted);
+            ReportCreateCommand = new RelayCommand(OnReportCreateCommandExecuted, CanReportCreateCommandExecuted);
+            SelectedPriceListCommand = new RelayCommand(OnSelectedPriceListCommandExecuted, CanSelectedPriceListCommandExecuted);
+            SelectedServiceCommand = new RelayCommand(OnSelectedServiceCommandExecuted, CanSelectedServiceCommandExecuted);
             #endregion
 
             #region InitSection
             this._Parent = parent;
             this.SelectedContract = parent.SelectedContract;
-            this._Report = new Report();
+            this.ReportProp = new Report();
             this._Report.ContractNavigation = this.SelectedContract;
             this.ReportDataProp = new ObservableCollection<ReportData>();
-            this.ReportDataProp.Add(new ReportData());
+            ReportData test = new ReportData();
+            test.ServiceEquipmentNavigation = new ServiceEquipment();
+            
             #endregion
         }
-    }
-
-    public class testStr
-    {
-        
     }
 }
