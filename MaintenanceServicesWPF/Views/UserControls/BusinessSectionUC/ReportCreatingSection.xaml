@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="/Resources/Themes/General.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:DateTimeToDateConverter x:Key="myDateConverter" />
+            <converters:MyMultiConverter x:Key="myMultiConverter" />
             <CollectionViewSource x:Key="Equipments" Source="{Binding Equipments}"/>
             <CollectionViewSource x:Key="Services" Source="{Binding Services}"/>
         </ResourceDictionary>
@@ -104,8 +105,15 @@
                                                       IsSynchronizedWithCurrentItem="False">
                                                 <Behaviors:Interaction.Triggers>
                                                     <Behaviors:EventTrigger EventName="SelectionChanged">
-                                                        <Behaviors:InvokeCommandAction Command="{Binding DataContext.SelectedServiceCommand,  RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                                                       CommandParameter="{Binding ElementName=servicesComboBox, Path=SelectedItem}"/>
+                                                        <Behaviors:InvokeCommandAction Command="{Binding DataContext.SelectedServiceCommand,  RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                                            <Behaviors:InvokeCommandAction.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource myMultiConverter}">
+                                                                    <Binding/>
+                                                                    <Binding ElementName="servicesComboBox" Path="SelectedItem" />
+                                                                </MultiBinding>
+                                                            </Behaviors:InvokeCommandAction.CommandParameter>
+                                                        </Behaviors:InvokeCommandAction>
+                                                        <!-- ElementName=servicesComboBox, Path=SelectedItem-->
                                                     </Behaviors:EventTrigger>
                                                 </Behaviors:Interaction.Triggers>
                                             </ComboBox>
@@ -113,19 +121,23 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!--<DataGridComboBoxColumn x:Name="whatever" Header="Service" Width="*" ItemsSource="{Binding Source={StaticResource Services}}"
-                                                        SelectedItemBinding="{Binding ServiceEquipmentNavigation.Service}"
-                                                        DisplayMemberPath="Name">
-                                    <Behaviors:Interaction.Triggers>
-                                        <Behaviors:EventTrigger EventName="SelectionChanged">
-                                            <Behaviors:InvokeCommandAction Command="{Binding DataContext.SelectedServiceCommand,  RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
-                                        </Behaviors:EventTrigger>
-                                    </Behaviors:Interaction.Triggers>
-                                </DataGridComboBoxColumn>-->
+                                <DataGridTemplateColumn Header="Equipment" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox x:Name="eqipmentsComboBox" ItemsSource="{Binding Equipments}"
+                                                      DisplayMemberPath="Name"
+                                                      SelectedItem="{Binding ServiceEquipmentNavigation.Equipment}"
+                                                      IsSynchronizedWithCurrentItem="False"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-                                <DataGridComboBoxColumn Header="Equipment"  Width="*" ItemsSource="{Binding Source={StaticResource Equipments}}"
+                                <!--
+                                <DataGridComboBoxColumn Header="Equipment"  Width="*" ItemsSource="{Binding Equipments}"
                                                         SelectedItemBinding="{Binding ServiceEquipmentNavigation.Equipment}"
                                                         DisplayMemberPath="Name"/>
+                                -->
+                                
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

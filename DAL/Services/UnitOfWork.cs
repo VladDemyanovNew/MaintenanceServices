@@ -14,13 +14,13 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
         private EFGenericRepository<Position> _positionRep;
         private EFGenericRepository<Contract> _contractRep;
         private EFGenericRepository<ContractCategory> _contractCategoryRep;
-        private EFGenericRepository<Equipment> _equipmentRep;
         private EFGenericRepository<EquipmentCategory> _equipmentCategoryRep;
         private EFGenericRepository<PriceList> _priceListRep;
         private EFGenericRepository<Report> _reportRep;
         private EFGenericRepository<ReportData> _reportDataRep;
         private EFGenericRepository<Service> _serviceRep;
         private EFGenericRepository<ServiceEquipment> _serviceEquipmentRep;
+        private EquipmentRepository _equipmentRep;
 
         public EFGenericRepository<Employee> EmployeeRep
         {
@@ -59,16 +59,6 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
                 if (_contractCategoryRep == null)
                     _contractCategoryRep = new EFGenericRepository<ContractCategory>(_db);
                 return _contractCategoryRep;
-            }
-        }
-
-        public EFGenericRepository<Equipment> EquipmentRep
-        {
-            get
-            {
-                if (_equipmentRep == null)
-                    _equipmentRep = new EFGenericRepository<Equipment>(_db);
-                return _equipmentRep;
             }
         }
 
@@ -129,6 +119,16 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
                 if (_serviceEquipmentRep == null)
                     _serviceEquipmentRep = new EFGenericRepository<ServiceEquipment>(_db);
                 return _serviceEquipmentRep;
+            }
+        }
+
+        public EquipmentRepository EquipmentRep
+        {
+            get
+            {
+                if (_equipmentRep == null)
+                    _equipmentRep = new EquipmentRepository(_db);
+                return _equipmentRep;
             }
         }
 

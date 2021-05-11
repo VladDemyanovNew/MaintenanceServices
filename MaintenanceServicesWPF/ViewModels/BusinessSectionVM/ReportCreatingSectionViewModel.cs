@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -138,23 +139,24 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         public ICommand SelectedServiceCommand { get; }
         private async void OnSelectedServiceCommandExecuted(object p)
         {
-            Service service = p as Service;
-
-            var aw = await _UnitOfWork.ServiceEquipmentRep.GetAllAsync();
-            List<ServiceEquipment> serviceEquipment = aw.Where(item => item.ServiceId == service.Id).ToList();
-
-            var aw2 = await _UnitOfWork.EquipmentRep.GetAllAsync();
-            List<Equipment> equipments = aw2.Where(item => serviceEquipment.Any(servEq => servEq.EquipmentId == item.Id)).ToList();
-
-            this.Equipments = new ObservableCollection<Equipment>(equipments);
-            
+            object[] test = (object[])p;
+            Service service = test[1] as Service;
+            var equipments = await _UnitOfWork.EquipmentRep.GetEquipmentsByService(service);
+            (test[0] as ReportData).Equipments = new ObservableCollection<Equipment>(equipments);
         }
         private bool CanSelectedServiceCommandExecuted(object p) => true;
         #endregion
 
         #region ServiceAddCommand
         public ICommand ServiceAddCommand { get; }
-        private void OnServiceAddCommandExecuted(object p) => this.ReportDataProp.Add(new ReportData());
+        private void OnServiceAddCommandExecuted(object p)  // testing
+        {
+            ReportData reportData = new ReportData();
+            reportData.ServiceEquipmentNavigation = new ServiceEquipment();
+            reportData.ReportNavigation = ReportProp;
+            reportData.Equipments = new ObservableCollection<Equipment>();
+            this.ReportDataProp.Add(reportData);
+        }
         private bool CanServiceAddCommandExecuted(object p) => true;
         #endregion
 

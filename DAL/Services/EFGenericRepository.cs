@@ -13,7 +13,7 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
 {
     public class EFGenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
-        private readonly ApplicationContext _db;
+        private protected readonly ApplicationContext _db;
 
         public EFGenericRepository(ApplicationContext db)
         {
