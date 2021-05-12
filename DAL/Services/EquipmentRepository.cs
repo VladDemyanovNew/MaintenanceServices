@@ -15,7 +15,7 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
     {
 
         public EquipmentRepository(ApplicationContext db) : base(db) { }
-
+        
         public async Task<IEnumerable<Equipment>> GetEquipmentsByService(Service entity, CancellationToken Cancel = default)
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));

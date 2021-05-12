@@ -18,5 +18,7 @@ namespace VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities
         public virtual ServiceEquipment ServiceEquipmentNavigation { get; set; }
         [NotMapped]
         public ObservableCollection<Equipment> Equipments { get; set; }
+        [NotMapped]
+        public ObservableCollection<Service> Services { get; set; }
     }
 }

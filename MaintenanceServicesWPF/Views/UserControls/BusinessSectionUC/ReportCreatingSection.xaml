@@ -89,7 +89,7 @@
                                   CanUserAddRows="False" CanUserDeleteRows="False"
                                   ColumnWidth="*" HorizontalScrollBarVisibility="auto"
                                   VerticalScrollBarVisibility="auto" FontSize="20"
-                                  ItemsSource="{Binding ReportDataProp}" Foreground="#FF353535"
+                                  ItemsSource="{Binding Path=ReportDataProp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="#FF353535"
                                   BorderThickness="0" BorderBrush="#FF353535"
                                   AlternatingRowBackground="LightGray"
                                   >
@@ -99,7 +99,8 @@
                                 <DataGridTemplateColumn Header="Service" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox x:Name="servicesComboBox" ItemsSource="{Binding Source={StaticResource Services}}"
+                                            <!--Source={StaticResource Services},-->
+                                            <ComboBox x:Name="servicesComboBox" ItemsSource="{Binding Path=Services, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       DisplayMemberPath="Name"
                                                       SelectedItem="{Binding ServiceEquipmentNavigation.Service}"
                                                       IsSynchronizedWithCurrentItem="False">
@@ -124,10 +125,11 @@
                                 <DataGridTemplateColumn Header="Equipment" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox x:Name="eqipmentsComboBox" ItemsSource="{Binding Equipments}"
+                                            <ComboBox x:Name="eqipmentsComboBox" ItemsSource="{Binding Equipments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       DisplayMemberPath="Name"
                                                       SelectedItem="{Binding ServiceEquipmentNavigation.Equipment}"
                                                       IsSynchronizedWithCurrentItem="False"/>
+                                            <!--IsSynchronizedWithCurrentItem="False"-->
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -153,13 +155,13 @@
                                 FontWeight="Regular" FontSize="15"  
                                 Style="{DynamicResource ButtonStyle}" 
                                 Content="Remove"  Cursor="Hand"
-                                Command="{Binding ServiceRemoveCommand}"/>
+                                Command="{Binding ReportDataRemoveCommand}"/>
                         <Button Grid.Column="1" Padding="15,10" Margin="0,15,15,15" BorderThickness="0"
                                 Background="#E008CA" Foreground="White"
                                 Style="{DynamicResource ButtonStyle}" 
                                 FontWeight="Regular" FontSize="15" 
                                 Content="Add" Cursor="Hand"
-                                Command="{Binding ServiceAddCommand}"/>
+                                Command="{Binding ReportDataAddCommand}"/>
 
                     </Grid>
                 </Grid>

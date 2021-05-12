@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Data;
 using System.Windows.Input;
 using VDemyanov.MaintenanceServices.DAL.Services;
 using VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities;
@@ -81,17 +83,17 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         }
         #endregion
 
-        #region Equipments
-        private ObservableCollection<Equipment> _Equipments;
-        public ObservableCollection<Equipment> Equipments
-        {
-            get => _Equipments;
-            set
-            {
-                Set(ref _Equipments, value);
-            }
-        }
-        #endregion
+        //#region Equipments
+        //private ObservableCollection<Equipment> _Equipments;
+        //public ObservableCollection<Equipment> Equipments
+        //{
+        //    get => _Equipments;
+        //    set
+        //    {
+        //        Set(ref _Equipments, value);
+        //    }
+        //}
+        //#endregion
 
         #region SelectedPriceList
         private PriceList _SelectedPriceList;
@@ -141,33 +143,36 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         {
             object[] test = (object[])p;
             Service service = test[1] as Service;
+            if (service==null)
+                return;
             var equipments = await _UnitOfWork.EquipmentRep.GetEquipmentsByService(service);
             (test[0] as ReportData).Equipments = new ObservableCollection<Equipment>(equipments);
         }
         private bool CanSelectedServiceCommandExecuted(object p) => true;
         #endregion
 
-        #region ServiceAddCommand
-        public ICommand ServiceAddCommand { get; }
-        private void OnServiceAddCommandExecuted(object p)  // testing
+        #region ReportDataAddCommand
+        public ICommand ReportDataAddCommand { get; }
+        private void OnReportDataAddCommandExecuted(object p)  // testing
         {
             ReportData reportData = new ReportData();
             reportData.ServiceEquipmentNavigation = new ServiceEquipment();
             reportData.ReportNavigation = ReportProp;
             reportData.Equipments = new ObservableCollection<Equipment>();
+            reportData.Services = Services;
             this.ReportDataProp.Add(reportData);
         }
-        private bool CanServiceAddCommandExecuted(object p) => true;
+        private bool CanReportDataAddCommandExecuted(object p) => true;
         #endregion
 
-        #region ServiceRemoveCommand
-        public ICommand ServiceRemoveCommand { get; }
-        private void OnServiceRemoveCommandExecuted(object p)
+        #region ReportDataRemoveCommand
+        public ICommand ReportDataRemoveCommand { get; }
+        private void OnReportDataRemoveCommandExecuted(object p)
         {
             if (ReportDataProp.Count != 0)
                 this.ReportDataProp.RemoveAt(ReportDataProp.Count - 1);
         }
-        private bool CanServiceRemoveCommandExecuted(object p) => true;
+        private bool CanReportDataRemoveCommandExecuted(object p) => true;
         #endregion
 
         #region ReportCreateCommand
@@ -186,8 +191,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         {
             #region Commands
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted, CanLoadDataCommandExecuted);
-            ServiceAddCommand = new RelayCommand(OnServiceAddCommandExecuted, CanServiceAddCommandExecuted);
-            ServiceRemoveCommand = new RelayCommand(OnServiceRemoveCommandExecuted, CanServiceRemoveCommandExecuted);
+            ReportDataAddCommand = new RelayCommand(OnReportDataAddCommandExecuted, CanReportDataAddCommandExecuted);
+            ReportDataRemoveCommand = new RelayCommand(OnReportDataRemoveCommandExecuted, CanReportDataRemoveCommandExecuted);
             ReportCreateCommand = new RelayCommand(OnReportCreateCommandExecuted, CanReportCreateCommandExecuted);
             SelectedPriceListCommand = new RelayCommand(OnSelectedPriceListCommandExecuted, CanSelectedPriceListCommandExecuted);
             SelectedServiceCommand = new RelayCommand(OnSelectedServiceCommandExecuted, CanSelectedServiceCommandExecuted);
