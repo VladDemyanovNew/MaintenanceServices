@@ -114,12 +114,6 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         {
             var aw1 = await _UnitOfWork.PriceListRep.GetAllAsync();
             this.PriceListComboBox = new ObservableCollection<PriceList>(aw1);
-
-            /*var aw2 = await _UnitOfWork.ServiceRep.GetAllAsync();
-            this.Services = new ObservableCollection<Service>(aw2);*/
-
-            /*var aw3 = await _UnitOfWork.EquipmentRep.GetAllAsync();
-            this.Equipments = new ObservableCollection<Equipment>(aw3);*/
         }
         private bool CanLoadDataCommandExecuted(object p) => true;
         #endregion

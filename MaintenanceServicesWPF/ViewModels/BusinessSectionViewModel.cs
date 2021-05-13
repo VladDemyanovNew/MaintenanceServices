@@ -78,15 +78,9 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
                 case ViewType.CONTRACT_CREATING_SECTION:
                     CurrentViewModel = new ContractCreatingSectionViewModel(this);
                     break;
-                case ViewType.REPORT_CREATING_SECTION:
-                    CurrentViewModel = new ReportCreatingSectionViewModel(this);
-                    break;
                 case ViewType.CONTRACT_INFO_SECTION:
                     SelectedContract.CategoryNavigation = await _UnitOfWork.ContractCategoryRep.GetAsync(SelectedContract.Category.Value);
                     CurrentViewModel = new ContractInfoSectionViewModel(this);
-                    break;
-                case ViewType.REPORT_PRESENTATION_ZONE:
-                    CurrentViewModel = new ReportPresentationZoneViewModel();
                     break;
                 default:
                     break;
@@ -103,6 +97,17 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             CurrentViewModel = new ReportCreatingSectionViewModel(this);
         }
         private bool CanOpenReportCreatingSectionCommandExecuted(object p) => true;
+        #endregion
+
+        #region OpenReportPresentationSectionCommand
+        public ICommand OpenReportPresentationSectionCommand { get; }
+        private void OnOpenReportPresentationSectionCommandExecuted(object p)
+        {
+            Contract contract = p as Contract;
+            SelectedContract = contract;
+            CurrentViewModel = new ReportPresentationSectionViewModel(this);
+        }
+        private bool CanOpenReportPresentationSectionCommandExecuted(object p) => true;
         #endregion
 
         #region RemoveContractCommand
@@ -158,6 +163,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             RemoveContractCommand = new RelayCommand(OnRemoveContractCommandExecuted, CanRemoveContractCommandExecuted);
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted, CanLoadDataCommandExecuted);
             OpenReportCreatingSectionCommand = new RelayCommand(OnOpenReportCreatingSectionCommandExecuted, CanOpenReportCreatingSectionCommandExecuted);
+            OpenReportPresentationSectionCommand = new RelayCommand(OnOpenReportPresentationSectionCommandExecuted, CanOpenReportPresentationSectionCommandExecuted);
             #endregion
 
             #region InitSection

@@ -28,7 +28,7 @@
         </Behaviors:EventTrigger>
     </Behaviors:Interaction.Triggers>
 
-    <Grid Background="White">
+    <Grid Background="#ffc7f9">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>

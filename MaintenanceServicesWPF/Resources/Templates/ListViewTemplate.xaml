@@ -46,7 +46,9 @@
                         </StackPanel>
                     </Button>
                     <Button Style="{DynamicResource ButtonStyle}" Background="#FF353535"
-                            Grid.Row="0" Grid.Column="0" Padding="8,10" BorderThickness="0">
+                            Grid.Row="0" Grid.Column="0" Padding="8,10" BorderThickness="0"
+                            Command="{Binding DataContext.OpenReportPresentationSectionCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                            CommandParameter="{Binding}">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="eye"/>
                             <TextBlock FontSize="15" Text="Show report" Foreground="White"/>

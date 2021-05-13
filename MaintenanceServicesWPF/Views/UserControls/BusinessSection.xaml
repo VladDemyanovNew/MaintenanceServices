@@ -29,8 +29,8 @@
                     <DataTemplate DataType = "{x:Type vm:ReportCreatingSectionViewModel}">
                         <views:ReportCreatingSection/>
                     </DataTemplate>
-                    <DataTemplate DataType = "{x:Type vm:ReportPresentationZoneViewModel}">
-                        <views:ReportPresentationZone/>
+                    <DataTemplate DataType = "{x:Type vm:ReportPresentationSectionViewModel}">
+                        <views:ReportPresentationSection/>
                     </DataTemplate>
                     <DataTemplate DataType = "{x:Type vm:ContractInfoSectionViewModel}">
                         <views:ContractInfoSection/>
@@ -64,7 +64,7 @@
             <Grid Grid.Row="0" Background="#f7f7f7">
                 <StackPanel>
                     <Grid Background="#f0f0f0">
-                        <TextBlock HorizontalAlignment="Center" Padding="0,2" FontSize="20" FontWeight="DemiBold" Foreground="DarkGray" Text="Contracts"/>
+                        <TextBlock HorizontalAlignment="Center" Padding="0,2" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" Text="Contracts"/>
                     </Grid>
                     <Grid Margin="5,10,5,5">
                         <Grid.ColumnDefinitions>

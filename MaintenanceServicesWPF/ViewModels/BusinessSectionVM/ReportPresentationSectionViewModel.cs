@@ -5,7 +5,11 @@ using VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Base;
 
 namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.BusinessSectionVM
 {
-    class ReportPresentationZoneViewModel : ViewModelBase
+    class ReportPresentationSectionViewModel : ViewModelBase
     {
+        public ReportPresentationSectionViewModel(BusinessSectionViewModel parent)
+        {
+
+        }
     }
 }

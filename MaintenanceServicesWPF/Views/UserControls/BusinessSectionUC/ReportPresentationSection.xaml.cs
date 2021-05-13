@@ -16,9 +16,9 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControl
     /// <summary>
     /// Логика взаимодействия для ReportPresentationZone.xaml
     /// </summary>
-    public partial class ReportPresentationZone : UserControl
+    public partial class ReportPresentationSection : UserControl
     {
-        public ReportPresentationZone()
+        public ReportPresentationSection()
         {
             InitializeComponent();
         }

@@ -18,11 +18,21 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="White">
-        
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center"
+    <Grid Background="#ffdad1">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   Text="Contract info section" FontSize="25" FontWeight="Bold" Foreground="#FF353535"
+                   HorizontalAlignment="Center" Padding="20"/>
+
+        <Border Grid.Row="1"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
                 Background="White" CornerRadius="5" Padding="20"
-                RenderOptions.ClearTypeHint="Enabled" SnapsToDevicePixels="True" >
+                RenderOptions.ClearTypeHint="Enabled" SnapsToDevicePixels="True">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="50" Opacity="0.3"/>
             </Border.Effect>
