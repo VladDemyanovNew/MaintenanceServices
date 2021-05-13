@@ -19,6 +19,7 @@
     </UserControl.Resources>
 
     <Grid Background="White">
+        
         <Border HorizontalAlignment="Center" VerticalAlignment="Center"
                 Background="White" CornerRadius="5" Padding="20"
                 RenderOptions.ClearTypeHint="Enabled" SnapsToDevicePixels="True" >
@@ -27,7 +28,7 @@
             </Border.Effect>
             <Grid MinWidth="500" MaxWidth="800">
                 <StackPanel>
-                    <Expander BorderBrush="#FF353535" Style="{DynamicResource ExpanderStyle2}" BorderThickness="0,1,0,0">
+                    <Expander IsExpanded="True" BorderBrush="#FF353535" Style="{DynamicResource ExpanderStyle2}" BorderThickness="0,1,0,0">
                         <Expander.Header>
                             <Grid HorizontalAlignment="{Binding Path=HorizontalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Mode=OneWayToSource}">
                                 <Grid.ColumnDefinitions>

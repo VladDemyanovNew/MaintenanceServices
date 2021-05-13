@@ -54,9 +54,18 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             get => _ReportData;
             set
             {
-                Set(ref _ReportData, value);
+                //Set(ref _ReportData, value);
+                if (!Set(ref _ReportData, value)) return;
+                _SelectedReportData.Source = value;
+                OnPropertyChanged(nameof(SelectedReportData));
             }
         }
+
+        #region ReportDataView
+        private CollectionViewSource _SelectedReportData = new CollectionViewSource();
+        public ICollectionView SelectedReportData => _SelectedReportData?.View;
+        #endregion
+
         #endregion
 
         #region Report
@@ -82,18 +91,6 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             }
         }
         #endregion
-
-        //#region Equipments
-        //private ObservableCollection<Equipment> _Equipments;
-        //public ObservableCollection<Equipment> Equipments
-        //{
-        //    get => _Equipments;
-        //    set
-        //    {
-        //        Set(ref _Equipments, value);
-        //    }
-        //}
-        //#endregion
 
         #region SelectedPriceList
         private PriceList _SelectedPriceList;
@@ -146,7 +143,11 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             if (service==null)
                 return;
             var equipments = await _UnitOfWork.EquipmentRep.GetEquipmentsByService(service);
+
             (test[0] as ReportData).Equipments = new ObservableCollection<Equipment>(equipments);
+            OnPropertyChanged(nameof(SelectedReportData));
+            SelectedReportData.Refresh();
+            (test[0] as ReportData).ServiceEquipmentNavigation.Service = service;
         }
         private bool CanSelectedServiceCommandExecuted(object p) => true;
         #endregion
@@ -160,6 +161,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             reportData.ReportNavigation = ReportProp;
             reportData.Equipments = new ObservableCollection<Equipment>();
             reportData.Services = Services;
+
             this.ReportDataProp.Add(reportData);
         }
         private bool CanReportDataAddCommandExecuted(object p) => true;
@@ -177,9 +179,15 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
 
         #region ReportCreateCommand
         public ICommand ReportCreateCommand { get; }
-        private void OnReportCreateCommandExecuted(object p)
+        private async void OnReportCreateCommandExecuted(object p)
         {
-
+            await _UnitOfWork.ReportRep.AddAsync(ReportProp);
+            
+            foreach (ReportData item in ReportDataProp)
+            {
+                await _UnitOfWork.ServiceEquipmentRep.AddAsync(item.ServiceEquipmentNavigation);
+                await _UnitOfWork.ReportDataRep.AddAsync(item);
+            }
         }
         private bool CanReportCreateCommandExecuted(object p) => true;
         #endregion
@@ -203,10 +211,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             this.SelectedContract = parent.SelectedContract;
             this.ReportProp = new Report();
             this._Report.ContractNavigation = this.SelectedContract;
+            this._Report.Discount = 0;
             this.ReportDataProp = new ObservableCollection<ReportData>();
-            ReportData test = new ReportData();
-            test.ServiceEquipmentNavigation = new ServiceEquipment();
-            
             #endregion
         }
     }

@@ -85,14 +85,16 @@
                     </Grid>
 
                     <Grid Grid.Row="2">
-                        <DataGrid AutoGenerateColumns="False" 
+                        <DataGrid x:Name="servicesDatagrid"
+                                  AutoGenerateColumns="False" 
                                   CanUserAddRows="False" CanUserDeleteRows="False"
                                   ColumnWidth="*" HorizontalScrollBarVisibility="auto"
                                   VerticalScrollBarVisibility="auto" FontSize="20"
-                                  ItemsSource="{Binding Path=ReportDataProp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="#FF353535"
+                                  ItemsSource="{Binding Path=SelectedReportData}" Foreground="#FF353535"
                                   BorderThickness="0" BorderBrush="#FF353535"
                                   AlternatingRowBackground="LightGray"
                                   >
+                            <!--, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged-->
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Count" Width="*" Binding="{Binding Path=Number}" />
 
@@ -129,7 +131,6 @@
                                                       DisplayMemberPath="Name"
                                                       SelectedItem="{Binding ServiceEquipmentNavigation.Equipment}"
                                                       IsSynchronizedWithCurrentItem="False"/>
-                                            <!--IsSynchronizedWithCurrentItem="False"-->
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -278,7 +279,8 @@
                                 BorderThickness="0"
                                 Background="#E008CA" Foreground="White"
                                 Style="{DynamicResource ButtonStyle}" 
-                                FontSize="20" Content="Create" Cursor="Hand"/>
+                                FontSize="20" Content="Create" Cursor="Hand"
+                                Command="{Binding ReportCreateCommand}"/>
                     </Grid>
                 </Border>
             </Grid>

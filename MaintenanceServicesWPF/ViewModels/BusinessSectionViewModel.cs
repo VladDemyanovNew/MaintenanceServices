@@ -147,6 +147,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             var aw = await _UnitOfWork.ContractRep.GetAllAsync();
             Contracts = new ObservableCollection<Contract>(aw);
             CurrentViewModel = new ContractCreatingSectionViewModel(this);
+
         }
         #endregion
 
