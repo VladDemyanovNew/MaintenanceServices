@@ -182,6 +182,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
                 await _UnitOfWork.ServiceEquipmentRep.AddAsync(item.ServiceEquipmentNavigation);
                 await _UnitOfWork.ReportDataRep.AddAsync(item);
             }
+            _UnitOfWork.Save();
+            _Parent.CurrentViewModel = new ReportPresentationSectionViewModel(_Parent);
         }
         private bool CanReportCreateCommandExecuted(object p) => true;
         #endregion

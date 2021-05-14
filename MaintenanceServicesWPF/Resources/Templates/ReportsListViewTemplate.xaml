@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fa="http://schemas.fontawesome.io/icons/"
+                    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" 
+                    xmlns:converters="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Resources/Themes/General.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:DateTimeToDateConverter x:Key="myDateConverter" />
+
+    <!-- Шаблон данных для представления списка reports -->
+    <DataTemplate x:Key="ReportsListView" >
+        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="#FF4F4F4F"  Background="#f2f5ff" Margin="5">
+            <StackPanel>
+                <Grid Margin="10,10,10,10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock VerticalAlignment="Center" FontSize="20"
+                                   Foreground="#FF353535" Text="Report №"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="20"
+                                   Foreground="#FF353535" TextWrapping="Wrap"
+                                   Width="150" Text="{Binding Id}"/>
+                    </StackPanel>
+                    <Button Style="{DynamicResource ButtonStyle}"
+                            HorizontalAlignment="Right"
+                            Padding="8,10" BorderThickness="0"
+                            Background="{x:Null}"
+                            Command="{Binding DataContext.RemoveReportCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                            CommandParameter="{Binding}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="15" Text="Delete" Padding="0,0,10,0" Foreground="#FF353535"/>
+                            <fa:ImageAwesome Height="20" Width="20" Foreground="#E10014" Icon="TrashOutline"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

@@ -10,10 +10,17 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Templates/ReportsListViewTemplate.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/General.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+
+    <Behaviors:Interaction.Triggers>
+        <Behaviors:EventTrigger EventName="Loaded">
+            <Behaviors:InvokeCommandAction Command="{Binding LoadDataCommand}" />
+        </Behaviors:EventTrigger>
+    </Behaviors:Interaction.Triggers>
 
     <Grid Background="#949494">
         <Grid.ColumnDefinitions>
@@ -65,7 +72,10 @@
 
                     <Grid Grid.Row="2">
                         <ScrollViewer CanContentScroll="True" Grid.Row="1">
-                            <ListView x:Name="reportsList">
+                            <ListView x:Name="reportsList" 
+                                      ItemTemplate="{StaticResource ReportsListView}"
+                                      ItemsSource="{Binding Path=Reports}"
+                                      Background="#f0f0f0">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment"  Value="Stretch"/>
@@ -81,7 +91,7 @@
                             FontWeight="Regular" FontSize="15"  
                             Style="{DynamicResource ButtonStyle}" 
                             Content="Add new report"  Cursor="Hand"
-                            Command="{Binding ReportDataRemoveCommand}"/>
+                            Command="{Binding AddReportCommand}"/>
                 </Grid>
             </Border>
         </Grid>

@@ -16,11 +16,11 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
         private EFGenericRepository<ContractCategory> _contractCategoryRep;
         private EFGenericRepository<EquipmentCategory> _equipmentCategoryRep;
         private EFGenericRepository<PriceList> _priceListRep;
-        private EFGenericRepository<Report> _reportRep;
-        private EFGenericRepository<ReportData> _reportDataRep;
         private EFGenericRepository<Service> _serviceRep;
         private EFGenericRepository<ServiceEquipment> _serviceEquipmentRep;
         private EquipmentRepository _equipmentRep;
+        private ReportRepository _reportRep;
+        private ReportDataRepository _reportDataRep;
 
         public EFGenericRepository<Employee> EmployeeRep
         {
@@ -82,26 +82,6 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
             }
         }
 
-        public EFGenericRepository<Report> ReportRep
-        {
-            get
-            {
-                if (_reportRep == null)
-                    _reportRep = new EFGenericRepository<Report>(_db);
-                return _reportRep;
-            }
-        }
-
-        public EFGenericRepository<ReportData> ReportDataRep
-        {
-            get
-            {
-                if (_reportDataRep == null)
-                    _reportDataRep = new EFGenericRepository<ReportData>(_db);
-                return _reportDataRep;
-            }
-        }
-
         public EFGenericRepository<Service> ServiceRep
         {
             get
@@ -129,6 +109,26 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
                 if (_equipmentRep == null)
                     _equipmentRep = new EquipmentRepository(_db);
                 return _equipmentRep;
+            }
+        }
+
+        public ReportRepository ReportRep
+        {
+            get
+            {
+                if (_reportRep == null)
+                    _reportRep = new ReportRepository(_db);
+                return _reportRep;
+            }
+        }
+
+        public ReportDataRepository ReportDataRep
+        {
+            get
+            {
+                if (_reportDataRep == null)
+                    _reportDataRep = new ReportDataRepository(_db);
+                return _reportDataRep;
             }
         }
 
