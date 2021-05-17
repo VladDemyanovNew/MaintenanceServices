@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessSectionUC" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors" xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls.BusinessSectionUC" 
+             xmlns:converters="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Converters"
+             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
 
@@ -13,6 +16,7 @@
                 <ResourceDictionary Source="/Resources/Templates/ReportsListViewTemplate.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/General.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:DateTimeToDateConverter x:Key="myDateConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -37,6 +41,7 @@
                    Text="Report presentation section" FontSize="25" FontWeight="Bold" Foreground="#FF353535"
                    HorizontalAlignment="Center" Padding="20"/>
 
+        <!-- Reports -->
         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Margin="20">
             <Border Background="White" CornerRadius="8"
                     RenderOptions.ClearTypeHint="Enabled" SnapsToDevicePixels="True">
@@ -75,7 +80,14 @@
                             <ListView x:Name="reportsList" 
                                       ItemTemplate="{StaticResource ReportsListView}"
                                       ItemsSource="{Binding Path=Reports}"
+                                      SelectedItem="{Binding SelectedReport}"
                                       Background="#f0f0f0">
+                                <Behaviors:Interaction.Triggers>
+                                    <Behaviors:EventTrigger EventName="SelectionChanged" SourceObject="{Binding ElementName=reportsList}">
+                                        <Behaviors:InvokeCommandAction Command="{Binding DataContext.ShowReportCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                            />
+                                    </Behaviors:EventTrigger>
+                                </Behaviors:Interaction.Triggers>
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment"  Value="Stretch"/>
@@ -96,15 +108,49 @@
             </Border>
         </Grid>
 
+        <!-- Report preview section -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="20">
             <Border Background="White" CornerRadius="8"
                     RenderOptions.ClearTypeHint="Enabled" SnapsToDevicePixels="True">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="50" Opacity="0.3"/>
                 </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Border CornerRadius="8, 8, 0, 0" Background="#cfcfcf">
+                            <TextBlock FontWeight="DemiBold" Foreground="#FF353535"
+                               FontSize="20" Padding="15" Text="Report info" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <DataGrid x:Name="reportInfoDatagrid"
+                                  AutoGenerateColumns="False" 
+                                  CanUserAddRows="False" CanUserDeleteRows="False"
+                                  ColumnWidth="*" HorizontalScrollBarVisibility="auto"
+                                  VerticalScrollBarVisibility="auto" FontSize="20"
+                                  Foreground="#FF353535"
+                                  BorderThickness="0" BorderBrush="#FF353535"
+                                  AlternatingRowBackground="LightGray"
+                                  >
+                            <!--, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged-->
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Count" Width="*" />
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                </Grid>
             </Border>
         </Grid>
 
+        <!-- Creating PDF -->
         <Grid Grid.Row="2" Grid.Column="1" Margin="20">
             <Border Background="White" CornerRadius="8"
                     RenderOptions.ClearTypeHint="Enabled" SnapsToDevicePixels="True">

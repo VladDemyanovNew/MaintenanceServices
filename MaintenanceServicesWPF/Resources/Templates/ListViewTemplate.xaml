@@ -54,7 +54,7 @@
                             <TextBlock FontSize="15" Text="Show report" Foreground="White"/>
                         </StackPanel>
                     </Button>
-                    <Button Style="{DynamicResource ButtonStyle}" Background="#E008CA"
+                    <Button Style="{DynamicResource ButtonStyle}" Background="#cc00ff"
                             Grid.Row="0" Grid.Column="1" Padding="8,10" BorderThickness="0"
                             Command="{Binding DataContext.OpenReportCreatingSectionCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             CommandParameter="{Binding}">
