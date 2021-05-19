@@ -23,5 +23,12 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
             _db.Set<ReportData>().RemoveRange(repData);
         }
 
+        public double GetResultSum()
+        {
+            double result =  Convert.ToDouble(_db.Set<ReportData>()
+            .FromSqlInterpolated($"SELECT SUM(REPORT_DATA.NUMBER * SERVICE.PRICE) FROM REPORT_DATA JOIN SERVICE_EQUIPMENT ON SERVICE_EQUIPMENT.ID = REPORT_DATA.SERVICE_EQUIPMENT JOIN SERVICE ON SERVICE.ID = SERVICE_EQUIPMENT.SERVICE_ID; "));
+            return result;
+        }
+
     }
 }

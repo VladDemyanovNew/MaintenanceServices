@@ -119,6 +119,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -137,13 +138,50 @@
                                   Foreground="#FF353535"
                                   BorderThickness="0" BorderBrush="#FF353535"
                                   AlternatingRowBackground="LightGray"
-                                  >
+                                  ItemsSource="{Binding Path=ReportDataProp}">
                             <!--, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged-->
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Count" Width="*" />
-
+                                <DataGridTextColumn Header="Услуга" Width="*"
+                                                    Binding="{Binding Path=ServiceEquipmentNavigation.Service.Name}"/>
+                                <DataGridTextColumn Header="Оборудование" Width="*"
+                                                    Binding="{Binding Path=ServiceEquipmentNavigation.Equipment.Name}"/>
+                                <DataGridTextColumn Header="Ед. Изм." Width="*"
+                                                    Binding="{Binding Path=ServiceEquipmentNavigation.Service.Unit}"/>
+                                <DataGridTextColumn Header="Кол-во" Width="*" 
+                                                    Binding="{Binding Path=Number}"/>
+                                <DataGridTextColumn Header="Цена" Width="*" 
+                                                    Binding="{Binding Path=ServiceEquipmentNavigation.Service.Price}"/>
+                                <DataGridTextColumn Header="Сумма" Width="*" />
+            
                             </DataGrid.Columns>
                         </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Border CornerRadius="0, 0, 8, 8" Background="white">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Итого: " FontSize="20"
+                                           HorizontalAlignment="Right" FontWeight="DemiBold" Padding="5" Foreground="#FF353535"/>
+                                <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="20,5,5,10">
+                                    <TextBlock  Text="Итого с учётом " FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
+                                    <TextBlock Text="{Binding SelectedReport.Discount}" FontSize="20" FontWeight="DemiBold" Foreground="#E10014"/>
+                                    <TextBlock Text="% скидки:" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
+                                </StackPanel>
+
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ResultSum}" Padding="20,5"
+                                           FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ResultDiscountSum}" 
+                                           Padding="20,5,20,10" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
+                            </Grid>
+                        </Border>
                     </Grid>
 
                 </Grid>

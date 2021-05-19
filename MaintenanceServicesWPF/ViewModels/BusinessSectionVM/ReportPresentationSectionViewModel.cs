@@ -34,6 +34,30 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         }
         #endregion
 
+        #region ResultSum
+        private double _ResultSum;
+        public double ResultSum
+        {
+            get => _ResultSum;
+            set
+            {
+                Set(ref _ResultSum, value);
+            }
+        }
+        #endregion
+
+        #region ResultDiscountSum
+        private double _ResultDiscountSum;
+        public double ResultDiscountSum
+        {
+            get => _ResultDiscountSum;
+            set
+            {
+                Set(ref _ResultDiscountSum, value);
+            }
+        }
+        #endregion
+
         #region Reports
         private ObservableCollection<Report> _Reports;
         public ObservableCollection<Report> Reports
@@ -116,6 +140,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         {
             List<ReportData> reportDataList = _UnitOfWork.ReportDataRep.GetAll().Where(item => item.Report == SelectedReport.Id).ToList();
             ReportDataProp = ConfigReportDataList(reportDataList);
+            ResultSum = _UnitOfWork.ReportDataRep.GetResultSum();
+            ResultDiscountSum = (double)(ResultSum - ResultSum * SelectedReport.Discount / 100);
         }
         private bool CanShowReportCommandExecuted(object p) => true;
 
