@@ -23,10 +23,18 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
             _db.Set<ReportData>().RemoveRange(repData);
         }
 
-        public double GetResultSum()
+        public double GetResultSum(Report report)
         {
-            double result =  Convert.ToDouble(_db.Set<ReportData>()
-            .FromSqlInterpolated($"SELECT SUM(REPORT_DATA.NUMBER * SERVICE.PRICE) FROM REPORT_DATA JOIN SERVICE_EQUIPMENT ON SERVICE_EQUIPMENT.ID = REPORT_DATA.SERVICE_EQUIPMENT JOIN SERVICE ON SERVICE.ID = SERVICE_EQUIPMENT.SERVICE_ID; "));
+            if (report is null) throw new ArgumentNullException(nameof(report));
+
+            double result = (double)(from rep in _db.ReportData
+                           join serv_eq in _db.ServiceEquipments on rep.ServiceEquipment equals serv_eq.Id
+                           join serv in _db.Services on serv_eq.ServiceId equals serv.Id
+                           where rep.Report == report.Id
+                           select new
+                           {
+                               Sum = rep.Number * (double)serv.Price
+                           }).Sum(s => s.Sum);
             return result;
         }
 

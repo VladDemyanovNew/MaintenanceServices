@@ -13,6 +13,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
     {
         #region Properties
         public Window CodeBehind { get; set; }
+
+
         #endregion
 
         #region Commands

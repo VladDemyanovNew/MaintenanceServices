@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="/Resources/Themes/General.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:DateTimeToDateConverter x:Key="myDateConverter" />
+            <converters:CalcMulConverter x:Key="CalculatingConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -58,7 +59,7 @@
                     <Grid Grid.Row="0">
                         <Border CornerRadius="8, 8, 0, 0" Background="#cfcfcf">
                             <TextBlock FontWeight="DemiBold" Foreground="#FF353535"
-                               FontSize="20" Padding="15" Text="Reports" HorizontalAlignment="Center"/>
+                               FontSize="20" Padding="15" Text="Список протоколов" HorizontalAlignment="Center"/>
                         </Border>
                     </Grid>
                     
@@ -102,7 +103,7 @@
                             Background="#FF353535" Foreground="White"
                             FontWeight="Regular" FontSize="15"  
                             Style="{DynamicResource ButtonStyle}" 
-                            Content="Add new report"  Cursor="Hand"
+                            Content="Новый протокол"  Cursor="Hand"
                             Command="{Binding AddReportCommand}"/>
                 </Grid>
             </Border>
@@ -125,7 +126,7 @@
                     <Grid Grid.Row="0">
                         <Border CornerRadius="8, 8, 0, 0" Background="#cfcfcf">
                             <TextBlock FontWeight="DemiBold" Foreground="#FF353535"
-                               FontSize="20" Padding="15" Text="Report info" HorizontalAlignment="Center"/>
+                               FontSize="20" Padding="15" Text="Протокол" HorizontalAlignment="Center"/>
                         </Border>
                     </Grid>
 
@@ -139,7 +140,6 @@
                                   BorderThickness="0" BorderBrush="#FF353535"
                                   AlternatingRowBackground="LightGray"
                                   ItemsSource="{Binding Path=ReportDataProp}">
-                            <!--, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged-->
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Услуга" Width="*"
                                                     Binding="{Binding Path=ServiceEquipmentNavigation.Service.Name}"/>
@@ -150,8 +150,8 @@
                                 <DataGridTextColumn Header="Кол-во" Width="*" 
                                                     Binding="{Binding Path=Number}"/>
                                 <DataGridTextColumn Header="Цена" Width="*" 
-                                                    Binding="{Binding Path=ServiceEquipmentNavigation.Service.Price}"/>
-                                <DataGridTextColumn Header="Сумма" Width="*" />
+                                                    Binding="{Binding Path=ServiceEquipmentNavigation.Service.Price, StringFormat='0.00'}"/>
+                                <DataGridTextColumn Header="Сумма" Width="*" Binding="{Binding Converter={StaticResource CalculatingConverter}, StringFormat='0.00'}"/>
             
                             </DataGrid.Columns>
                         </DataGrid>
@@ -176,9 +176,9 @@
                                     <TextBlock Text="% скидки:" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
                                 </StackPanel>
 
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ResultSum}" Padding="20,5"
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ResultSum, StringFormat='0.00'}" Padding="20,5"
                                            FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ResultDiscountSum}" 
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ResultDiscountSum, StringFormat='0.00'}" 
                                            Padding="20,5,20,10" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
                             </Grid>
                         </Border>

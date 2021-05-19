@@ -140,7 +140,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         {
             List<ReportData> reportDataList = _UnitOfWork.ReportDataRep.GetAll().Where(item => item.Report == SelectedReport.Id).ToList();
             ReportDataProp = ConfigReportDataList(reportDataList);
-            ResultSum = _UnitOfWork.ReportDataRep.GetResultSum();
+            ResultSum = _UnitOfWork.ReportDataRep.GetResultSum(SelectedReport);
             ResultDiscountSum = (double)(ResultSum - ResultSum * SelectedReport.Discount / 100);
         }
         private bool CanShowReportCommandExecuted(object p) => true;
