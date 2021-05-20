@@ -115,7 +115,6 @@
                                                                 </MultiBinding>
                                                             </Behaviors:InvokeCommandAction.CommandParameter>
                                                         </Behaviors:InvokeCommandAction>
-                                                        <!-- ElementName=servicesComboBox, Path=SelectedItem-->
                                                     </Behaviors:EventTrigger>
                                                 </Behaviors:Interaction.Triggers>
                                             </ComboBox>

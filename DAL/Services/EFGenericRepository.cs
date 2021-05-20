@@ -30,6 +30,12 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
             return entity;
         }
 
+        public void Add(T entity, CancellationToken Cancel = default)
+        {
+            if (entity is null) throw new ArgumentNullException(nameof(entity));
+            _db.Add(entity);
+        }
+
         public async Task RemoveAsync(int id, CancellationToken Cancel = default)
         {
             T entity = await _db.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);

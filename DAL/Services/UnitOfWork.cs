@@ -10,7 +10,6 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
     {
         private ApplicationContext _db = new ApplicationContextFactory().CreateDbContext();
 
-        private EFGenericRepository<Employee> _employeeRep;
         private EFGenericRepository<Position> _positionRep;
         private EFGenericRepository<Contract> _contractRep;
         private EFGenericRepository<ContractCategory> _contractCategoryRep;
@@ -21,16 +20,7 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
         private EquipmentRepository _equipmentRep;
         private ReportRepository _reportRep;
         private ReportDataRepository _reportDataRep;
-
-        public EFGenericRepository<Employee> EmployeeRep
-        {
-            get
-            {
-                if (_employeeRep == null)
-                    _employeeRep = new EFGenericRepository<Employee>(_db);
-                return _employeeRep;
-            }
-        }
+        private EmployeeRepository _employeeRep;
 
         public EFGenericRepository<Position> PositionRep
         {
@@ -129,6 +119,16 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
                 if (_reportDataRep == null)
                     _reportDataRep = new ReportDataRepository(_db);
                 return _reportDataRep;
+            }
+        }
+
+        public EmployeeRepository EmployeeRep
+        {
+            get
+            {
+                if (_employeeRep == null)
+                    _employeeRep = new EmployeeRepository(_db);
+                return _employeeRep;
             }
         }
 

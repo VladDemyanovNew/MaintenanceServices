@@ -14,6 +14,7 @@
     <None Remove="Assets\Images\contractLogo.png" />
     <None Remove="Assets\Images\login-background.jpg" />
     <None Remove="Assets\Images\profile.png" />
+    <None Remove="Assets\Images\shield.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,7 @@
     <Resource Include="Assets\Images\contractIcon.png" />
     <Resource Include="Assets\Images\login-background.jpg" />
     <Resource Include="Assets\Images\profile.png" />
+    <Resource Include="Assets\Images\shield.png" />
   </ItemGroup>
 
 </Project>

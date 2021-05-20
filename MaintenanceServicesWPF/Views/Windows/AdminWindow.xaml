@@ -1,0 +1,81 @@
+﻿<Window x:Class="VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.Windows.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.Windows" xmlns:fa="http://schemas.fontawesome.io/icons/" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors" xmlns:converters="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Converters"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="610" Width="400" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Themes/General.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:MyMultiConverter x:Key="myMultiConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid Background="White" Grid.Column="1">
+            <StackPanel VerticalAlignment="Center" Width="280">
+                <Image Source="/Assets/Images/shield.png" MaxWidth="110" MaxHeight="110" Margin="0,0,0,30"/>
+                <DockPanel Background="LightGray" Margin="0,0,0,10">
+                    <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="User" HorizontalAlignment="Left"/>
+                    <TextBox HorizontalAlignment="Stretch" Background="Transparent"
+                             Foreground="Gray" FontSize="20" BorderThickness="0" 
+                             VerticalContentAlignment="Center"
+                             Text="{Binding Login}"/>
+                </DockPanel>
+                <DockPanel Background="LightGray" Margin="0,0,0,10">
+                    <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="Lock" HorizontalAlignment="Left"/>
+                    <PasswordBox HorizontalAlignment="Stretch" Background="Transparent"
+                                 Foreground="Gray" FontSize="20" BorderThickness="0"
+                                 VerticalContentAlignment="Center" x:Name="PasswordBox1"/>
+                </DockPanel>
+                <DockPanel Background="LightGray" Margin="0,0,0,10">
+                    <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="Lock" HorizontalAlignment="Left"/>
+                    <PasswordBox HorizontalAlignment="Stretch" Background="Transparent"
+                                 Foreground="Gray" FontSize="20" BorderThickness="0"
+                                 VerticalContentAlignment="Center" x:Name="PasswordBox2"/>
+                </DockPanel>
+                <CheckBox Margin="0,0,0,30" VerticalAlignment="Center" Content="Администратор"
+                          VerticalContentAlignment="Center" Foreground="Gray" FontSize="18"
+                          IsChecked="{Binding CheckBox}"/>
+                    <DockPanel>
+                    <Button Style="{DynamicResource ButtonStyle}" BorderThickness="0"
+                        Command="{Binding BackToLoginCommand}"
+                        FontSize="20" FontWeight="DemiBold" FontFamily="Arial"
+                        Padding="10" Cursor="Hand"
+                        HorizontalAlignment="Right" Background="Transparent">
+                        <fa:ImageAwesome Height="30" Width="30" Foreground="Gray" Icon="ArrowLeft" HorizontalAlignment="Left"/>
+                    </Button>
+                    <Button Style="{DynamicResource ButtonStyle}" BorderThickness="0" Content="Зарегестрировать"
+                        Foreground="White" FontSize="20" FontWeight="DemiBold" FontFamily="Arial"
+                        Width="200" Padding="10" Cursor="Hand"
+                        HorizontalAlignment="Right">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#ff8a00" Offset="0.0" />
+                                <GradientStop Color="#e52e71" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        
+                        <Behaviors:Interaction.Triggers>
+                            <Behaviors:EventTrigger EventName="Click">
+                                <Behaviors:InvokeCommandAction Command="{Binding RegisterUserCommand}">
+                                    <Behaviors:InvokeCommandAction.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource myMultiConverter}">
+                                            <Binding ElementName="PasswordBox1"/>
+                                            <Binding ElementName="PasswordBox2" />
+                                        </MultiBinding>
+                                    </Behaviors:InvokeCommandAction.CommandParameter>
+                                </Behaviors:InvokeCommandAction>
+                            </Behaviors:EventTrigger>
+                        </Behaviors:Interaction.Triggers>
+                        
+                    </Button>
+                </DockPanel>
+                
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
