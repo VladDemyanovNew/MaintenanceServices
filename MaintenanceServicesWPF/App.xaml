@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF"
              StartupUri="Views/Windows/LoginWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="/Resources/Themes/General.xaml" />
     </Application.Resources>
 </Application>

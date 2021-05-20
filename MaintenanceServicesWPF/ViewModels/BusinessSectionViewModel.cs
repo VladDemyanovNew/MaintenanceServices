@@ -19,6 +19,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 {
     class BusinessSectionViewModel : ViewModelBase
     {
+        #region Fields
+        public UnitOfWork _UnitOfWork;
+        #endregion
+
         #region Properties
 
         #region CurrentViewModel
@@ -58,10 +62,49 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         }
         #endregion
 
+        #region ContractSearchText
+        private string _ContractSearchText;
+        public string ContractSearchText
+        {
+            get => _ContractSearchText;
+            set
+            {
+                if (!Set(ref _ContractSearchText, value)) return;
+                _SelectedContracts.View.Refresh();
+            }
+        }
+
+        private void OnContractSearched(object sender, FilterEventArgs e)
+        {
+
+            if (!(e.Item is Contract contract))
+            {
+                e.Accepted = false;
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_ContractSearchText))
+                return;
+
+            if (contract.Name is null || contract.ClientName is null || contract.FacilityAddress is null)
+            {
+                e.Accepted = false;
+                return;
+            }
+
+            var search_text = _ContractSearchText.ToLower();
+            string name = contract.Name.ToLower();
+            string clientName = contract.ClientName.ToLower();
+            string facilityAddress = contract.FacilityAddress.ToLower();
+
+            if (name.Contains(search_text)) return;
+            if (clientName.Contains(search_text)) return;
+            if (facilityAddress.Contains(search_text)) return;
+
+            e.Accepted = false;
+        }
         #endregion
 
-        #region Fields
-        public UnitOfWork _UnitOfWork;
         #endregion
 
         #region Commands
@@ -79,8 +122,11 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
                     CurrentViewModel = new ContractCreatingSectionViewModel(this);
                     break;
                 case ViewType.CONTRACT_INFO_SECTION:
-                    SelectedContract.CategoryNavigation = await _UnitOfWork.ContractCategoryRep.GetAsync(SelectedContract.Category.Value);
-                    CurrentViewModel = new ContractInfoSectionViewModel(this);
+                    if (SelectedContract != null)
+                    {
+                        SelectedContract.CategoryNavigation = await _UnitOfWork.ContractCategoryRep.GetAsync(SelectedContract.Category.Value);
+                        CurrentViewModel = new ContractInfoSectionViewModel(this);
+                    }
                     break;
                 default:
                     break;
@@ -164,6 +210,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted, CanLoadDataCommandExecuted);
             OpenReportCreatingSectionCommand = new RelayCommand(OnOpenReportCreatingSectionCommandExecuted, CanOpenReportCreatingSectionCommandExecuted);
             OpenReportPresentationSectionCommand = new RelayCommand(OnOpenReportPresentationSectionCommandExecuted, CanOpenReportPresentationSectionCommandExecuted);
+            #endregion
+
+            #region Filters
+            _SelectedContracts.Filter += OnContractSearched;
             #endregion
 
             #region InitSection

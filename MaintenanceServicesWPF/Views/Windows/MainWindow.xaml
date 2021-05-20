@@ -52,11 +52,16 @@
                     Background="#FF353535"
                     Grid.Column="0">
 
-                <StackPanel x:Name="st_pnl">
+                <Grid x:Name="st_pnl">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
                     <!-- Grid for the Menu Toggle Button -->
-                    <Grid Height="90">
-                        <!-- Toggle Button -->
-                        <ToggleButton x:Name="humburger"
+                    <Grid Height="90" Grid.Row="0">
+                            <!-- Toggle Button -->
+                            <ToggleButton x:Name="humburger"
                                       Grid.Column="0"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Left"
@@ -69,69 +74,70 @@
                                       Cursor="Hand"
                                       IsChecked="{Binding HumburgerIsChecked}">
 
-                            <!-- Toggle Button: Checked, Unchecked, MouseEnter, MouseLeave events -->
-                            <ToggleButton.Triggers>
+                                <!-- Toggle Button: Checked, Unchecked, MouseEnter, MouseLeave events -->
+                                <ToggleButton.Triggers>
 
-                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="HideStackPanel">
-                                            <DoubleAnimation          
+                                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="HideStackPanel">
+                                                <DoubleAnimation          
                                                 Storyboard.TargetName="nav_pnl"
                                                 Storyboard.TargetProperty="Width"
                                                 BeginTime="0:0:0"
                                                 From="230" To="65"
                                                 Duration="0:0:0.2">
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
 
-                                <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="ShowStackPanel">
-                                            <DoubleAnimation    
+                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="ShowStackPanel">
+                                                <DoubleAnimation    
                                                 Storyboard.TargetName="nav_pnl"
                                                 Storyboard.TargetProperty="Width"
                                                 BeginTime="0:0:0"
                                                 From="65" To="230"
                                                 Duration="0:0:0.3">
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
 
-                                <EventTrigger RoutedEvent="ToggleButton.MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="MouseEnter_Humburger">
-                                            <ColorAnimation
+                                    <EventTrigger RoutedEvent="ToggleButton.MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="MouseEnter_Humburger">
+                                                <ColorAnimation
                                                 Storyboard.TargetName="humburger_icon"
                                                 Storyboard.TargetProperty="(fa:ImageAwesome.Foreground).(SolidColorBrush.Color)"
                                                 To="#ffbf08" Duration="0:0:0.1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
 
-                                <EventTrigger RoutedEvent="ToggleButton.MouseLeave">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="MouseLeave_Humburger">
-                                            <ColorAnimation
+                                    <EventTrigger RoutedEvent="ToggleButton.MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="MouseLeave_Humburger">
+                                                <ColorAnimation
                                                 Storyboard.TargetName="humburger_icon"
                                                 Storyboard.TargetProperty="(fa:ImageAwesome.Foreground).(SolidColorBrush.Color)"
                                                 To="White" Duration="0:0:0.1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </ToggleButton.Triggers>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ToggleButton.Triggers>
 
-                            <fa:ImageAwesome x:Name="humburger_icon" Foreground="White" Icon="Bars"/>
-                        </ToggleButton>
-                    </Grid>
+                                <fa:ImageAwesome x:Name="humburger_icon" Foreground="White" Icon="Bars"/>
+                            </ToggleButton>
+                        </Grid>
 
-                    <!-- ListView with menu list items -->
+                        <!-- ListView with menu list items -->
                     <ListView  Background="Transparent"
                                BorderBrush="Transparent"
                                BorderThickness="0"
-                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                               Grid.Row="1">
 
                         <!-- Business zone -->
                         <ListViewItem x:Name="business_zone" HorizontalAlignment="Left" Margin="0,0,0,15" >
@@ -194,7 +200,14 @@
                         </ListView.ItemContainerStyle>
 
                     </ListView>
-                </StackPanel>
+
+                    <Button Background="Transparent" BorderThickness="0"
+                            VerticalAlignment="Bottom"  Grid.Row="2"
+                            Margin="0,0,0,5" Style="{DynamicResource ButtonStyle}"
+                            Command="{Binding OpenLoginWindowCommand}">
+                        <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="white" Icon="SignOut" />
+                    </Button>
+                </Grid>
             </Grid>
 
         </Grid>

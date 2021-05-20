@@ -72,7 +72,8 @@
                          Padding="50, 5, 3, 5" Foreground="#FF353535"
                          Grid.ColumnSpan="3" Background="White" FontSize="20"
                          TextAlignment="Left"
-                         Style="{StaticResource TextBoxStyle}"/>
+                         Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding ReportSearchText, UpdateSourceTrigger=PropertyChanged}"/>
                         <fa:ImageAwesome Grid.Column="0" Height="20" Width="20" Foreground="DarkGray" Icon="Search"/>
                     </Grid>
 
@@ -80,7 +81,7 @@
                         <ScrollViewer CanContentScroll="True" Grid.Row="1">
                             <ListView x:Name="reportsList" 
                                       ItemTemplate="{StaticResource ReportsListView}"
-                                      ItemsSource="{Binding Path=Reports}"
+                                      ItemsSource="{Binding Path=SelectedReportView}"
                                       SelectedItem="{Binding SelectedReport}"
                                       Background="#f0f0f0">
                                 <Behaviors:Interaction.Triggers>

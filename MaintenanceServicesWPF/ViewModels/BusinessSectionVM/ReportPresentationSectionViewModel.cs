@@ -65,9 +65,17 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             get => _Reports;
             set
             {
-                Set(ref _Reports, value);
+                if (!Set(ref _Reports, value)) return;
+                _SelectedReportView.Source = value;
+                OnPropertyChanged(nameof(SelectedReportView));
             }
         }
+
+        #region ReportView
+        private CollectionViewSource _SelectedReportView = new CollectionViewSource();
+        public ICollectionView SelectedReportView => _SelectedReportView?.View;
+        #endregion
+
         #endregion
 
         #region SelectedReport
@@ -98,6 +106,45 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         public ICollectionView SelectedReportData => _SelectedReportData?.View;
         #endregion
 
+        #endregion
+
+        #region ReportSearchText
+        private string _ReportSearchText;
+        public string ReportSearchText
+        {
+            get => _ReportSearchText;
+            set
+            {
+                if (!Set(ref _ReportSearchText, value)) return;
+                _SelectedReportView.View.Refresh();
+            }
+        }
+
+        private void OnReportSearched(object sender, FilterEventArgs e)
+        {
+            if (!(e.Item is Report report))
+            {
+                e.Accepted = false;
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_ReportSearchText))
+                return;
+
+            if (report.Id.ToString() is null)
+            {
+                e.Accepted = false;
+                return;
+            }
+
+            var search_text = _ReportSearchText.ToLower();
+            string reportId = report.Id.ToString().ToLower();
+           
+
+            if (reportId.Contains(search_text)) return;
+
+            e.Accepted = false;
+        }
         #endregion
 
         #endregion
@@ -168,6 +215,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             AddReportCommand = new RelayCommand(OnAddReportCommandExecuted, CanAddReportCommandExecuted);
             RemoveReportCommand = new RelayCommand(OnRemoveReportCommandExecuted, CanRemoveReportCommandExecuted);
             ShowReportCommand = new RelayCommand(OnShowReportCommandExecuted, CanShowReportCommandExecuted);
+            #endregion
+
+            #region Filters
+            _SelectedReportView.Filter += OnReportSearched;
             #endregion
 
             #region InitSection
