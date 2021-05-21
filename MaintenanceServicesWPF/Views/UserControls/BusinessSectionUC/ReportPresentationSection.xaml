@@ -8,7 +8,7 @@
              xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors" 
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800" Background="Black">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -27,20 +27,28 @@
         </Behaviors:EventTrigger>
     </Behaviors:Interaction.Triggers>
 
-    <Grid Background="#949494">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Images/contractBackground.jpg" Opacity="0.25"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition Height="auto"/>
+            
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                   Text="Report presentation section" FontSize="25" FontWeight="Bold" Foreground="#FF353535"
-                   HorizontalAlignment="Center" Padding="20"/>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" 
+                    Grid.ColumnSpan="2" Orientation="Horizontal" Margin="20">
+            <TextBlock FontFamily="Arial" Text="Протоколы к договору №"
+                       FontSize="25" FontWeight="Bold" Foreground="White"/>
+            <TextBlock FontFamily="Arial" Text="{Binding SelectedContract.Name}"
+                       FontSize="25" FontWeight="Bold" Foreground="White" FontStyle="Italic"/>
+        </StackPanel>
+        
 
         <!-- Reports -->
         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Margin="20">
@@ -58,7 +66,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Border CornerRadius="8, 8, 0, 0" Background="#cfcfcf">
-                            <TextBlock FontWeight="DemiBold" Foreground="#FF353535"
+                            <TextBlock FontWeight="DemiBold" Foreground="#FF353535" FontFamily="Arial"
                                FontSize="20" Padding="15" Text="Список протоколов" HorizontalAlignment="Center"/>
                         </Border>
                     </Grid>
@@ -79,7 +87,7 @@
 
                     <Grid Grid.Row="2">
                         <ScrollViewer CanContentScroll="True" Grid.Row="1">
-                            <ListView x:Name="reportsList" 
+                            <ListView x:Name="reportsList" BorderThickness="0"
                                       ItemTemplate="{StaticResource ReportsListView}"
                                       ItemsSource="{Binding Path=SelectedReportView}"
                                       SelectedItem="{Binding SelectedReport}"
@@ -100,7 +108,7 @@
                     </Grid>
 
                     <Button Grid.Row="3" Padding="15,10" Margin="15,15,15,15"
-                            BorderThickness="0"
+                            BorderThickness="0" FontFamily="Arial"
                             Background="#FF353535" Foreground="White"
                             FontWeight="Regular" FontSize="15"  
                             Style="{DynamicResource ButtonStyle}" 
@@ -126,14 +134,19 @@
 
                     <Grid Grid.Row="0">
                         <Border CornerRadius="8, 8, 0, 0" Background="#cfcfcf">
-                            <TextBlock FontWeight="DemiBold" Foreground="#FF353535"
-                               FontSize="20" Padding="15" Text="Протокол" HorizontalAlignment="Center"/>
+                            <StackPanel Margin="15" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock FontWeight="DemiBold" Foreground="#FF353535" FontFamily="Arial"
+                               FontSize="20"  Text="Протокол №"/>
+                                <TextBlock FontWeight="DemiBold" Foreground="#FF353535" FontFamily="Arial"
+                               FontSize="20"  Text="{Binding SelectedReport.Id}" FontStyle="Italic"/>
+                            </StackPanel>
+                            
                         </Border>
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <DataGrid x:Name="reportInfoDatagrid"
-                                  AutoGenerateColumns="False" 
+                        <DataGrid x:Name="reportInfoDatagrid" IsReadOnly="True"
+                                  AutoGenerateColumns="False" FontFamily="Arial"
                                   CanUserAddRows="False" CanUserDeleteRows="False"
                                   ColumnWidth="*" HorizontalScrollBarVisibility="auto"
                                   VerticalScrollBarVisibility="auto" FontSize="20"
@@ -153,7 +166,7 @@
                                 <DataGridTextColumn Header="Цена" Width="*" 
                                                     Binding="{Binding Path=ServiceEquipmentNavigation.Service.Price, StringFormat='0.00'}"/>
                                 <DataGridTextColumn Header="Сумма" Width="*" Binding="{Binding Converter={StaticResource CalculatingConverter}, StringFormat='0.00'}"/>
-            
+
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -169,18 +182,18 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Итого: " FontSize="20"
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Итого: " FontSize="20" FontFamily="Arial"
                                            HorizontalAlignment="Right" FontWeight="DemiBold" Padding="5" Foreground="#FF353535"/>
                                 <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="20,5,5,10">
-                                    <TextBlock  Text="Итого с учётом " FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
-                                    <TextBlock Text="{Binding SelectedReport.Discount}" FontSize="20" FontWeight="DemiBold" Foreground="#E10014"/>
-                                    <TextBlock Text="% скидки:" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
+                                    <TextBlock Text="Итого с учётом " FontFamily="Arial" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
+                                    <TextBlock Text="{Binding SelectedReport.Discount}" FontStyle="Italic" FontFamily="Arial" FontSize="20" FontWeight="DemiBold" Foreground="#E10014"/>
+                                    <TextBlock Text="% скидки:" FontSize="20" FontWeight="DemiBold" FontFamily="Arial" Foreground="#FF353535"/>
                                 </StackPanel>
 
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ResultSum, StringFormat='0.00'}" Padding="20,5"
-                                           FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ResultDiscountSum, StringFormat='0.00'}" 
-                                           Padding="20,5,20,10" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ResultSum, StringFormat='0.00'}" FontStyle="Italic" Padding="20,5"
+                                           FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" FontFamily="Arial"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" FontFamily="Arial" Text="{Binding ResultDiscountSum, StringFormat='0.00'}" 
+                                           Padding="20,5,20,10" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" FontStyle="Italic"/>
                             </Grid>
                         </Border>
                     </Grid>
@@ -188,22 +201,6 @@
                 </Grid>
             </Border>
         </Grid>
-
-        <!-- Creating PDF -->
-        <Grid Grid.Row="2" Grid.Column="1" Margin="20">
-            <Border Background="White" CornerRadius="8"
-                    RenderOptions.ClearTypeHint="Enabled" SnapsToDevicePixels="True">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="50" Opacity="0.3"/>
-                </Border.Effect>
-
-                <Button Padding="15,10" Margin="15,15,15,15"
-                        BorderThickness="0"
-                        Background="#FF353535" Foreground="White"
-                        FontWeight="Regular" FontSize="15"  
-                        Style="{DynamicResource ButtonStyle}" 
-                        Content="Create PDF"  Cursor="Hand"/>
-            </Border>
-        </Grid>
+        
     </Grid>
 </UserControl>

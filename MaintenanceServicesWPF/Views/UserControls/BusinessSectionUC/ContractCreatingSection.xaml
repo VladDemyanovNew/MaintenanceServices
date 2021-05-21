@@ -22,10 +22,10 @@
         </Behaviors:EventTrigger>
     </Behaviors:Interaction.Triggers>
 
-    <Grid Background="#FF373737">
+    <Grid Background="black">
         <Grid>
             <Grid.Background>
-                <ImageBrush ImageSource="/Assets/Images/contractBackground.jpg" Opacity="0.4"/>
+                <ImageBrush ImageSource="/Assets/Images/contractBackground.jpg" Opacity="0.25"/>
             </Grid.Background>
 
             <Grid MaxHeight="1000" MaxWidth="800" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -52,8 +52,10 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="200*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" Foreground="#FF353535" FontWeight="Regular" Text="Contract name"/>
-                                    <TextBox Grid.Column="1"  MinHeight="30" BorderThickness="0,0,0,1" Foreground="DarkGray" FontSize="20">
+                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" Foreground="#FF353535"
+                                               FontWeight="Regular" Text="Название" FontFamily="Arial"/>
+                                    <TextBox Grid.Column="1"  MinHeight="30" BorderThickness="0,0,0,1"
+                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial">
                                         <TextBox.Text>
                                             <Binding Path="ContractProp.Name">
                                                 <Binding.ValidationRules>
@@ -68,7 +70,8 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="200*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" Text="Creation date" Foreground="#FF353535" FontWeight="Regular"/>
+                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" FontFamily="Arial"
+                                               Text="Дата заключения" Foreground="#FF353535" FontWeight="Regular"/>
                                     <DatePicker Grid.Column="1" FontSize="20" BorderThickness="0,0,0,1" Foreground="DarkGray">
                                         <DatePicker.SelectedDate>
                                             <Binding Path="ContractProp.CreationDate">
@@ -84,8 +87,10 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="200*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" Text="Client" Foreground="#FF353535" FontWeight="Regular"/>
-                                    <TextBox Grid.Column="1"  MinHeight="30" BorderThickness="0,0,0,1" Foreground="DarkGray" FontSize="20">
+                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" FontFamily="Arial"
+                                               Text="Заказчик" Foreground="#FF353535" FontWeight="Regular"/>
+                                    <TextBox Grid.Column="1"  MinHeight="30" BorderThickness="0,0,0,1"
+                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial">
                                         <TextBox.Text>
                                             <Binding Path="ContractProp.ClientName">
                                                 <Binding.ValidationRules>
@@ -100,8 +105,10 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="200*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" Text="Facility address" Foreground="#FF353535" FontWeight="Regular"/>
-                                    <TextBox Grid.Column="1" MinHeight="30" BorderThickness="0,0,0,1" Foreground="DarkGray" FontSize="20">
+                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" FontFamily="Arial"
+                                               Text="Адрес" Foreground="#FF353535" FontWeight="Regular"/>
+                                    <TextBox Grid.Column="1" MinHeight="30" BorderThickness="0,0,0,1" 
+                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial">
                                         <TextBox.Text>
                                             <Binding Path="ContractProp.FacilityAddress">
                                                 <Binding.ValidationRules>
@@ -116,9 +123,10 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="200*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" Text="Contract category" Foreground="#FF353535" FontWeight="Regular"/>
+                                    <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" FontFamily="Arial"
+                                               Text="Категория" Foreground="#FF353535" FontWeight="Regular"/>
                                     <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" FontSize="20"
-                                              Foreground="DarkGray" ItemsSource="{Binding ComboBoxItemsSource}"
+                                              Foreground="DarkGray" ItemsSource="{Binding ComboBoxItemsSource}" FontFamily="Arial"
                                               SelectedIndex="0" Cursor="Hand" BorderThickness="0,0,0,1" Background="{x:Null}">
                                         <ComboBox.SelectedItem>
                                             <Binding Path="SelectedContractCategory">
@@ -136,8 +144,14 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Padding="20,15" BorderThickness="0" Style="{DynamicResource ButtonStyle}" Foreground="White" FontWeight="Regular" MinWidth="200" FontSize="15" HorizontalContentAlignment="Left" Content="Close" Background="#FF353535" Cursor="Hand"/>
-                                <Button Command="{Binding CreateContractCommand}" Grid.Column="1" Padding="20,15" BorderThickness="0" Style="{DynamicResource ButtonStyle}" Foreground="White" FontWeight="Regular" MinWidth="200" FontSize="15" HorizontalContentAlignment="Right" Content="Create" Background="#FF204AFA" Cursor="Hand"/>
+                                <Button Grid.Column="0" Padding="20,15" BorderThickness="0"
+                                        Style="{DynamicResource ButtonStyle}" Foreground="White"
+                                        FontWeight="Regular" MinWidth="200" FontSize="15" FontFamily="Arial"
+                                        HorizontalContentAlignment="Left" Content="Закрыть" Background="#FF353535" Cursor="Hand"/>
+                                <Button Command="{Binding CreateContractCommand}" Grid.Column="1" Padding="20,15"
+                                        BorderThickness="0" Style="{DynamicResource ButtonStyle}" Foreground="White" 
+                                        FontWeight="Regular" MinWidth="200" FontSize="15" HorizontalContentAlignment="Right" 
+                                        Content="Создать" Background="#FF204AFA" Cursor="Hand" FontFamily="Arial"/>
                             </Grid>
                         </StackPanel>
                     </Border>

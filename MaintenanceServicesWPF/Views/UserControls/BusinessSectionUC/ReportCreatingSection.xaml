@@ -8,7 +8,7 @@
              d:DesignHeight="600" d:DesignWidth="800"
              xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums"
              xmlns:converters="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Converters" 
-             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors">
+             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors" Background="#6a0085">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -27,7 +27,10 @@
         </Behaviors:EventTrigger>
     </Behaviors:Interaction.Triggers>
 
-    <Grid Background="#eda6ff">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Images/contractBackground.jpg" Opacity="0.25"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
@@ -39,8 +42,8 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                   Text="Report creating section" FontSize="25" FontWeight="Bold" Foreground="#FF353535"
-                   HorizontalAlignment="Center" Padding="20"/>
+                   Text="Создание протокола" FontSize="25" FontWeight="Bold" Foreground="White"
+                   HorizontalAlignment="Center" Padding="20" FontFamily="Arial"/>
 
         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Margin="20">
             <Border Background="White" CornerRadius="8"
@@ -56,19 +59,19 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" FontWeight="DemiBold" Foreground="#FF353535"
-                               FontSize="20" Padding="15" Text="Services" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" FontWeight="DemiBold" Foreground="#FF353535" FontFamily="Arial"
+                               FontSize="20" Padding="15" Text="Услуги" HorizontalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Price list"
+                        <TextBlock Grid.Column="0" Text="Прейскурант" FontFamily="Arial"
                                    Padding="15,0,0,0" VerticalAlignment="Center"
                                    FontSize="20" Foreground="#FF353535"/>
                         <ComboBox x:Name="priceList" Grid.Column="1" HorizontalAlignment="Stretch" FontSize="20"
-                                  Foreground="#FF353535" SelectedIndex="0" Cursor="Hand" Margin="5,5,15,5"
+                                  Foreground="#FF353535" SelectedIndex="0" Cursor="Hand" Margin="5,5,15,5" FontFamily="Arial"
                                   ItemsSource="{Binding PriceListComboBox}" SelectedItem="{Binding SelectedPriceList}">
                             <Behaviors:Interaction.Triggers>
                                 <Behaviors:EventTrigger EventName="SelectionChanged" SourceObject="{Binding ElementName=priceList}">
@@ -84,7 +87,7 @@
                     </Grid>
 
                     <Grid Grid.Row="2">
-                        <DataGrid x:Name="servicesDatagrid"
+                        <DataGrid x:Name="servicesDatagrid" FontFamily="Arial"
                                   AutoGenerateColumns="False" 
                                   CanUserAddRows="False" CanUserDeleteRows="False"
                                   ColumnWidth="*" HorizontalScrollBarVisibility="auto"
@@ -95,9 +98,9 @@
                                   >
                             <!--, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged-->
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Count" Width="*" Binding="{Binding Path=Number}" />
+                                <DataGridTextColumn Header="Кол-во" Width="*" Binding="{Binding Path=Number}" />
 
-                                <DataGridTemplateColumn Header="Service" Width="*">
+                                <DataGridTemplateColumn Header="Услуга" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <!--Source={StaticResource Services},-->
@@ -122,7 +125,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Header="Equipment" Width="*">
+                                <DataGridTemplateColumn Header="Оборудование" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox x:Name="eqipmentsComboBox" ItemsSource="{Binding Equipments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -147,13 +150,13 @@
                                 Background="#FF353535" Foreground="White"
                                 FontWeight="Regular" FontSize="15"  
                                 Style="{DynamicResource ButtonStyle}" 
-                                Content="Remove"  Cursor="Hand"
+                                Content="Удалить"  Cursor="Hand" FontFamily="Arial"
                                 Command="{Binding ReportDataRemoveCommand}"/>
                         <Button Grid.Column="1" Padding="15,10" Margin="0,15,15,15" BorderThickness="0"
                                 Background="#cc00ff" Foreground="White"
                                 Style="{DynamicResource ButtonStyle}" 
                                 FontWeight="Regular" FontSize="15" 
-                                Content="Add" Cursor="Hand"
+                                Content="Добавить" Cursor="Hand" FontFamily="Arial"
                                 Command="{Binding ReportDataAddCommand}"/>
 
                     </Grid>
@@ -181,41 +184,44 @@
 
 
                     <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="Contract №" FontWeight="DemiBold" Foreground="#FF353535"
-                                   FontSize="20" VerticalAlignment="Center"/>
-                        <TextBlock FontWeight="DemiBold" Foreground="#FF353535"
+                        <TextBlock Text="Договор №" FontWeight="DemiBold" Foreground="#FF353535"
+                                   FontSize="20" VerticalAlignment="Center" FontFamily="Arial"/>
+                        <TextBlock FontWeight="DemiBold" Foreground="#FF353535" FontFamily="Arial" FontStyle="Italic"
                                    FontSize="20" VerticalAlignment="Center" Text="{Binding SelectedContract.Name}"/>
 
                     </StackPanel>
 
                     <Grid Grid.Column="0" Grid.Row="1"  Background="LightGray">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Foreground="#FF353535" FontSize="20" Text="Date of creation"/>
+                                   FontFamily="Arial" Foreground="#FF353535" Width="160"
+                                   FontSize="20" Text="Дата заключения" TextWrapping="Wrap"/>
                     </Grid>
                     <Grid Grid.Column="0" Grid.Row="2">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Foreground="#FF353535" FontSize="20" Text="Customer name"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial"
+                                   Foreground="#FF353535" FontSize="20" Text="Заказчик" 
+                                   TextWrapping="Wrap" Width="90"/>
                     </Grid>
                     <Grid Grid.Column="0" Grid.Row="3" Background="LightGray">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
                                    Foreground="#FF353535" FontSize="20"
-                                   Text="Facility address" />
+                                   Text="Адрес" FontFamily="Arial"
+                                   TextWrapping="Wrap" Width="60"/>
                     </Grid>
 
                     <Grid Grid.Column="1" Grid.Row="1">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Foreground="#FF353535" FontSize="20"
+                                   Foreground="#FF353535" FontSize="20" FontFamily="Arial" FontStyle="Italic"
                                    Text="{Binding SelectedContract.CreationDate, Converter={StaticResource myDateConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
                     <Grid Grid.Column="1" Grid.Row="2" Background="LightGray">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Foreground="#FF353535" FontSize="20"
-                                   Text="{Binding SelectedContract.ClientName}"/>
+                                   Foreground="#FF353535" FontSize="20" FontFamily="Arial"
+                                   Text="{Binding SelectedContract.ClientName}" FontStyle="Italic"/>
                     </Grid>
                     <Grid  Grid.Column="1" Grid.Row="3">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Foreground="#FF353535" FontSize="20"
-                               Text="{Binding SelectedContract.FacilityAddress}"/>
+                               Foreground="#FF353535" FontSize="20" FontFamily="Arial"
+                               Text="{Binding SelectedContract.FacilityAddress}" FontStyle="Italic"/>
                     </Grid>
 
                 </Grid>
@@ -244,13 +250,13 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                   HorizontalAlignment="Center" Padding="10"
-                                   Text="Create report" FontWeight="DemiBold" Foreground="#FF353535"
+                                   HorizontalAlignment="Center" Padding="10" FontFamily="Arial"
+                                   Text="Создание протокола" FontWeight="DemiBold" Foreground="#FF353535"
                                    FontSize="20" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="1" Grid.Column="0"
                                    VerticalAlignment="Center" Padding="20,0,0,0"
                                    FontSize="20" Foreground="#FF353535"
-                                   Text="Discount"/>
+                                   Text="Скидка" FontFamily="Arial"/>
                         <Grid Grid.Column="1" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -260,7 +266,7 @@
                                      FontSize="20" Text="{Binding ReportProp.Discount}"
                                      BorderThickness="0,0,0,1" Background="White"
                                      HorizontalAlignment="Stretch" Padding="5" BorderBrush="#FF353535"
-                                     Foreground="#FF353535"/>
+                                     Foreground="#E10014"/>
                             <TextBlock Text="%" FontWeight="DemiBold" Foreground="#FF353535"
                                        FontSize="20" VerticalAlignment="Center"
                                        Grid.Column="1" Padding="5,0,20,0"/>
@@ -268,10 +274,10 @@
                         
                         <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
                                 Margin="20,10" Padding="50,5"
-                                BorderThickness="0"
+                                BorderThickness="0" FontFamily="Arial"
                                 Background="#cc00ff" Foreground="White"
                                 Style="{DynamicResource ButtonStyle}" 
-                                FontSize="20" Content="Create" Cursor="Hand"
+                                FontSize="15" Content="Создать" Cursor="Hand"
                                 Command="{Binding ReportCreateCommand}"/>
                     </Grid>
                 </Border>

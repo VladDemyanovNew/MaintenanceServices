@@ -8,7 +8,9 @@
              d:DesignHeight="850" d:DesignWidth="800"
              xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums"
-             xmlns:converters="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Converters">
+             xmlns:converters="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Converters"
+             Background="#4f0f00">
+    <!--ffdad1-->
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,16 +20,18 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#ffdad1">
-
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Images/contractBackground.jpg" Opacity="0.25"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                   Text="Contract info section" FontSize="25" FontWeight="Bold" Foreground="#FF353535"
-                   HorizontalAlignment="Center" Padding="20"/>
+                   Text="Информация о договоре" FontSize="25" FontWeight="Bold" Foreground="White"
+                   HorizontalAlignment="Center" Padding="20" FontFamily="Arial"/>
 
         <Border Grid.Row="1"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -46,11 +50,18 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Text="Name" Foreground="#FF353535" TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="150" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                                           FontSize="20" Text="Название" Foreground="#FF353535"
+                                           TextWrapping="Wrap" FontFamily="Arial"/>
+                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="150" FontSize="20"
+                                           Foreground="#FF353535" HorizontalAlignment="Center" FontStyle="Italic"
+                                           VerticalAlignment="Center"
                                            Text="{Binding SelectedContract.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                           TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}" Grid.Column="2" FontSize="20" Foreground="#FF353535" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Edit" TextWrapping="Wrap"/>
+                                           TextWrapping="Wrap" FontFamily="Arial"/>
+                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}" Grid.Column="2" FontSize="20"
+                                           Foreground="#FF353535" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Text="Ред." TextWrapping="Wrap" FontFamily="Arial"/>
                             </Grid>
                         </Expander.Header>
                         <Grid Background="#FF353535">
@@ -64,8 +75,8 @@
                             </Grid.RowDefinitions>
                             <Border Padding="25" Grid.ColumnSpan="2" />
                             <TextBlock Margin="10,0,10,0" VerticalAlignment="Center"
-                                   Grid.Column="0" Grid.Row="0" FontSize="20"
-                                   Text="enter a new contract name:" Foreground="White"/>
+                                   Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Arial"
+                                   Text="введите новое название:" Foreground="White"/>
                             <TextBox Margin="10,0,10,0" Grid.Column="1" Grid.Row="0"
                                  VerticalAlignment="Center" FontSize="15"
                                  BorderThickness="0,0,0,1" Background="#FF353535"
@@ -80,9 +91,9 @@
                                 </TextBox.Text>
                             </TextBox>
                             <Button Style="{DynamicResource ButtonStyle}"
-                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Update"
+                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5"
+                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.NAME}}"/>
                         </Grid>
@@ -95,11 +106,19 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Text="Date of creation" Foreground="#FF353535" TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="150" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                           FontSize="20" Text="Дата заключения" Foreground="#FF353535"
+                                           TextWrapping="Wrap" FontFamily="Arial"/>
+                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="150" FontStyle="Italic"
+                                           FontSize="20" Foreground="#FF353535"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial"
                                            Text="{Binding SelectedContract.CreationDate, Converter={StaticResource myDateConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                            TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}" Grid.Column="2" FontSize="20" Foreground="#FF353535" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Edit" TextWrapping="Wrap"/>
+                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}"
+                                           Grid.Column="2" FontSize="20" Foreground="#FF353535"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Text="Ред." TextWrapping="Wrap" FontFamily="Arial"/>
                             </Grid>
                         </Expander.Header>
                         <Grid Background="#FF353535">
@@ -113,8 +132,8 @@
                             </Grid.RowDefinitions>
                             <Border Padding="25" Grid.ColumnSpan="2" />
                             <TextBlock Margin="10,0,10,0" VerticalAlignment="Center"
-                                   Grid.Column="0" Grid.Row="0" FontSize="20"
-                                   Text="select a new date:" Foreground="White"/>
+                                   Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Arial"
+                                   Text="выберите новую дату:" Foreground="White"/>
 
                             <DatePicker Grid.Column="1" Grid.Row="0"
                                         Margin="10,0,10,0" Padding="5"
@@ -145,9 +164,9 @@
                                 </DatePicker.SelectedDate>
                             </DatePicker>
                             <Button Style="{DynamicResource ButtonStyle}"
-                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Update"
+                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5"
+                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.CREATION_DATE}}"/>
                         </Grid>
@@ -160,11 +179,18 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Text="Customer name" Foreground="#FF353535" TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="150" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                           FontSize="20" Text="Заказчик" Foreground="#FF353535"
+                                           TextWrapping="Wrap" FontFamily="Arial"/>
+                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="150" FontSize="20"
+                                           FontStyle="Italic" Foreground="#FF353535" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Text="{Binding SelectedContract.ClientName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                           TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}" Grid.Column="2" FontSize="20" Foreground="#FF353535" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Edit" TextWrapping="Wrap"/>
+                                           TextWrapping="Wrap" FontFamily="Arial"/>
+                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}" 
+                                           Grid.Column="2" FontSize="20" Foreground="#FF353535"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                           Text="Ред." TextWrapping="Wrap" FontFamily="Arial"/>
                             </Grid>
                         </Expander.Header>
                         <Grid Background="#FF353535">
@@ -178,13 +204,13 @@
                             </Grid.RowDefinitions>
                             <Border Padding="25" Grid.ColumnSpan="2" />
                             <TextBlock Margin="10,0,10,0" VerticalAlignment="Center"
-                                   Grid.Column="0" Grid.Row="0" FontSize="20"
-                                   Text="enter a new customer name:" Foreground="White"/>
+                                   Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Arial"
+                                   Text="введите новое имя заказчика:" Foreground="White"/>
                             <TextBox Margin="10,0,10,0" Grid.Column="1" Grid.Row="0"
                                  VerticalAlignment="Center" FontSize="15"
                                  BorderThickness="0,0,0,1" Background="#FF353535"
                                  HorizontalAlignment="Stretch" Padding="5" BorderBrush="White"
-                                 Foreground="White" MaxWidth="300">
+                                 Foreground="White" MaxWidth="300" FontFamily="Arial">
                                 <TextBox.Text>
                                     <Binding Path="UpdatingContract.ClientName">
                                         <Binding.ValidationRules>
@@ -194,9 +220,9 @@
                                 </TextBox.Text>
                             </TextBox>
                             <Button Style="{DynamicResource ButtonStyle}"
-                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Update"
+                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5"
+                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.CLIENT_NAME}}"/>
                         </Grid>
@@ -209,11 +235,19 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Text="Facility address" Foreground="#FF353535" TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="150" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                           FontSize="20" Text="Адрес" Foreground="#FF353535"
+                                           TextWrapping="Wrap" FontFamily="Arial"/>
+                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="150"
+                                           FontSize="20" FontStyle="Italic" Foreground="#FF353535" 
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial"
                                            Text="{Binding SelectedContract.FacilityAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                            TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}" Grid.Column="2" FontSize="20" Foreground="#FF353535" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Edit" TextWrapping="Wrap"/>
+                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}"
+                                           Grid.Column="2" FontSize="20" Foreground="#FF353535" 
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Text="Ред." TextWrapping="Wrap" FontFamily="Arial"/>
                             </Grid>
                         </Expander.Header>
                         <Grid Background="#FF353535">
@@ -227,10 +261,10 @@
                             </Grid.RowDefinitions>
                             <Border Padding="25" Grid.ColumnSpan="2" />
                             <TextBlock Margin="10,0,10,0" VerticalAlignment="Center"
-                                   Grid.Column="0" Grid.Row="0" FontSize="20"
-                                   Text="enter a new facitity address:" Foreground="White"/>
+                                   Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Arial"
+                                   Text="введите новый адрес:" Foreground="White"/>
                             <TextBox Margin="10,0,10,0" Grid.Column="1" Grid.Row="0"
-                                 VerticalAlignment="Center" FontSize="15"
+                                 VerticalAlignment="Center" FontSize="15" FontFamily="Arial"
                                  BorderThickness="0,0,0,1" Background="#FF353535"
                                  HorizontalAlignment="Stretch" Padding="5" BorderBrush="White"
                                  Foreground="White" MaxWidth="300">
@@ -243,9 +277,9 @@
                                 </TextBox.Text>
                             </TextBox>
                             <Button Style="{DynamicResource ButtonStyle}"
-                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Update"
+                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5"
+                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.FACILITY_ADDRESS}}"/>
                         </Grid>
@@ -258,11 +292,19 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Text="Contract category" Foreground="#FF353535" TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="180" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <TextBlock Margin="10,10,20,10" Grid.Column="0" MaxWidth="150"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                                           FontSize="20" Text="Категория" Foreground="#FF353535"
+                                           TextWrapping="Wrap" FontFamily="Arial"/>
+                                <TextBlock Margin="10,10,20,10" Grid.Column="1" MaxWidth="180"
+                                           FontSize="20" FontStyle="Italic" Foreground="#FF353535"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial"
                                            Text="{Binding SelectedContract.CategoryNavigation.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                            TextWrapping="Wrap"/>
-                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}" Grid.Column="2" FontSize="20" Foreground="#FF353535" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Edit" TextWrapping="Wrap"/>
+                                <TextBlock Margin="10,10,10,10" Style="{DynamicResource HoverUnderlineStyle}"
+                                           Grid.Column="2" FontSize="20" Foreground="#FF353535"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Text="Ред." TextWrapping="Wrap" FontFamily="Arial"/>
                             </Grid>
                         </Expander.Header>
                         <Grid Background="#FF353535">
@@ -277,13 +319,13 @@
                             <Border Padding="25" Grid.ColumnSpan="2" />
                             <TextBlock Margin="10,0,10,0" VerticalAlignment="Center"
                                    Grid.Column="0" Grid.Row="0" FontSize="20"
-                                   Text="select a new contract category:" Foreground="White"/>
+                                   Text="выберите новую категорию:" Foreground="White"/>
 
                             <ComboBox Margin="10,0,10,0" Grid.Column="1" Grid.Row="0"
                                       VerticalAlignment="Center" FontSize="15"
                                       BorderThickness="0,0,0,1" Background="#FF353535"
                                       HorizontalAlignment="Stretch" Padding="5" BorderBrush="White"
-                                      Foreground="#FF353535" MaxWidth="300"
+                                      Foreground="#FF353535" MaxWidth="300" FontFamily="Arial"
                                       SelectedIndex="0" Cursor="Hand" ItemsSource="{Binding ComboBoxItemsSource}">
                                 <ComboBox.SelectedItem>
                                     <Binding Path="SelectedContractCategory">
@@ -294,9 +336,9 @@
                                 </ComboBox.SelectedItem>
                             </ComboBox>
                             <Button Style="{DynamicResource ButtonStyle}"
-                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Update"
+                                Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5"
+                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.CATEGORY}}"/>
                         </Grid>

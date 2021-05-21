@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using VDemyanov.MaintenanceServices.DAL.Services;
 using VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities;
@@ -63,11 +64,21 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         public ICommand CreateContractCommand { get; }
         private async void OnCreateContractCommandExecuted(object p)
         {
+            if (ContractProp == null || ContractProp.Name == null || 
+                ContractProp.CreationDate == null || ContractProp.ClientName == null ||
+                ContractProp.FacilityAddress == null || SelectedContractCategory == null)
+            {
+                MessageBox.Show("Заполните форму полностью!");
+                return;
+            }
+
             var aw = await _UnitOfWork.ContractCategoryRep.GetAllAsync();
             ContractProp.CategoryNavigation = aw.First(item => item.Description == SelectedContractCategory);
             await _UnitOfWork.ContractRep.AddAsync(ContractProp);
             _UnitOfWork.Save();
             _Parent.Contracts.Add(ContractProp);
+
+            MessageBox.Show("Договор успешно добавлен в базу!");
 
             ContractProp = new Contract();
         }

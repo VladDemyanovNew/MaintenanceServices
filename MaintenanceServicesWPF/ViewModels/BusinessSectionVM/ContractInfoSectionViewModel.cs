@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using VDemyanov.MaintenanceServices.DAL.Services;
 using VDemyanov.MaintenanceServices.Domain.Models.MainServiceEntities;
@@ -92,30 +93,55 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             switch (contractProperty)
             {
                 case ContractProperty.NAME:
-                    if (UpdatingContract.Name == null) break;
+                    if (UpdatingContract.Name == null)
+                    {
+                        MessageBox.Show("Введите название!");
+                        return;
+                    }
                     SelectedContract.Name = UpdatingContract.Name;
                     UpdateContractUtil();
+                    MessageBox.Show("Название обновлено!");
                     break;
                 case ContractProperty.CLIENT_NAME:
-                    if (UpdatingContract.ClientName == null) break;
+                    if (UpdatingContract.ClientName == null)
+                    {
+                        MessageBox.Show("Введите заказчика!");
+                        return;
+                    }
                     SelectedContract.ClientName = UpdatingContract.ClientName;
                     UpdateContractUtil();
+                    MessageBox.Show("Клиент обновлён!");
                     break;
                 case ContractProperty.CREATION_DATE:
-                    if (UpdatingContract.CreationDate == null) break;
+                    if (UpdatingContract.CreationDate == null)
+                    {
+                        MessageBox.Show("Выберите дату заключения!");
+                        return;
+                    }
                     SelectedContract.CreationDate = UpdatingContract.CreationDate;
                     UpdateContractUtil();
+                    MessageBox.Show("Дата заключения обновлена!");
                     break;
                 case ContractProperty.FACILITY_ADDRESS:
-                    if (UpdatingContract.FacilityAddress == null) break;
+                    if (UpdatingContract.FacilityAddress == null)
+                    {
+                        MessageBox.Show("Введите адрес!");
+                        return;
+                    }
                     SelectedContract.FacilityAddress = UpdatingContract.FacilityAddress;
                     UpdateContractUtil();
+                    MessageBox.Show("Адрес обновлён!");
                     break;
                 case ContractProperty.CATEGORY:
-                    if (SelectedContractCategory == null) break;
+                    if (SelectedContractCategory == null)
+                    {
+                        MessageBox.Show("Выберите категорию!");
+                        return;
+                    }
                     var aw = await _UnitOfWork.ContractCategoryRep.GetAllAsync();
                     SelectedContract.CategoryNavigation = aw.First(item => item.Description == SelectedContractCategory);
                     UpdateContractUtil();
+                    MessageBox.Show("Категория обновлена!");
                     break;
             }
         }

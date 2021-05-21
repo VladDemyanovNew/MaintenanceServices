@@ -51,7 +51,7 @@
                       HorizontalAlignment="Center" VerticalAlignment="Stretch"
                       Background="Transparent"
                       BorderThickness="0,0,1,0"
-                      BorderBrush="Black"/>
+                      BorderBrush="Transparent"/>
 
         <Grid x:Name="contracts" Grid.Column="0" Background="#f7f7f7">
             <Grid.RowDefinitions>
@@ -64,7 +64,8 @@
             <Grid Grid.Row="0" Background="#f7f7f7">
                 <StackPanel>
                     <Grid Background="#f0f0f0">
-                        <TextBlock HorizontalAlignment="Center" Padding="0,2" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535" Text="Contracts"/>
+                        <TextBlock HorizontalAlignment="Center" Padding="0,2" FontSize="20" FontWeight="DemiBold"
+                                   Foreground="#FF353535" Text="Договоры" FontFamily="Arial"/>
                     </Grid>
                     <Grid Margin="5,10,5,5">
                         <Grid.ColumnDefinitions>
@@ -100,7 +101,8 @@
             <Grid Grid.Row="1">
                 <ScrollViewer CanContentScroll="True" Grid.Row="1">
                     <ListView x:Name="contractsList" ItemsSource="{Binding Path=SelectedContracts}"
-                              ItemTemplate="{StaticResource ContractsListView}" SelectedItem="{Binding SelectedContract}">
+                              ItemTemplate="{StaticResource ContractsListView}" SelectedItem="{Binding SelectedContract}"
+                              BorderThickness="0" BorderBrush="Black">
                         <Behaviors:Interaction.Triggers>
                             <Behaviors:EventTrigger EventName="SelectionChanged" SourceObject="{Binding ElementName=contractsList}">
                                 <Behaviors:InvokeCommandAction Command="{Binding DataContext.NavCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
@@ -126,11 +128,11 @@
             <Grid Grid.Row="2">
                 <Button Cursor="Hand" Padding="4,6" Margin="10,15" Width="160"
                         Style="{DynamicResource ButtonStyle}" Background="#FF204AFA" BorderBrush="{x:Null}"
-                        Command="{Binding NavCommand}"
+                        Command="{Binding NavCommand}" FontFamily="Arial"
                         CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_CREATING_SECTION}}">
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="PlusCircle"/>
-                        <TextBlock FontSize="15" Text="Add new contract" Foreground="White"/>
+                        <TextBlock FontSize="15" Text="Новый договор" Foreground="White" FontFamily="Arial" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
             </Grid>

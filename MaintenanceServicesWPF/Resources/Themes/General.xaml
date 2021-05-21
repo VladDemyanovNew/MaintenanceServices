@@ -10,21 +10,20 @@
                             CornerRadius="6"
                             BorderThickness="0.3"
                             BorderBrush="#636363"
-                            Background="{TemplateBinding Background}"
-                            >
+                            Background="{TemplateBinding Background}">
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="0.5" Direction="0" Opacity="0.3" />
                         </Border.Effect>
-                        <ScrollViewer Margin="0, 0, 0, 0" x:Name="PART_ContentHost" />
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
                     </Border>
-                    <ControlTemplate.Triggers>
+                    <!--<ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="Border" Property="BorderThickness" Value="0.5"></Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Border" Property="BorderThickness" Value="0.5"></Setter>
                         </Trigger>
-                    </ControlTemplate.Triggers>
+                    </ControlTemplate.Triggers>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

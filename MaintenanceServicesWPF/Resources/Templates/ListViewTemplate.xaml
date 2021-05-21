@@ -11,19 +11,25 @@
     <converters:DateTimeToDateConverter x:Key="myDateConverter" />
     
     <!-- Шаблон данных для представления списка контрактов -->
-    <DataTemplate x:Key="ContractsListView" >
-        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="#FF4F4F4F"  Background="White" Margin="5">
+    <DataTemplate x:Key="ContractsListView">
+        <Border HorizontalAlignment="Stretch" BorderThickness="0" Background="White" Margin="5"
+                RenderOptions.ClearTypeHint="Enabled" SnapsToDevicePixels="True">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="50" Opacity="0.35"/>
+            </Border.Effect>
             <StackPanel>
                 <Grid Margin="10,10,10,10">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <TextBlock VerticalAlignment="Center" FontSize="20"
-                                   Foreground="#FF353535" Text="Contract №"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="20" FontFamily="Arial"
+                                   Foreground="#FF353535" Text="Договор №"/>
                         <TextBlock VerticalAlignment="Center" FontSize="20"
                                    Foreground="#FF353535" TextWrapping="Wrap"
-                                   Width="150"  Text="{Binding Name}"/>
+                                   Width="150"  Text="{Binding Name}" FontFamily="Arial"/>
                     </StackPanel>
-                    <TextBlock Foreground="#FF353535" VerticalAlignment="Center" FontSize="20"
-                               Text="{Binding CreationDate, Converter={StaticResource myDateConverter}}" HorizontalAlignment="Right"/>
+                    <TextBlock Foreground="#FF353535"
+                               FontSize="20" FontFamily="Arial"
+                               Text="{Binding CreationDate, Converter={StaticResource myDateConverter}}" 
+                               HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </Grid>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -35,32 +41,34 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Button Style="{DynamicResource ButtonStyle}"
-                            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="#E10014" 
+                    <Button Style="{DynamicResource ButtonStyle}" HorizontalAlignment="Left"
+                            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                             Padding="8,10" BorderThickness="0"
                             Command="{Binding DataContext.RemoveContractCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                            CommandParameter="{Binding}">
+                            CommandParameter="{Binding}" Background="{x:Null}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="white" Icon="TrashOutline"/>
-                            <TextBlock FontSize="15" Text="Delete" Foreground="White"/>
+                            <fa:ImageAwesome Height="20" Width="20" Foreground="#E10014" Icon="TrashOutline"/>
+                            <TextBlock FontSize="15" Style="{DynamicResource HoverUnderlineStyle}" Text="Удалить" Padding="10,0,0,0" Foreground="#FF353535" FontFamily="Arial" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                     <Button Style="{DynamicResource ButtonStyle}" Background="#FF353535"
-                            Grid.Row="0" Grid.Column="0" Padding="8,10" BorderThickness="0"
+                            Grid.Row="1" Grid.Column="0" Padding="8,10" BorderThickness="0"
                             Command="{Binding DataContext.OpenReportPresentationSectionCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             CommandParameter="{Binding}">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="eye"/>
-                            <TextBlock FontSize="15" Text="Show report" Foreground="White"/>
+                            <TextBlock FontSize="15" Text="Протоколы" Foreground="White" FontFamily="Arial"
+                                       VerticalAlignment="Center" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
                     <Button Style="{DynamicResource ButtonStyle}" Background="#cc00ff"
-                            Grid.Row="0" Grid.Column="1" Padding="8,10" BorderThickness="0"
+                            Grid.Row="1" Grid.Column="1" Padding="8,10" BorderThickness="0"
                             Command="{Binding DataContext.OpenReportCreatingSectionCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             CommandParameter="{Binding}">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Height="20" Width="20" Margin="0,0,10,0" Foreground="White" Icon="magic"/>
-                            <TextBlock FontSize="15" Text="Create report" Foreground="White"/>
+                            <TextBlock FontSize="15" Text="Создать протокол" Foreground="White" FontFamily="Arial"
+                                       VerticalAlignment="Center" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
                 </Grid>

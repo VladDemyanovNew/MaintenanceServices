@@ -12,15 +12,15 @@
 
     <!-- Шаблон данных для представления списка reports -->
     <DataTemplate x:Key="ReportsListView" >
-        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="#FF4F4F4F"  Background="#f2f5ff" Margin="5">
+        <Border HorizontalAlignment="Stretch" BorderThickness="0" BorderBrush="#FF4F4F4F"  Background="White" Margin="5">
             <StackPanel>
                 <Grid Margin="10,10,10,10">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <TextBlock VerticalAlignment="Center" FontSize="20"
-                                   Foreground="#FF353535" Text="Report №"/>
-                        <TextBlock VerticalAlignment="Center" FontSize="20"
+                                   Foreground="#FF353535" Text="Протокол №" FontFamily="Arial"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="20" FontFamily="Arial"
                                    Foreground="#FF353535" TextWrapping="Wrap"
-                                   Width="150" Text="{Binding Id}"/>
+                                   Width="150" Text="{Binding Id}" FontStyle="Italic"/>
                     </StackPanel>
                     <Button Style="{DynamicResource ButtonStyle}"
                             HorizontalAlignment="Right"
@@ -29,7 +29,7 @@
                             Command="{Binding DataContext.RemoveReportCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             CommandParameter="{Binding}">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="15" Text="Delete" Padding="0,0,10,0" Foreground="#FF353535"/>
+                            <TextBlock Style="{DynamicResource HoverUnderlineStyle}" FontSize="15" Text="Удалить" Padding="0,0,10,0" FontFamily="Arial" Foreground="#FF353535"/>
                             <fa:ImageAwesome Height="20" Width="20" Foreground="#E10014" Icon="TrashOutline"/>
                         </StackPanel>
                     </Button>

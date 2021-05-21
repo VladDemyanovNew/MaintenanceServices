@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using VDemyanov.MaintenanceServices.DAL.Services;
@@ -150,6 +151,14 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         public ICommand ReportDataAddCommand { get; }
         private void OnReportDataAddCommandExecuted(object p)  // testing
         {
+            if (this.ReportDataProp.Count != 0 && 
+                (this.ReportDataProp.Last().Number == null || this.ReportDataProp.Last().ServiceEquipmentNavigation.Service == null ||
+                this.ReportDataProp.Last().ServiceEquipmentNavigation.Equipment == null))
+            {
+                MessageBox.Show("Вы не заполнили предыдущую строку!");
+                return;
+            }
+
             ReportData reportData = new ReportData();
             reportData.ServiceEquipmentNavigation = new ServiceEquipment();
             reportData.ReportNavigation = ReportProp;
@@ -175,8 +184,21 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         public ICommand ReportCreateCommand { get; }
         private async void OnReportCreateCommandExecuted(object p)
         {
+            if (ReportProp.Discount < 0 || ReportProp.Discount > 100 || String.IsNullOrWhiteSpace(ReportProp.Discount.ToString()))
+            {
+                MessageBox.Show("Введите скидку в диапазоне от 0 до 100!");
+                return;
+            }
+
+            if (!ValidReportDataProp())
+            {
+                MessageBox.Show("Заполните все поля формы!");
+                return;
+            }
+
             await _UnitOfWork.ReportRep.AddAsync(ReportProp);
-            
+
+
             foreach (ReportData item in ReportDataProp)
             {
                 await _UnitOfWork.ServiceEquipmentRep.AddAsync(item.ServiceEquipmentNavigation);
@@ -186,6 +208,16 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
             _Parent.CurrentViewModel = new ReportPresentationSectionViewModel(_Parent);
         }
         private bool CanReportCreateCommandExecuted(object p) => true;
+
+        private bool ValidReportDataProp()
+        {
+            foreach (ReportData item in ReportDataProp)
+                if (item.ServiceEquipmentNavigation == null || item.Number == null ||
+                     item.ServiceEquipmentNavigation.Equipment == null || item.ServiceEquipmentNavigation.Service == null)
+                    return false;
+
+            return true;
+        }
         #endregion
 
         #endregion
