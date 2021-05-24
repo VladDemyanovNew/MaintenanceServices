@@ -273,7 +273,7 @@
                         </Grid>
                         
                         <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
-                                Margin="20,10" Padding="50,5"
+                                Margin="20,10" Padding="50,7"
                                 BorderThickness="0" FontFamily="Arial"
                                 Background="#cc00ff" Foreground="White"
                                 Style="{DynamicResource ButtonStyle}" 

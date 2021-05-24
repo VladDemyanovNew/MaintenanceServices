@@ -171,6 +171,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         public ICommand RemoveReportCommand { get; }
         private void OnRemoveReportCommandExecuted(object p)
         {
+            if (p == null)
+                return;
             Report report = p as Report;
 
             _UnitOfWork.ReportDataRep.RemoveAllByReport(report);
@@ -185,6 +187,8 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
         public ICommand ShowReportCommand { get; }
         private void OnShowReportCommandExecuted(object p)
         {
+            if (SelectedReport == null)
+                return;
             List<ReportData> reportDataList = _UnitOfWork.ReportDataRep.GetAll().Where(item => item.Report == SelectedReport.Id).ToList();
             ReportDataProp = ConfigReportDataList(reportDataList);
             ResultSum = _UnitOfWork.ReportDataRep.GetResultSum(SelectedReport);

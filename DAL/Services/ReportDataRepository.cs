@@ -20,7 +20,8 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
             if (report is null) throw new ArgumentNullException(nameof(report));
 
             IEnumerable<ReportData> repData = _db.Set<ReportData>().Where(item => item.Report == report.Id);
-            _db.Set<ReportData>().RemoveRange(repData);
+            if (repData.Count() != 0)
+                _db.Set<ReportData>().RemoveRange(repData);
         }
 
         public double GetResultSum(Report report)

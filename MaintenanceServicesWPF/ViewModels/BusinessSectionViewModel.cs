@@ -158,21 +158,18 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
         #region RemoveContractCommand
         public ICommand RemoveContractCommand { get; }
-        private async void OnRemoveContractCommandExecuted(object p) // нужно ещё тестировать
+        private void OnRemoveContractCommandExecuted(object p)
         {
             Contract contract = p as Contract;
 
-            if (contract.Equals(SelectedContract) && Contracts.Count == 1)
+            List<Report> reports = _UnitOfWork.ReportRep.GetAll().Where(report => report.Contract == contract.Id).ToList();
+            foreach(Report rep in reports)
             {
-                SelectedContract = null;
-                CurrentViewModel = new ContractCreatingSectionViewModel(this);
-            } 
-            else if (contract.Equals(SelectedContract) && !contract.Equals(Contracts.Last()))
-                SelectedContract = Contracts.Last();
-            else if (contract.Equals(SelectedContract) && contract.Equals(Contracts.Last()))
-                SelectedContract = Contracts[Contracts.Count - 2];
+                _UnitOfWork.ReportDataRep.RemoveAllByReport(rep);
+                _UnitOfWork.ReportRep.Remove(rep.Id);
+            }
 
-            await _UnitOfWork.ContractRep.RemoveAsync(contract.Id);
+            _UnitOfWork.ContractRep.Remove(contract.Id);
             _UnitOfWork.Save();
             Contracts.Remove(contract);
         }

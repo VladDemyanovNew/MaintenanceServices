@@ -72,6 +72,14 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels.Busine
                 return;
             }
 
+            bool isUniqName = !_UnitOfWork.ContractRep.GetAll().Any(contract => contract.Name.Trim() == ContractProp.Name);
+
+            if (!isUniqName)
+            {
+                MessageBox.Show("Название должно быть уникальным!");
+                return;
+            }
+
             var aw = await _UnitOfWork.ContractCategoryRep.GetAllAsync();
             ContractProp.CategoryNavigation = aw.First(item => item.Description == SelectedContractCategory);
             await _UnitOfWork.ContractRep.AddAsync(ContractProp);
