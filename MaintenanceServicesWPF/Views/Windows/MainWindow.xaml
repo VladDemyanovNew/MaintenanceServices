@@ -9,7 +9,7 @@
         xmlns:enums="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Enums" 
         xmlns:fa="http://schemas.fontawesome.io/icons/" 
         xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Title="MaintenanceService" Icon="/Assets/Images/logo.png"
         Height="720" Width="1080" MinWidth="950" MinHeight="700" WindowState="Maximized" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -111,7 +111,7 @@
                                                 <ColorAnimation
                                                 Storyboard.TargetName="humburger_icon"
                                                 Storyboard.TargetProperty="(fa:ImageAwesome.Foreground).(SolidColorBrush.Color)"
-                                                To="#ffbf08" Duration="0:0:0.1"/>
+                                                To="#FF204AFA" Duration="0:0:0.1"/>
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </EventTrigger>
@@ -160,8 +160,8 @@
                                 </Behaviors:EventTrigger>
                             </Behaviors:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal" Width="230">
-                                <fa:ImageAwesome Margin="12,0,0,0"  Height="30" Width="30" Foreground="White" Icon="Database"/>
-                                <TextBlock Text="Database" Margin="25,0,0,0" Style="{StaticResource font_style}"/>
+                                <fa:ImageAwesome Margin="12,0,0,0"  Height="30" Width="30" Foreground="White" Icon="UserCircle"/>
+                                <TextBlock Text="User settings" Margin="25,0,0,0" Style="{StaticResource font_style}"/>
                             </StackPanel>
                         </ListViewItem>
 

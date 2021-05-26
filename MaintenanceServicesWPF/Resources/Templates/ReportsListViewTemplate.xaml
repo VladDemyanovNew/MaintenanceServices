@@ -20,7 +20,7 @@
                                    Foreground="#FF353535" Text="Протокол №" FontFamily="Arial"/>
                         <TextBlock VerticalAlignment="Center" FontSize="20" FontFamily="Arial"
                                    Foreground="#FF353535" TextWrapping="Wrap"
-                                   Width="150" Text="{Binding Id}" FontStyle="Italic"/>
+                                   Width="150" Text="{Binding Id}"/>
                     </StackPanel>
                     <Button Style="{DynamicResource ButtonStyle}"
                             HorizontalAlignment="Right"

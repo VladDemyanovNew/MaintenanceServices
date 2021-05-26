@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         xmlns:vm="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels"
         xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
-        Title="LoginWindow" Height="610" Width="950" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" >
+        xmlns:fa="http://schemas.fontawesome.io/icons/" Icon="/Assets/Images/logo.png"
+        Title="MaintenanceService" Height="610" Width="950" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

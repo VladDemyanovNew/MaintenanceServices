@@ -20,6 +20,14 @@ namespace VDemyanov.MaintenanceServices.DAL.Services
             return result;
         }
 
+        public Employee GetByLogin(string login)
+        {
+            if (login is null) throw new ArgumentNullException(nameof(login));
+            Employee employee = _db.Employees.FirstOrDefault(empl => empl.Login == login);
+            return employee;
+
+        }
+
         public bool CheckByLoginAndPassword(string login, string password)
         {
             if (login is null || password is null) throw new ArgumentNullException(nameof(login));

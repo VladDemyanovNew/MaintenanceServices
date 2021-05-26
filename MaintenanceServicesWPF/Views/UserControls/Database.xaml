@@ -4,12 +4,83 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.UserControls"
-             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:fa="http://schemas.fontawesome.io/icons/" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors" xmlns:converters="clr-namespace:VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Infrastructure.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Gold">
-       <!--
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Database"/>
-        --> 
+             d:DesignHeight="650" d:DesignWidth="900">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Themes/General.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:MyMultiConverter x:Key="myMultiConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid  Background="Black">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/Images/user-settings.jpg" Opacity="0.25"/>
+            </Grid.Background>
+
+            <StackPanel Grid.Column="1"  Width="350" VerticalAlignment="Center">
+                <TextBlock Text="Обновление данных пользователя" Foreground="White" FontWeight="Bold"
+                       FontSize="35" FontFamily="Arial" TextWrapping="Wrap" Padding="0,0,0,20"/>
+                <TextBlock Text="           Здесь вы можете поменять данные своей учётной записи. Помните о безопастности, не разглошайте свои данные другим пользователям."
+                       Foreground="#FF666666" FontFamily="Arial" FontSize="20"
+                       TextWrapping="Wrap" TextAlignment="Justify"/>
+            </StackPanel>
+
+
+            <StackPanel Background="White" VerticalAlignment="Center" Width="380">
+
+                <Image Source="/Assets/Images/refresh.png" MaxWidth="110" MaxHeight="110" Margin="0,20,0,30"/>
+                <TextBlock Text="Введите новый логин:" Foreground="Gray" Margin="20,0" FontSize="17"/>
+                <DockPanel Background="LightGray" Margin="20,0,20,10">
+                    <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="User" HorizontalAlignment="Left"/>
+                    <TextBox HorizontalAlignment="Stretch" Background="Transparent"
+                             Foreground="Gray" FontSize="20" BorderThickness="0" 
+                             VerticalContentAlignment="Center" Text="{Binding Login}"/>
+                </DockPanel>
+                <Button Style="{DynamicResource ButtonStyle}" BorderThickness="0" Content="Обновить логин"
+                        Foreground="White" FontSize="20"  FontFamily="Arial"
+                        Padding="10" Margin="20,0,20,20" Cursor="Hand" Background="#FF2FFF39"
+                        Command="{Binding UpdateLoginCommand}">
+                </Button>
+                <TextBlock Text="Введите новый пароль:" Foreground="Gray" Margin="20,0" FontSize="17"/>
+                <DockPanel Background="LightGray" Margin="20,0,20,10">
+                    <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="Lock" HorizontalAlignment="Left"/>
+                    <PasswordBox HorizontalAlignment="Stretch" Background="Transparent"
+                                 Foreground="Gray" FontSize="20" BorderThickness="0"
+                                 VerticalContentAlignment="Center" x:Name="PasswordBox1"/>
+                </DockPanel>
+                <TextBlock Text="Повторите новый пароль:" Margin="20,0" Foreground="Gray" FontSize="17"/>
+                <DockPanel Background="LightGray" Margin="20,0,20,10">
+                    <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="Lock" HorizontalAlignment="Left"/>
+                    <PasswordBox HorizontalAlignment="Stretch" Background="Transparent"
+                                 Foreground="Gray" FontSize="20" BorderThickness="0"
+                                 VerticalContentAlignment="Center" x:Name="PasswordBox2"/>
+                </DockPanel>
+                <Button Style="{DynamicResource ButtonStyle}" BorderThickness="0" Content="Обновить пароль"
+                        Foreground="White" FontSize="20"  FontFamily="Arial"
+                        Padding="10" Margin="20,0,20,20" Cursor="Hand" Background="GreenYellow">
+                    <Behaviors:Interaction.Triggers>
+                        <Behaviors:EventTrigger EventName="Click">
+                            <Behaviors:InvokeCommandAction Command="{Binding UpdatePasswordCommand}">
+                                <Behaviors:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource myMultiConverter}">
+                                        <Binding ElementName="PasswordBox1"/>
+                                        <Binding ElementName="PasswordBox2" />
+                                    </MultiBinding>
+                                </Behaviors:InvokeCommandAction.CommandParameter>
+                            </Behaviors:InvokeCommandAction>
+                        </Behaviors:EventTrigger>
+                    </Behaviors:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </UserControl>

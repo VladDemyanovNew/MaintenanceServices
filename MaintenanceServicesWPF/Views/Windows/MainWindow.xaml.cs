@@ -29,9 +29,9 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.Views.Windows
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            MainWindowViewModel viewModel = new MainWindowViewModel();
+            /*MainWindowViewModel viewModel = new MainWindowViewModel();
             viewModel.CodeBehind = this;
-            this.DataContext = viewModel;
+            this.DataContext = viewModel;*/
         }
     }
 }

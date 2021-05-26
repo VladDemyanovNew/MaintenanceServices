@@ -46,7 +46,7 @@
             <TextBlock FontFamily="Arial" Text="Протоколы к договору №"
                        FontSize="25" FontWeight="Bold" Foreground="White"/>
             <TextBlock FontFamily="Arial" Text="{Binding SelectedContract.Name}"
-                       FontSize="25" FontWeight="Bold" Foreground="White" FontStyle="Italic"/>
+                       FontSize="25" FontWeight="Bold" Foreground="White"/>
         </StackPanel>
         
 
@@ -138,7 +138,7 @@
                                 <TextBlock FontWeight="DemiBold" Foreground="#FF353535" FontFamily="Arial"
                                FontSize="20"  Text="Протокол №"/>
                                 <TextBlock FontWeight="DemiBold" Foreground="#FF353535" FontFamily="Arial"
-                               FontSize="20"  Text="{Binding SelectedReport.Id}" FontStyle="Italic"/>
+                               FontSize="20"  Text="{Binding SelectedReport.Id}"/>
                             </StackPanel>
                             
                         </Border>
@@ -186,7 +186,7 @@
                                            HorizontalAlignment="Right" FontWeight="DemiBold" Padding="5" Foreground="#FF353535"/>
                                 <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="20,5,5,10">
                                     <TextBlock Text="Итого с учётом " FontFamily="Arial" FontSize="20" FontWeight="DemiBold" Foreground="#FF353535"/>
-                                    <TextBlock Text="{Binding SelectedReport.Discount}" FontStyle="Italic" FontFamily="Arial" FontSize="20" FontWeight="DemiBold" Foreground="#E10014"/>
+                                    <TextBlock Text="{Binding SelectedReport.Discount}" FontFamily="Arial" FontSize="20" FontWeight="DemiBold" Foreground="#E10014"/>
                                     <TextBlock Text="% скидки:" FontSize="20" FontWeight="DemiBold" FontFamily="Arial" Foreground="#FF353535"/>
                                 </StackPanel>
 

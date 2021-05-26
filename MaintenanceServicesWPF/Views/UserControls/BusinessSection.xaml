@@ -80,7 +80,7 @@
                          Text="{Binding ContractSearchText, UpdateSourceTrigger=PropertyChanged}"/>
                         <fa:ImageAwesome Grid.Column="0" Height="20" Width="20" Foreground="DarkGray" Icon="Search"/>
                     </Grid>
-                    <Grid Background="#f7f7f7">
+                    <!--<Grid Background="#f7f7f7">
                         <Expander Padding="0" Margin="5" Style="{DynamicResource MyCoolExpanderStyle}">
                             <Expander.Header>
                                 <StackPanel Orientation="Horizontal">
@@ -93,7 +93,7 @@
                                 <TextBlock Text="test"/>
                             </StackPanel>
                         </Expander>
-                    </Grid>
+                    </Grid> -->
                 </StackPanel>
             </Grid>
 

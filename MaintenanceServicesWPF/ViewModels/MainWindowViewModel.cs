@@ -44,7 +44,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
         #region Fields
         private BusinessSectionViewModel _BusinessSectionViewModel = new BusinessSectionViewModel();
-        private DatabaseViewModel _DatabaseViewModel = new DatabaseViewModel();
+        private LoginWindowViewModel _Parent;
         #endregion
 
         #region Commands
@@ -71,7 +71,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             switch (destination)
             {
                 case ViewType.DATABASE:
-                    CurrentViewModel = _DatabaseViewModel;
+                    CurrentViewModel = new DatabaseViewModel(_Parent);
                     break;
                 case ViewType.BUSINESS_SECTION:
                 default:
@@ -92,7 +92,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
 
         #endregion
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(LoginWindowViewModel parent)
         {
             #region Commands
             OpenLoginWindowCommand = new RelayCommand(OnOpenLoginWindowCommandExecuted, CanOpenLoginWindowCommandExecuted);
@@ -101,6 +101,7 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
             #endregion
 
             #region InitFields
+            _Parent = parent;
             CurrentViewModel = _BusinessSectionViewModel;
             HumburgerIsChecked = false;
             #endregion InitFields

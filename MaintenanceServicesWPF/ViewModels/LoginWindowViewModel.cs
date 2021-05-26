@@ -83,6 +83,9 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
                 else if (pos == "user")
                 {
                     MainWindow view = new MainWindow();
+                    MainWindowViewModel vm = new MainWindowViewModel(this);
+                    vm.CodeBehind = view;
+                    view.DataContext = vm;
                     view.Show();
                     this.CodeBehind.Close();
                 }

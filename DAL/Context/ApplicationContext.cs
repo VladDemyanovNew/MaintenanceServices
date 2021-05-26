@@ -30,14 +30,6 @@ namespace VDemyanov.MaintenanceServices.DAL.Context
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<ServiceEquipment> ServiceEquipments { get; set; }
 
-       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-               optionsBuilder.UseSqlServer("Server=LENOVO_R2500U;Database=MAINTENANCE_SERVICE;Trusted_Connection=True;");
-            }
-        }*/
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Cyrillic_General_CI_AS");

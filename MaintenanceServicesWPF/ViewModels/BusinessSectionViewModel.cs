@@ -162,6 +162,10 @@ namespace VDemyanov.MaintenanceServices.MaintenanceServicesWPF.ViewModels
         {
             Contract contract = p as Contract;
 
+            if (SelectedContract == contract)
+                OnNav(ViewType.CONTRACT_CREATING_SECTION);
+
+
             List<Report> reports = _UnitOfWork.ReportRep.GetAll().Where(report => report.Contract == contract.Id).ToList();
             foreach(Report rep in reports)
             {

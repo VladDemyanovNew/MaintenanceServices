@@ -13,8 +13,11 @@
     <None Remove="Assets\Images\contractIcon.png" />
     <None Remove="Assets\Images\contractLogo.png" />
     <None Remove="Assets\Images\login-background.jpg" />
+    <None Remove="Assets\Images\logo.png" />
     <None Remove="Assets\Images\profile.png" />
+    <None Remove="Assets\Images\refresh.png" />
     <None Remove="Assets\Images\shield.png" />
+    <None Remove="Assets\Images\user-settings.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,8 +35,11 @@
     <Resource Include="Assets\Images\contractBackground.jpg" />
     <Resource Include="Assets\Images\contractIcon.png" />
     <Resource Include="Assets\Images\login-background.jpg" />
+    <Resource Include="Assets\Images\logo.png" />
     <Resource Include="Assets\Images\profile.png" />
+    <Resource Include="Assets\Images\refresh.png" />
     <Resource Include="Assets\Images\shield.png" />
+    <Resource Include="Assets\Images\user-settings.jpg" />
   </ItemGroup>
 
 </Project>
