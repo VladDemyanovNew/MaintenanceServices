@@ -55,7 +55,8 @@
                                     <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" Foreground="#FF353535"
                                                FontWeight="Regular" Text="Название" FontFamily="Arial"/>
                                     <TextBox Grid.Column="1"  MinHeight="30" BorderThickness="0,0,0,1"
-                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial">
+                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial"
+                                             MaxLength="10">
                                         <TextBox.Text>
                                             <Binding Path="ContractProp.Name">
                                                 <Binding.ValidationRules>
@@ -90,7 +91,8 @@
                                     <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" FontFamily="Arial"
                                                Text="Заказчик" Foreground="#FF353535" FontWeight="Regular"/>
                                     <TextBox Grid.Column="1"  MinHeight="30" BorderThickness="0,0,0,1"
-                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial">
+                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial"
+                                             MaxLength="20">
                                         <TextBox.Text>
                                             <Binding Path="ContractProp.ClientName">
                                                 <Binding.ValidationRules>
@@ -108,7 +110,7 @@
                                     <TextBlock Grid.Column="0" Margin="0,0,20,0" FontSize="25" FontFamily="Arial"
                                                Text="Адрес" Foreground="#FF353535" FontWeight="Regular"/>
                                     <TextBox Grid.Column="1" MinHeight="30" BorderThickness="0,0,0,1" 
-                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial">
+                                             Foreground="DarkGray" FontSize="20" FontFamily="Arial" MaxLength="20">
                                         <TextBox.Text>
                                             <Binding Path="ContractProp.FacilityAddress">
                                                 <Binding.ValidationRules>
@@ -145,13 +147,13 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Column="0" Padding="20,15" BorderThickness="0"
-                                        Style="{DynamicResource ButtonStyle}" Foreground="White"
+                                        Style="{DynamicResource ButtonStyle3}" Foreground="White"
                                         FontWeight="Regular" MinWidth="200" FontSize="15" FontFamily="Arial"
-                                        HorizontalContentAlignment="Left" Content="Закрыть" Background="#FF353535" Cursor="Hand"/>
+                                        HorizontalContentAlignment="Left" Content="Закрыть" Cursor="Hand"/>
                                 <Button Command="{Binding CreateContractCommand}" Grid.Column="1" Padding="20,15"
-                                        BorderThickness="0" Style="{DynamicResource ButtonStyle}" Foreground="White" 
+                                        BorderThickness="0" Style="{DynamicResource ButtonStyle2}" Foreground="White" 
                                         FontWeight="Regular" MinWidth="200" FontSize="15" HorizontalContentAlignment="Right" 
-                                        Content="Создать" Background="#FF204AFA" Cursor="Hand" FontFamily="Arial"/>
+                                        Content="Создать" Cursor="Hand" FontFamily="Arial"/>
                             </Grid>
                         </StackPanel>
                     </Border>

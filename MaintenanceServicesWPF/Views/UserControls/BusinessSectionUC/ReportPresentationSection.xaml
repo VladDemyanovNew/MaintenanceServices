@@ -109,9 +109,9 @@
 
                     <Button Grid.Row="3" Padding="15,10" Margin="15,15,15,15"
                             BorderThickness="0" FontFamily="Arial"
-                            Background="#FF353535" Foreground="White"
+                            Foreground="White"
                             FontWeight="Regular" FontSize="15"  
-                            Style="{DynamicResource ButtonStyle}" 
+                            Style="{DynamicResource ButtonStyle3}" 
                             Content="Новый протокол"  Cursor="Hand"
                             Command="{Binding AddReportCommand}"/>
                 </Grid>

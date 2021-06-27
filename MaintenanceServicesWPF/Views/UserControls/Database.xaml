@@ -42,11 +42,11 @@
                     <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="User" HorizontalAlignment="Left"/>
                     <TextBox HorizontalAlignment="Stretch" Background="Transparent"
                              Foreground="Gray" FontSize="20" BorderThickness="0" 
-                             VerticalContentAlignment="Center" Text="{Binding Login}"/>
+                             VerticalContentAlignment="Center" Text="{Binding Login}" MaxLength="20"/>
                 </DockPanel>
-                <Button Style="{DynamicResource ButtonStyle}" BorderThickness="0" Content="Обновить логин"
+                <Button Style="{DynamicResource ButtonStyle5}" BorderThickness="0" Content="Обновить логин"
                         Foreground="White" FontSize="20"  FontFamily="Arial"
-                        Padding="10" Margin="20,0,20,20" Cursor="Hand" Background="#FF2FFF39"
+                        Padding="10" Margin="20,0,20,20" Cursor="Hand"
                         Command="{Binding UpdateLoginCommand}">
                 </Button>
                 <TextBlock Text="Введите новый пароль:" Foreground="Gray" Margin="20,0" FontSize="17"/>
@@ -54,18 +54,18 @@
                     <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="Lock" HorizontalAlignment="Left"/>
                     <PasswordBox HorizontalAlignment="Stretch" Background="Transparent"
                                  Foreground="Gray" FontSize="20" BorderThickness="0"
-                                 VerticalContentAlignment="Center" x:Name="PasswordBox1"/>
+                                 VerticalContentAlignment="Center" x:Name="PasswordBox1" MaxLength="40"/>
                 </DockPanel>
                 <TextBlock Text="Повторите новый пароль:" Margin="20,0" Foreground="Gray" FontSize="17"/>
                 <DockPanel Background="LightGray" Margin="20,0,20,10">
                     <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="Lock" HorizontalAlignment="Left"/>
                     <PasswordBox HorizontalAlignment="Stretch" Background="Transparent"
                                  Foreground="Gray" FontSize="20" BorderThickness="0"
-                                 VerticalContentAlignment="Center" x:Name="PasswordBox2"/>
+                                 VerticalContentAlignment="Center" x:Name="PasswordBox2" MaxLength="40"/>
                 </DockPanel>
-                <Button Style="{DynamicResource ButtonStyle}" BorderThickness="0" Content="Обновить пароль"
+                <Button Style="{DynamicResource ButtonStyle6}" BorderThickness="0" Content="Обновить пароль"
                         Foreground="White" FontSize="20"  FontFamily="Arial"
-                        Padding="10" Margin="20,0,20,20" Cursor="Hand" Background="GreenYellow">
+                        Padding="10" Margin="20,0,20,20" Cursor="Hand">
                     <Behaviors:Interaction.Triggers>
                         <Behaviors:EventTrigger EventName="Click">
                             <Behaviors:InvokeCommandAction Command="{Binding UpdatePasswordCommand}">

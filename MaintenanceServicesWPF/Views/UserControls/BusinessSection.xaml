@@ -110,14 +110,8 @@
                             </Behaviors:EventTrigger>
                         </Behaviors:Interaction.Triggers>
                         <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
+                            <Style TargetType="{x:Type ListViewItem}">
                                 <Setter Property="HorizontalContentAlignment"  Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="BorderThickness" Value="1"/>
-                                        <Setter Property="BorderBrush" Value="Red"/>
-                                    </Trigger>
-                                </Style.Triggers>
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
@@ -127,7 +121,7 @@
             <!-- Кнопка добавления новых contracts -->
             <Grid Grid.Row="2">
                 <Button Cursor="Hand" Padding="4,6" Margin="10,15" Width="160"
-                        Style="{DynamicResource ButtonStyle}" Background="#FF204AFA" BorderBrush="{x:Null}"
+                        Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}"
                         Command="{Binding NavCommand}" FontFamily="Arial"
                         CommandParameter="{Binding Source={x:Static enums:ViewType.CONTRACT_CREATING_SECTION}}">
                     <StackPanel Orientation="Horizontal">

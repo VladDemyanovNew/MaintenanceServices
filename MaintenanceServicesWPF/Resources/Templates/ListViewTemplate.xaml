@@ -17,6 +17,7 @@
             <Border.Effect>
                 <DropShadowEffect BlurRadius="50" Opacity="0.35"/>
             </Border.Effect>
+           
             <StackPanel>
                 <Grid Margin="10,10,10,10">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -51,7 +52,7 @@
                             <TextBlock FontSize="15" Style="{DynamicResource HoverUnderlineStyle}" Text="Удалить" Padding="10,0,0,0" Foreground="#FF353535" FontFamily="Arial" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <Button Style="{DynamicResource ButtonStyle}" Background="#FF353535"
+                    <Button Style="{DynamicResource ButtonStyle3}"
                             Grid.Row="1" Grid.Column="0" Padding="8,10" BorderThickness="0"
                             Command="{Binding DataContext.OpenReportPresentationSectionCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             CommandParameter="{Binding}">
@@ -61,7 +62,7 @@
                                        VerticalAlignment="Center" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
-                    <Button Style="{DynamicResource ButtonStyle}" Background="#cc00ff"
+                    <Button Style="{DynamicResource ButtonStyle4}"
                             Grid.Row="1" Grid.Column="1" Padding="8,10" BorderThickness="0"
                             Command="{Binding DataContext.OpenReportCreatingSectionCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             CommandParameter="{Binding}">

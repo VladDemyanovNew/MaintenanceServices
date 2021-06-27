@@ -56,6 +56,96 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!-- Стиль для кнопки -->
+    <Style x:Key="ButtonStyle2" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#FF204AFA"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#153bd1" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#00135e" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для кнопки -->
+    <Style x:Key="ButtonStyle3" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#FF353535"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#262626" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#0f0f0f" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для кнопки -->
+    <Style x:Key="ButtonStyle4" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#cc00ff"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#ab00d6" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#8200a3" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для кнопки -->
+    <Style x:Key="ButtonStyle5" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#FF2FFF39"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#24c92d" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#1ca323" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для кнопки -->
+    <Style x:Key="ButtonStyle6" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#aaff3b"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#93de31" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#72ad24" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для кнопки -->
+    <Style x:Key="ButtonStyle7" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Style.Setters>
+            <Setter Property="Background" Value="#FF7D5C"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#de6b4e" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#c25d44" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <!-- Стиль для экспандера -->
     <Style x:Key="ExpanderHeaderFocusVisual">
