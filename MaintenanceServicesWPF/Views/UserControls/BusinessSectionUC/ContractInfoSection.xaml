@@ -78,7 +78,7 @@
                                    Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Arial"
                                    Text="введите новое название:" Foreground="White"/>
                             <TextBox Margin="10,0,10,0" Grid.Column="1" Grid.Row="0"
-                                 VerticalAlignment="Center" FontSize="15"
+                                 VerticalAlignment="Center" FontSize="15" MaxLength="10"
                                  BorderThickness="0,0,0,1" Background="#FF353535"
                                  HorizontalAlignment="Stretch" Padding="5" BorderBrush="White"
                                  Foreground="White" MaxWidth="300">
@@ -90,10 +90,10 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <Button Style="{DynamicResource ButtonStyle}"
+                            <Button Style="{DynamicResource ButtonStyle7}"
                                 Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
+                                Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.NAME}}"/>
                         </Grid>
@@ -163,10 +163,10 @@
                                     </Binding>
                                 </DatePicker.SelectedDate>
                             </DatePicker>
-                            <Button Style="{DynamicResource ButtonStyle}"
+                            <Button Style="{DynamicResource ButtonStyle7}"
                                 Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
+                                Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.CREATION_DATE}}"/>
                         </Grid>
@@ -207,7 +207,7 @@
                                    Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Arial"
                                    Text="введите новое имя заказчика:" Foreground="White"/>
                             <TextBox Margin="10,0,10,0" Grid.Column="1" Grid.Row="0"
-                                 VerticalAlignment="Center" FontSize="15"
+                                 VerticalAlignment="Center" FontSize="15" MaxLength="20"
                                  BorderThickness="0,0,0,1" Background="#FF353535"
                                  HorizontalAlignment="Stretch" Padding="5" BorderBrush="White"
                                  Foreground="White" MaxWidth="300" FontFamily="Arial">
@@ -219,10 +219,10 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <Button Style="{DynamicResource ButtonStyle}"
+                            <Button Style="{DynamicResource ButtonStyle7}"
                                 Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
+                                Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.CLIENT_NAME}}"/>
                         </Grid>
@@ -265,7 +265,7 @@
                                    Text="введите новый адрес:" Foreground="White"/>
                             <TextBox Margin="10,0,10,0" Grid.Column="1" Grid.Row="0"
                                  VerticalAlignment="Center" FontSize="15" FontFamily="Arial"
-                                 BorderThickness="0,0,0,1" Background="#FF353535"
+                                 BorderThickness="0,0,0,1" Background="#FF353535" MaxLength="20"
                                  HorizontalAlignment="Stretch" Padding="5" BorderBrush="White"
                                  Foreground="White" MaxWidth="300">
                                 <TextBox.Text>
@@ -276,10 +276,10 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <Button Style="{DynamicResource ButtonStyle}"
+                            <Button Style="{DynamicResource ButtonStyle7}"
                                 Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
+                                Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.FACILITY_ADDRESS}}"/>
                         </Grid>
@@ -335,10 +335,10 @@
                                     </Binding>
                                 </ComboBox.SelectedItem>
                             </ComboBox>
-                            <Button Style="{DynamicResource ButtonStyle}"
+                            <Button Style="{DynamicResource ButtonStyle7}"
                                 Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Content="Обновить"
                                 BorderThickness="0" Foreground="White" FontWeight="Regular"
-                                Background="#FF7D5C" Cursor="Hand" Padding="5" FontFamily="Arial"
+                                Cursor="Hand" Padding="5" FontFamily="Arial"
                                 Command="{Binding UpdateContractCommand}"
                                 CommandParameter="{Binding Source={x:Static enums:ContractProperty.CATEGORY}}"/>
                         </Grid>

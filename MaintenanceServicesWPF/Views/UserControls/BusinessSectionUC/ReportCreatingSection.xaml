@@ -98,7 +98,7 @@
                                   >
                             <!--, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged-->
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Кол-во" Width="*" Binding="{Binding Path=Number}" />
+                                <DataGridTextColumn Header="Кол-во" Width="*" Binding="{Binding Path=Number}"/>
 
                                 <DataGridTemplateColumn Header="Услуга" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -147,14 +147,14 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" Padding="15,10" Margin="15,15,0,15"
                                 BorderThickness="0"
-                                Background="#FF353535" Foreground="White"
+                                Foreground="White"
                                 FontWeight="Regular" FontSize="15"  
-                                Style="{DynamicResource ButtonStyle}" 
+                                Style="{DynamicResource ButtonStyle3}" 
                                 Content="Удалить"  Cursor="Hand" FontFamily="Arial"
                                 Command="{Binding ReportDataRemoveCommand}"/>
                         <Button Grid.Column="1" Padding="15,10" Margin="0,15,15,15" BorderThickness="0"
-                                Background="#cc00ff" Foreground="White"
-                                Style="{DynamicResource ButtonStyle}" 
+                                Foreground="White"
+                                Style="{DynamicResource ButtonStyle4}" 
                                 FontWeight="Regular" FontSize="15" 
                                 Content="Добавить" Cursor="Hand" FontFamily="Arial"
                                 Command="{Binding ReportDataAddCommand}"/>
@@ -266,7 +266,7 @@
                                      FontSize="20" Text="{Binding ReportProp.Discount}"
                                      BorderThickness="0,0,0,1" Background="White"
                                      HorizontalAlignment="Stretch" Padding="5" BorderBrush="#FF353535"
-                                     Foreground="#E10014"/>
+                                     Foreground="#E10014" MaxLength="3"/>
                             <TextBlock Text="%" FontWeight="DemiBold" Foreground="#FF353535"
                                        FontSize="20" VerticalAlignment="Center"
                                        Grid.Column="1" Padding="5,0,20,0"/>
@@ -275,8 +275,8 @@
                         <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
                                 Margin="20,10" Padding="50,7"
                                 BorderThickness="0" FontFamily="Arial"
-                                Background="#cc00ff" Foreground="White"
-                                Style="{DynamicResource ButtonStyle}" 
+                                Foreground="White"
+                                Style="{DynamicResource ButtonStyle4}" 
                                 FontSize="15" Content="Создать" Cursor="Hand"
                                 Command="{Binding ReportCreateCommand}"/>
                     </Grid>

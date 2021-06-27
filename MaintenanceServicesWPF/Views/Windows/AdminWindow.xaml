@@ -24,21 +24,21 @@
                     <TextBox HorizontalAlignment="Stretch" Background="Transparent"
                              Foreground="Gray" FontSize="20" BorderThickness="0" 
                              VerticalContentAlignment="Center"
-                             Text="{Binding Login}"/>
+                             Text="{Binding Login}" MaxLength="20"/>
                 </DockPanel>
                 <TextBlock Text="Введите пароль:" Foreground="Gray" FontSize="17"/>
                 <DockPanel Background="LightGray" Margin="0,0,0,10">
                     <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="Lock" HorizontalAlignment="Left"/>
                     <PasswordBox HorizontalAlignment="Stretch" Background="Transparent"
                                  Foreground="Gray" FontSize="20" BorderThickness="0"
-                                 VerticalContentAlignment="Center" x:Name="PasswordBox1"/>
+                                 VerticalContentAlignment="Center" x:Name="PasswordBox1" MaxLength="40"/>
                 </DockPanel>
                 <TextBlock Text="Повторите пароль:" Foreground="Gray" FontSize="17"/>
                 <DockPanel Background="LightGray" Margin="0,0,0,10">
                     <fa:ImageAwesome Height="30" Width="30" Margin="8,8,10,8" Foreground="Gray" Icon="Lock" HorizontalAlignment="Left"/>
                     <PasswordBox HorizontalAlignment="Stretch" Background="Transparent"
                                  Foreground="Gray" FontSize="20" BorderThickness="0"
-                                 VerticalContentAlignment="Center" x:Name="PasswordBox2"/>
+                                 VerticalContentAlignment="Center" x:Name="PasswordBox2" MaxLength="40"/>
                 </DockPanel>
                 <CheckBox Margin="0,0,0,30" VerticalAlignment="Center" Content="Администратор"
                           VerticalContentAlignment="Center" Foreground="Gray" FontSize="18"
